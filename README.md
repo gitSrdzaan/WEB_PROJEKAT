@@ -3,7 +3,7 @@
 
 GitHub nalog | Ime i prezime
 ------------ | -------------
-@pantic246 | Stefan Pantic
+@panta246 | Stefan Pantic
 @gitSrdzaan | Srdjan Simic
 
 ## RACompany
