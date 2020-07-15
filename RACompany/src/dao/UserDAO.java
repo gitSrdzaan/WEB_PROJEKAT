@@ -25,6 +25,7 @@ public class UserDAO {
 	
 	private Map<String, User> users = new HashMap<String,User>();
 	private String contextPath;
+	
 	public UserDAO() {
 		
 		
