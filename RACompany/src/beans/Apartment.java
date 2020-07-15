@@ -3,9 +3,9 @@ package beans;
 import java.util.Date;
 import java.util.List;
 
-public class Appartman {
+public class Apartment {
 	
-	private AppartmentType type;
+	private ApartmentType type;
 	private Integer roomNumber;
 	private Integer guestNumber;
 	private Location appartmentLocation;
@@ -26,18 +26,25 @@ public class Appartman {
 	
 
 	
-	public Appartman() {
+	public Apartment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	public AppartmentType getType() {
+
+	public ApartmentType getType() {
 		return type;
 	}
-	public void setType(AppartmentType type) {
+
+
+
+	public void setType(ApartmentType type) {
 		this.type = type;
 	}
+
+
+
 	public Integer getRoomNumber() {
 		return roomNumber;
 	}

@@ -3,9 +3,9 @@ package beans;
 public class Comment {
 
 	private Guest guest;
-	private Appartman apparment;
+	private Apartment apparment;
 	private String text;
-	private AppartmentGrade grade;
+	private ApartmentGrade grade;
 	public Comment() {
 		
 	}
@@ -15,10 +15,11 @@ public class Comment {
 	public void setGuest(Guest guest) {
 		this.guest = guest;
 	}
-	public Appartman getApparment() {
+	
+	public Apartment getApparment() {
 		return apparment;
 	}
-	public void setApparment(Appartman apparment) {
+	public void setApparment(Apartment apparment) {
 		this.apparment = apparment;
 	}
 	public String getText() {
@@ -27,13 +28,12 @@ public class Comment {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public AppartmentGrade getGrade() {
+	public ApartmentGrade getGrade() {
 		return grade;
 	}
-	public void setGrade(AppartmentGrade grade) {
+	public void setGrade(ApartmentGrade grade) {
 		this.grade = grade;
 	}
-	
 	
 	
 	

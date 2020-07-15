@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Reservations {
 
-	private Appartman reservedAppatment;
+	private Apartment reservedAppatment;
 	private Date startDate;
 	private Integer nightNumber = 1;
 	private Double price;
@@ -17,12 +17,19 @@ public class Reservations {
 	}
 	
 	
-	public Appartman getReservedAppatment() {
+
+	public Apartment getReservedAppatment() {
 		return reservedAppatment;
 	}
-	public void setReservedAppatment(Appartman reservedAppatment) {
+
+
+
+	public void setReservedAppatment(Apartment reservedAppatment) {
 		this.reservedAppatment = reservedAppatment;
 	}
+
+
+
 	public Date getStartDate() {
 		return startDate;
 	}

@@ -1,6 +1,6 @@
 package beans;
 
-public enum AppartmentType {
+public enum ApartmentType {
 
 	FULL,
 	ROOM

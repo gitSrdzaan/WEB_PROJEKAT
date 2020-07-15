@@ -1,6 +1,6 @@
 package beans;
 
-public enum AppartmentGrade {
+public enum ApartmentGrade {
 
 	BAD,
 	GOOD,
