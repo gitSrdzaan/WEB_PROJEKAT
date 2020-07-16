@@ -32,7 +32,9 @@ public class LoginService {
 	@PostConstruct
 	public void init() {
 		if(ctx.getAttribute("userDAO") == null) {
-			ctx.setAttribute("userDAO", new UserDAO());
+			ctx.setAttribute("userDAO", new UserDAO(ctx.getRealPath("/")));
+			
+			System.out.println(ctx.getContextPath());
 		}
 	}
 	
@@ -76,7 +78,14 @@ public class LoginService {
 		System.out.println(user.getUserRole());*/
 		
 		if(dao.find(user.getUsername(), user.getPassword())==null) {
-			dao.putUser(user);
+			try {
+				dao.putUser(user);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return Response.status(500).build();
+			}
+			dao.saveUsers();
 			return Response.status(200).build();
 		}
 		

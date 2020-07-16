@@ -20,6 +20,7 @@ import beans.Admin;
 import beans.Guest;
 import beans.Host;
 import beans.User;
+import beans.UserRole;
 
 public class UserDAO {
 	
@@ -186,14 +187,15 @@ public class UserDAO {
 		// lista administratora
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		for(User iter : this.users.values()) {
-			if(iter instanceof Admin) {
+			if(iter.getUserRole() == UserRole.ADMIN) {
+				System.out.println("username admina: "+iter.getUsername());
 				adminList.add((Admin)iter);
 			}
 		}
 		//lista domacina
 		ArrayList<Host> hostList = new ArrayList<Host>();
 		for(User iter : this.users.values()) {
-			if(iter instanceof Host) {
+			if(iter.getUserRole() == UserRole.HOST) {
 				hostList.add((Host)iter);
 			}
 		}
@@ -201,7 +203,7 @@ public class UserDAO {
 		//lista gostiju
 		ArrayList<Guest> guestList = new ArrayList<Guest>();
 		for(User iter : this.users.values()) {
-			if(iter instanceof Guest) {
+			if(iter.getUserRole() == UserRole.GUEST) {
 				guestList.add((Guest)iter);
 			}
 		}
@@ -209,9 +211,12 @@ public class UserDAO {
 		/**
 		 * Upisivanje liste u fajl 
 		 * */
+		System.out.println(adminList);
+		
 		//upisivanje administratora
-		File adminFile = new File(this.contextPath + "data/admin.json");
+		File adminFile = new File("WebContent/data"+File.separator+"admin.json");
 		try {
+			System.out.println(adminFile.getAbsolutePath());
 			mapper.writerWithDefaultPrettyPrinter().writeValue(adminFile, 
 					adminList);
 		}
@@ -280,10 +285,25 @@ public class UserDAO {
 	/**
 	 * Matoda za dodavanje korisnika u mapu korisnika
 	 * @param beans.User user
+	 * @throws Exception 
 	 * */
-	public void putUser(User user) {
+	public void putUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		this.users.put(user.getUsername(), user);
+		if(user.getUserRole() == UserRole.ADMIN) {
+			Admin temp = new Admin(user);
+			this.users.put(temp.getUsername(), temp);
+			return;
+		}
+		if(user.getUserRole() == UserRole.HOST) {
+			this.users.put(user.getUsername(), (Host)user);
+			return;
+		}
+		if(user.getUserRole() == UserRole.GUEST) {
+			this.users.put(user.getUsername(), (Guest)user);
+			return;
+		}
+		
+		throw new Exception("Greska pri smjestanju u mapu korisnika sesije");
 		
 		
 	}

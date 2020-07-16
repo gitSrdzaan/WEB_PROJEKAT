@@ -5,6 +5,8 @@ import java.util.List;
 
 public class Apartment {
 	
+	private Long Id;
+	
 	private ApartmentType type;
 	private Integer roomNumber;
 	private Integer guestNumber;
@@ -19,7 +21,7 @@ public class Apartment {
 	private Date checkInTime;
 	private Date checkOutTime;
 	
-	private boolean appartmentStatus;
+	private boolean apartmentStatus;
 	
 	private List<Amenities> amenities;
 	private List<Reservations> reservations;
@@ -32,6 +34,24 @@ public class Apartment {
 	}
 	
 	
+	
+	
+
+	public Long getId() {
+		return Id;
+	}
+
+
+
+
+
+	public void setId(Long id) {
+		Id = id;
+	}
+
+
+
+
 
 	public ApartmentType getType() {
 		return type;
@@ -57,22 +77,22 @@ public class Apartment {
 	public void setGuestNumber(Integer guestNumber) {
 		this.guestNumber = guestNumber;
 	}
-	public Location getAppartmentLocation() {
+	public Location getApartmentLocation() {
 		return appartmentLocation;
 	}
-	public void setAppartmentLocation(Location appartmentLocation) {
+	public void setApartmentLocation(Location appartmentLocation) {
 		this.appartmentLocation = appartmentLocation;
 	}
-	public Host getAppartmentHost() {
+	public Host getApartmentHost() {
 		return appartmentHost;
 	}
-	public void setAppartmentHost(Host appartmentHost) {
+	public void setApartmentHost(Host appartmentHost) {
 		this.appartmentHost = appartmentHost;
 	}
-	public List<DateStatus> getAppartmentResevartionDates() {
+	public List<DateStatus> getApartmentResevartionDates() {
 		return appartmentResevartionDates;
 	}
-	public void setAppartmentResevartionDates(List<DateStatus> appartmentResevartionDates) {
+	public void setApartmentResevartionDates(List<DateStatus> appartmentResevartionDates) {
 		this.appartmentResevartionDates = appartmentResevartionDates;
 	}
 	public List<Comment> getComments() {
@@ -99,11 +119,11 @@ public class Apartment {
 	public void setCheckOutTime(Date checkOutTime) {
 		this.checkOutTime = checkOutTime;
 	}
-	public boolean isAppartmentStatus() {
-		return appartmentStatus;
+	public boolean isApartmentStatus() {
+		return apartmentStatus;
 	}
-	public void setAppartmentStatus(boolean appartmentStatus) {
-		this.appartmentStatus = appartmentStatus;
+	public void setApartmentStatus(boolean appartmentStatus) {
+		this.apartmentStatus = appartmentStatus;
 	}
 	public List<Amenities> getAmenities() {
 		return amenities;
