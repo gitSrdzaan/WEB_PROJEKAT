@@ -274,4 +274,11 @@ public class UserDAO {
 		this.contextPath = contextPath;
 	}
 
+	public void putUser(User user) {
+		// TODO Auto-generated method stub
+		this.users.put(user.getUsername(), user);
+		
+		
+	}
+
 }

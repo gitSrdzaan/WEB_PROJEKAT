@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import beans.User;
 import dao.UserDAO;
 
-@Path("/login")
+@Path("/")
 public class LoginService {
 
 	@Context
@@ -25,6 +25,7 @@ public class LoginService {
 		
 	}
 	
+	
 	@PostConstruct
 	public void init() {
 		if(ctx.getAttribute("userDAO") == null) {
@@ -33,7 +34,13 @@ public class LoginService {
 	}
 	
 	@GET
-	@Path("/currentUser")
+	@Path("helloWorld")
+	public Response helloWOrld(@Context HttpServletRequest request) {
+		return Response.status(200).entity("Hello World").build();
+	}
+	
+	@GET
+	@Path("currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User currentUser(@Context HttpServletRequest request) {
@@ -41,18 +48,46 @@ public class LoginService {
 	}
 	
 	@POST
-	@Path("/")
+	@Path("login")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response loginMethod(User user, @Context HttpServletRequest request) {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
-		User retUser = dao.find(user.getUsername(), user.getPassword());
-		if(retUser == null) {
+		User currUser = dao.find(user.getUsername(), user.getPassword());
+		if(currUser == null) {
 			return Response.status(400).
 					entity("invalid username or password").build();
 		}
 		
-		request.getSession().setAttribute("user", retUser);
+		request.getSession().setAttribute("user", currUser);
 		return Response.status(200).build();
 	}
+	
+	@POST
+	@Path("register")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response registerMethod(User user, @Context HttpServletRequest request) {
+		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
+		
+		System.out.println(user.getUsername());
+		System.out.println(user.getUserRole());
+		
+		if(dao.find(user.getUsername(), user.getPassword())==null) {
+			dao.putUser(user);
+			return Response.status(200).build();
+		}
+		
+		return Response.status(400).entity("Username already exists").build();
+		
+		
+	}
+	
+	@POST
+	@Path("logout")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void logoutMethod(@Context HttpServletRequest request) {
+		request.getSession().invalidate();
+	}
+	
+	
 }
