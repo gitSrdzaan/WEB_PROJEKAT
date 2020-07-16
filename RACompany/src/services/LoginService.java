@@ -15,6 +15,9 @@ import javax.ws.rs.core.Response;
 import beans.User;
 import dao.UserDAO;
 
+/**
+ * Servic klasa za registraciju, logovanje i izlogovanje korisnika aplkacije
+ * */
 @Path("/")
 public class LoginService {
 
@@ -69,8 +72,8 @@ public class LoginService {
 	public Response registerMethod(User user, @Context HttpServletRequest request) {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
-		System.out.println(user.getUsername());
-		System.out.println(user.getUserRole());
+		/*System.out.println(user.getUsername());
+		System.out.println(user.getUserRole());*/
 		
 		if(dao.find(user.getUsername(), user.getPassword())==null) {
 			dao.putUser(user);

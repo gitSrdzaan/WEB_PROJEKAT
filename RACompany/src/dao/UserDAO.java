@@ -118,8 +118,10 @@ public class UserDAO {
 		for(Admin admin : adminList) {
 			this.users.put(admin.getUsername(),admin);
 		}
+		
 		/**
 		 * TODO : ucitavanje domacina
+		 *  
 		 * */
 		File hostFile = new File(this.contextPath + "data/host.json");
 		json.setLength(0);
@@ -175,6 +177,7 @@ public class UserDAO {
 		}
 		
 	}
+	
 	/**
 	 * Metoda za uspis user-a u fajlove
 	 * */
@@ -204,7 +207,7 @@ public class UserDAO {
 		}
 		
 		/**
-		 * Upisivanje u fajl liste
+		 * Upisivanje liste u fajl 
 		 * */
 		//upisivanje administratora
 		File adminFile = new File(this.contextPath + "data/admin.json");
@@ -274,6 +277,10 @@ public class UserDAO {
 		this.contextPath = contextPath;
 	}
 
+	/**
+	 * Matoda za dodavanje korisnika u mapu korisnika
+	 * @param beans.User user
+	 * */
 	public void putUser(User user) {
 		// TODO Auto-generated method stub
 		this.users.put(user.getUsername(), user);
