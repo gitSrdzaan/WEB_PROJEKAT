@@ -1,1 +1,10 @@
-[]
+[
+	{ 
+		"username" : "admin",
+		"password" : "admin",
+		"firstname" : "Pablo",
+		"lastname" : "Escobar",
+		"sex"  : "Male",
+		"userRole"  :"ADMIN"		
+	}
+]

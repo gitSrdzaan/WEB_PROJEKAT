@@ -41,6 +41,8 @@ public class LoginService {
 	@GET
 	@Path("helloWorld")
 	public Response helloWOrld(@Context HttpServletRequest request) {
+		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
+		System.out.println(dao.findAll());
 		return Response.status(200).entity("Hello World").build();
 	}
 	
