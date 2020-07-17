@@ -1,5 +1,7 @@
 package services;
 
+import java.io.IOException;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -85,9 +87,15 @@ public class LoginService {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return Response.status(500).build();
+				return Response.status(500).entity("Greska pri dodavanju registrovanog korisnika").build();
 			}
-			dao.saveUsers();
+			try {
+				dao.saveUsers();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return Response.status(500).entity("Gresk pri cuvanju registrovanog korisnika").build();
+			}
 			return Response.status(200).build();
 		}
 		

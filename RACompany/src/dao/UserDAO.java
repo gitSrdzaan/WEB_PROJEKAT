@@ -24,7 +24,7 @@ import beans.UserRole;
 
 public class UserDAO {
 	
-	private Map<String, User> users = new HashMap<String,User>();
+	private Map<String, User> users = new HashMap<String,User>();;
 	private String contextPath;
 	
 	public UserDAO() {
@@ -181,8 +181,11 @@ public class UserDAO {
 	
 	/**
 	 * Metoda za uspis user-a u fajlove
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 * */
-	public void saveUsers()  {
+	public void saveUsers()  throws JsonParseException, JsonMappingException, IOException  {
 		ObjectMapper mapper = new ObjectMapper();
 		// lista administratora
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
@@ -223,12 +226,15 @@ public class UserDAO {
 		catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonGenerationException("JSON generalizacija");
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonMappingException("mapiranje JSON");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new IOException();
 		}
 		
 		//upisivanje domacina
@@ -240,12 +246,15 @@ public class UserDAO {
 		catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonGenerationException("JSON generalizacija");
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonMappingException("mapiranje JSON");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new IOException();
 		}
 		
 		//upisivanje gosta
@@ -257,12 +266,15 @@ public class UserDAO {
 		catch (JsonGenerationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonGenerationException("JSON generalizacija");
 		} catch (JsonMappingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new JsonMappingException("mapiranje JSON");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new IOException();
 		}
 	}
 
@@ -289,7 +301,7 @@ public class UserDAO {
 	 * */
 	public void putUser(User user) throws Exception {
 		// TODO Auto-generated method stub
-		if(user.getUserRole() == UserRole.ADMIN) {
+		/*if(user.getUserRole() == UserRole.ADMIN) {
 			Admin temp = new Admin(user);
 			this.users.put(temp.getUsername(), temp);
 			return;
@@ -301,9 +313,23 @@ public class UserDAO {
 		if(user.getUserRole() == UserRole.GUEST) {
 			this.users.put(user.getUsername(), (Guest)user);
 			return;
+		}*/
+		this.users.put(user.getUsername(), user);
+		
+		//throw new Exception("Greska pri smjestanju u mapu korisnika sesije");
+		
+		
+	}
+
+	public boolean modifyUser(User modifiedUser, String username) {
+		// TODO Auto-generated method stub
+		User user = this.findByUsername(username);
+		if(user.getUsername() != modifiedUser.getUsername()) {
+			return false;
 		}
 		
-		throw new Exception("Greska pri smjestanju u mapu korisnika sesije");
+		this.users.put(username, modifiedUser);
+		return true;
 		
 		
 	}

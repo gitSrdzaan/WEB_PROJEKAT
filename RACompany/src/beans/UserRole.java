@@ -4,5 +4,6 @@ public enum UserRole {
 
 	ADMIN,
 	HOST,
-	GUEST
+	GUEST,
+	NOT_REGISTERED
 }
