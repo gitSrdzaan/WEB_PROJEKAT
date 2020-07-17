@@ -1,8 +1,66 @@
 [
 	{
-		"id" : 1
+		"id" : 1,
+		"type" : "FULL",
+		"roomNumber" : 3,
+		"guestNumber" : 7,
+		"apartmentLocation" : {
+								"longitude" : 24.25,
+								"latitude" : 47.25,
+								"adress" : {
+											"street" : "Ilije Bircanina",
+											"number" : 13,
+											"city" : "Novi Sad",
+											"postalCode" : 21000
+											}
+								},
+		"apartmentHost" : {
+							"username" : "narco",
+							"password" : "traficante",
+							"firstname" : "Miguel",
+							"lastname" : "Felix",
+							"sex" : "Male",
+							"userRole" : "HOST"
+							},
+							
+							
+		"apartmentResevartionDates" : [],
+		"comments" : [],
+		"pricePerNight" : 14.0,
+		"checkInTime" : "2020-05-05T00:00:00.001",
+		"checkOutTime" : "2020-05-05T00:00:00.001",
+		"apartmentStatus" : true,
+		"amenities" : [
+						{
+							"id" : 1,
+							"name" : "WiFi"
+						},
+						{
+							"id" : 2,
+							"name" : "CableTV"
+						}
+						],
+		"reservations" : []
 	},
 	{
-		"id" : 2
+		"id" : 2,
+		"type" : "ROOM",
+		"roomNumber" : 1,
+		"guestNumber" : 1,
+		"apartmentLocation" : {},
+		"apartmentHost" : {},
+		"apartmentResevartionDates" : [],
+		"comments" : [],
+		"pricePerNight" : 5.0,
+		"checkInTime" : "2020-05-05T00:00:00.001",
+		"checkOutTime" : "2020-05-05T00:00:00.001",
+		"apartmentStatus" : true,
+		"amenities" : [
+						{
+							"id" : 1,
+							"name" : "WiFi"
+						}
+						],
+		"reservations" : []
 	}
 ]

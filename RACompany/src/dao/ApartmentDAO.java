@@ -119,9 +119,7 @@ public class ApartmentDAO {
 	 * Metoda za dodavanje apartmana u mapu apartmana
 	 * */
 	public void putApartment(Apartment apartment) {
-		/**
-		 * TODO: generisanje kljuca apartmana
-		 * */
+		
 		List<Apartment> allApartments = (List<Apartment>) this.apartments.values();
 		
 		/**

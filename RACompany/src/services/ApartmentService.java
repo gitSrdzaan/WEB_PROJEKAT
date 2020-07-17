@@ -54,9 +54,12 @@ public class ApartmentService {
 	
 	@GET
 	@Path("/helloWorld")
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response helloWOrld(@Context HttpServletRequest request) {
+		ApartmentDAO apDAO = (ApartmentDAO)this.ctx.getAttribute("apartmentDAO");
 		
-		return Response.status(200).entity("Hello World").build();
+		return Response.ok().entity(apDAO.findAll()).build();
+		//return Response.status(200).entity("Hello World").build();
 	}
 	/**
 	 * Metoda za izlistavanje svih apartmana
