@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -117,6 +118,21 @@ public class ApartmentDAO {
 	 * Metoda za dodavanje apartmana u mapu apartmana
 	 * */
 	public void putApartment(Apartment apartment) {
+		/**
+		 * TODO: generisanje kljuca apartmana
+		 * */
+		List<Apartment> allApartments = (List<Apartment>) this.apartments.values();
+		//allApartments.sort(Comparator.comparing(a -> a.getId() ));
+		/**
+		 * Java Lambda funckija za sortiranje liste apartmana po id-u
+		 * */
+		allApartments.sort((a,b) -> Long.compare(a.getId(), b.getId()));
+		
+		Long maxId = allApartments.get(0).getId();
+		apartment.setId(++maxId); 
+		
+		System.out.println(maxId);
+		
 		this.apartments.put(apartment.getId(), apartment);
 	}
 	/**
@@ -192,5 +208,25 @@ public class ApartmentDAO {
 
 	public void setContextPath(String contextPath) {
 		this.contextPath = contextPath;
+	}
+
+	/**
+	 * Metoda za modifikaciju apartmana
+	 * @param beans.Apartment modifedApartment
+	 * @param Long id
+	 * */
+	public void modifyApartment(Apartment modifiedApartment, Long id) {
+		// TODO Auto-generated method stub
+		Apartment apartment = this.find(id);
+		apartment = modifiedApartment;
+		this.apartments.put(id, apartment);
+		
+		
+	}
+
+	public void deleteApartment(Long id) {
+		// TODO Auto-generated method stub
+		this.apartments.remove(id);
+		
 	}
 }
