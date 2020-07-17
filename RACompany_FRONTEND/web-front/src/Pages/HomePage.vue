@@ -1,21 +1,16 @@
 <template>
   <div>
-      <app-header></app-header>
-      <app-content></app-content>
+    <router-link to="/">Home</router-link>
+    <router-link to="/login">LogIn</router-link>
+    <router-view/>
   </div>
 </template>
 
 <script>
 
-import HomeHeaderComponent from '../components/HomeHeaderComponent';
-import HomeContentComponent from '../components/HomeContentComponent'
-
 export default {
   name: 'HomePage',
-  components: {
-      'app-header': HomeHeaderComponent,
-      'app-content': HomeContentComponent,
-  }
+
 }
 </script>
 

@@ -1,15 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import HomePage from "../Pages/HomePage";
 import LogInPage from "../Pages/LogInPage";
+import HomeContentComponent from "../components/HomeContentComponent";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "HomePage",
-    component: HomePage,
+    name: "HomeContentComponent",
+    component: HomeContentComponent,
   },
   {
     path: "/login",

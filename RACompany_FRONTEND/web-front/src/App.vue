@@ -1,14 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/login" tag="button">LogIn</router-link>
-    </div>
-    <router-view/>
+    <HomePage/>
   </div>
 </template>
 
+<script>
+import HomePage from "./Pages/HomePage"
 
+export default {
+  name: 'App',
+  components: {
+    HomePage
+  }
+}
+</script>
 
 <style>
 
