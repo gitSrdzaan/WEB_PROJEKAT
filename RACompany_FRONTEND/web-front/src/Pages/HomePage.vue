@@ -1,20 +1,20 @@
 <template>
   <div>
-      <HomeHeaderComponent/>
-      <HomeContentComponent/>
+      <app-header></app-header>
+      <app-content></app-content>
   </div>
 </template>
 
 <script>
 
-import HomeHeaderComponent from '../components/HomeHeaderComponent'
+import HomeHeaderComponent from '../components/HomeHeaderComponent';
 import HomeContentComponent from '../components/HomeContentComponent'
 
 export default {
   name: 'HomePage',
   components: {
-      HomeHeaderComponent,
-      HomeContentComponent
+      'app-header': HomeHeaderComponent,
+      'app-content': HomeContentComponent,
   }
 }
 </script>
