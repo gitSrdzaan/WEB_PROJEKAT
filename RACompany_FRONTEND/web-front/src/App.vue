@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import HomePage from './Pages/HomePage'
+import HomePage from "./Pages/HomePage"
 
 export default {
   name: 'App',
