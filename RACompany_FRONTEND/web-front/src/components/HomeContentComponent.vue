@@ -20,17 +20,30 @@
     </form>
     <form class="content">
       <ul>
-        <li>
-          item1
+        <li >
+          {{info}}
         </li>
       </ul>
     </form>
   </div>
 </template>
 
+
 <script>
+import axios from 'axios'
+
 export default {
   name: 'HomeContentComponent',
+  mounted: function(){
+    axios
+      .get('http://localhost:8080/RACompany/rest/helloWorld')
+      .then(response => (this.info = response.data))
+  },
+  data() {
+    return{
+      info: null
+    }
+  }
   
 }
 </script>

@@ -45,7 +45,7 @@ public class LoginService {
 	public Response helloWOrld(@Context HttpServletRequest request) {
 		/*UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		System.out.println(dao.findAll());*/
-		return Response.status(200).entity("Hello World").build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Hello World").build();
 	}
 	
 	@GET
