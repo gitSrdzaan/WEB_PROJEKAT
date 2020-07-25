@@ -11,6 +11,7 @@ GitHub nalog | Ime i prezime
 **Folder za backend kod**
 
 * Tehnologije
+  * JAVA 8
   * JAX RS
   * Apache Tomcat 8.0.47
   
