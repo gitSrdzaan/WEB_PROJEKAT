@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +16,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.Amenities;
 import beans.Apartment;
 import beans.ApartmentType;
 import beans.Host;
@@ -118,18 +119,17 @@ public class ApartmentDAO {
 	 * Metoda za dodavanje apartmana u mapu apartmana
 	 * */
 	public void putApartment(Apartment apartment) {
-		/**
-		 * TODO: generisanje kljuca apartmana
-		 * */
-		List<Apartment> allApartments = (List<Apartment>) this.apartments.values();
-		//allApartments.sort(Comparator.comparing(a -> a.getId() ));
-		/**
-		 * Java Lambda funckija za sortiranje liste apartmana po id-u
-		 * */
-		allApartments.sort((a,b) -> Long.compare(a.getId(), b.getId()));
 		
-		Long maxId = allApartments.get(0).getId();
-		apartment.setId(++maxId); 
+		List<Apartment> allApartments = (List<Apartment>) this.apartments.values();
+		
+		/**
+		 * Java Lambda funckija za sortiranje liste apartmana po id-u 
+		 * u opadajucem redosljedu
+		 * */
+		allApartments.sort((a,b) -> Long.compare(b.getId(), a.getId()));
+		
+		Long maxId = allApartments.get(0).getId(); //id prvog u sortiranoj listi je najveci
+		apartment.setId(++maxId); //uvecavanjem za jedan dobijamo da se vrijednost kljuca nece ponoviti
 		
 		System.out.println(maxId);
 		
@@ -226,7 +226,53 @@ public class ApartmentDAO {
 
 	public void deleteApartment(Long id) {
 		// TODO Auto-generated method stub
+		//this.apartments.get(id).setApartmentStatus(false);//postavljanje statusa apartmana na neaktivan
+		
 		this.apartments.remove(id);
 		
+	}
+
+	public void modifyApartmentsWithAmenity(Amenities amenities) {
+		// TODO Auto-generated method stub
+		ArrayList<Apartment> list = (ArrayList<Apartment>) this.apartments.values();
+		//lista svih apartmana
+		for(Apartment iter : list) {
+			if(iter.getAmenities() != null) {
+				//lista svih sadrzaja apartmana za odredjeni apartman
+				ArrayList<Amenities> iterAmenities = (ArrayList<Amenities>) iter.getAmenities();
+				for(Amenities amenIter : iterAmenities) {
+					if(amenIter.getId() == amenities.getId()) {
+						//ako se poklapaju samo modifikovati vrijednosti i prekinuti petlju,
+						//jer znamo da postoji samo jedan sa tim id
+						amenIter = amenities;
+						this.apartments.put(iter.getId(), iter);
+						break;
+					}
+				}
+			}
+		}
+		
+		
+	}
+
+	public void deleteAmenityFromApartment(Amenities amenity) {
+		// TODO Auto-generated method stub
+		ArrayList<Apartment> list = (ArrayList<Apartment>) this.apartments.values();
+		//lista svih apartmana
+		for(Apartment iter : list) {
+			if(iter.getAmenities() != null) {
+				//lista svih sadrzaja apartmana za odredjeni apartman
+				ArrayList<Amenities> iterAmenities = (ArrayList<Amenities>) iter.getAmenities();
+				for(Amenities amenIter : iterAmenities) {
+					if(amenIter.getId() == amenity.getId()) {
+						//ako se poklapaju kljucevi treba ga obrisati
+						//jer znamo da postoji samo jedan sa tim id
+						iterAmenities.remove(amenIter);
+						this.apartments.put(iter.getId(), iter);
+						break;
+					}
+				}
+			}
+		}
 	}
 }

@@ -1,19 +1,20 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Apartment {
 	
-	private Long Id;
+	private Long id;
 	
 	private ApartmentType type;
 	private Integer roomNumber;
 	private Integer guestNumber;
-	private Location appartmentLocation;
-	private Host appartmentHost;
+	private Location apartmentLocation;
+	private Host apartmentHost;
 	
-	private List<DateStatus> appartmentResevartionDates;
+	private List<DateStatus> apartmentResevartionDates;
 	private List<Comment> comments;
 	
 	private Double pricePerNight;
@@ -31,6 +32,10 @@ public class Apartment {
 	public Apartment() {
 		super();
 		// TODO Auto-generated constructor stub
+		this.apartmentResevartionDates = new ArrayList<DateStatus>();
+		this.comments = new ArrayList<Comment>();
+		this.amenities = new ArrayList<>();
+		this.reservations = new ArrayList<>();
 	}
 	
 	
@@ -38,7 +43,7 @@ public class Apartment {
 	
 
 	public Long getId() {
-		return Id;
+		return id;
 	}
 
 
@@ -46,7 +51,7 @@ public class Apartment {
 
 
 	public void setId(Long id) {
-		Id = id;
+		this.id = id;
 	}
 
 
@@ -78,22 +83,22 @@ public class Apartment {
 		this.guestNumber = guestNumber;
 	}
 	public Location getApartmentLocation() {
-		return appartmentLocation;
+		return apartmentLocation;
 	}
 	public void setApartmentLocation(Location appartmentLocation) {
-		this.appartmentLocation = appartmentLocation;
+		this.apartmentLocation = appartmentLocation;
 	}
 	public Host getApartmentHost() {
-		return appartmentHost;
+		return apartmentHost;
 	}
 	public void setApartmentHost(Host appartmentHost) {
-		this.appartmentHost = appartmentHost;
+		this.apartmentHost = appartmentHost;
 	}
 	public List<DateStatus> getApartmentResevartionDates() {
-		return appartmentResevartionDates;
+		return apartmentResevartionDates;
 	}
 	public void setApartmentResevartionDates(List<DateStatus> appartmentResevartionDates) {
-		this.appartmentResevartionDates = appartmentResevartionDates;
+		this.apartmentResevartionDates = appartmentResevartionDates;
 	}
 	public List<Comment> getComments() {
 		return comments;

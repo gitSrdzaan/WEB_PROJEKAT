@@ -3,9 +3,12 @@ package beans;
 public class Comment {
 
 	private Guest guest;
-	private Apartment apparment;
+	private Apartment aparment;
 	private String text;
 	private ApartmentGrade grade;
+	
+	private boolean visible;
+	
 	public Comment() {
 		
 	}
@@ -17,10 +20,10 @@ public class Comment {
 	}
 	
 	public Apartment getApparment() {
-		return apparment;
+		return aparment;
 	}
-	public void setApparment(Apartment apparment) {
-		this.apparment = apparment;
+	public void setAparment(Apartment aparment) {
+		this.aparment = aparment;
 	}
 	public String getText() {
 		return text;
@@ -33,6 +36,12 @@ public class Comment {
 	}
 	public void setGrade(ApartmentGrade grade) {
 		this.grade = grade;
+	}
+	public boolean isVisible() {
+		return visible;
+	}
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 	
 	
