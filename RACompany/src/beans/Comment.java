@@ -10,7 +10,7 @@ public class Comment {
 	private boolean visible;
 	
 	public Comment() {
-		
+		this.visible = true;
 	}
 	public Guest getGuest() {
 		return guest;
@@ -42,6 +42,24 @@ public class Comment {
 	}
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+	
+	/**
+	 * Metoda koja provjerava da li su oglasi isti
+	 * @param beans.Comment comment*/
+	public boolean isEqual(Comment comment) {
+		// TODO Auto-generated method stub
+		if(this.getGuest() != comment.getGuest()) {
+			return false;
+		}
+		if(this.getGrade() != comment.getGrade()) {
+			return false;
+		}
+		if(this.getText() != comment.getText()) {
+			return false;
+		}
+		
+		return true;
 	}
 	
 	

@@ -84,7 +84,7 @@ public class AmenitiesService {
 	}
 	
 	@PUT
-	@Path("/modfy")
+	@Path("/modify")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modifyAmenity(Amenities amenities, @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");

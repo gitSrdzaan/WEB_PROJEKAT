@@ -131,8 +131,8 @@ public class ApartmentDAO {
 		Long maxId = allApartments.get(0).getId(); //id prvog u sortiranoj listi je najveci
 		apartment.setId(++maxId); //uvecavanjem za jedan dobijamo da se vrijednost kljuca nece ponoviti
 		
-		System.out.println(maxId);
-		
+		//System.out.println(maxId);
+		apartment.setApartmentStatus(false);//inicijalno stanje apartmana je neaktivno
 		this.apartments.put(apartment.getId(), apartment);
 	}
 	/**

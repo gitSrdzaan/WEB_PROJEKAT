@@ -18,11 +18,12 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import beans.Admin;
 import beans.Apartment;
 import beans.Comment;
 import beans.Guest;
 import beans.Host;
+import beans.User;
+import beans.UserRole;
 import dao.ApartmentDAO;
 import dao.UserDAO;
 
@@ -71,9 +72,9 @@ public class ApartmentService {
 	public Response getAllApartments(@Context HttpServletRequest request) {
 		
 		ApartmentDAO apDAO = (ApartmentDAO)this.ctx.getAttribute("apartmentDAO");
-		Admin admin = (Admin) request.getSession().getAttribute("user");
+		User admin = (User) request.getSession().getAttribute("user");
 		
-		if(admin == null) {
+		if(admin.getUserRole() != UserRole.ADMIN) {
 			return Response.status(403).build();
 		}
 		
@@ -192,5 +193,34 @@ public class ApartmentService {
 		return Response.status(200).build();	
 	}
 	
-	
+	@PUT
+	@Path("/commentVisibility/{apartmentId}")
+	public Response modifyApartmentComment(@PathParam("apartmentId") Long apartmentId,
+			@Context HttpServletRequest request, Comment comment) {
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user.getUserRole() != UserRole.HOST) {
+			return Response.status(403).build();
+		}
+		ApartmentDAO dao = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
+		Apartment apartment = dao.find(apartmentId);
+		
+		
+		for(Comment iter : apartment.getComments()) {
+			if(iter.isEqual(comment)) {
+				iter.setVisible(!iter.isVisible());//postavljanje vidljivosti na suprotnu od prethodne
+			}
+		}
+		
+		try {
+			dao.saveApartments();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(500).entity("Greska pri cuvanju modifikovanog apartmana pri modifikaciji"
+					+ " vidljivosti komentara").build();
+		}
+		
+		return Response.ok().build();
+	}
 }
