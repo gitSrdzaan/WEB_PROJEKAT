@@ -20,8 +20,10 @@
     </form>
     <form class="content">
       <ul>
-        <li >
-          {{info}}
+        <li v-for="apartment in info"
+        :key="apartment.id">
+          {{apartment.type}}
+          
         </li>
       </ul>
     </form>
@@ -36,7 +38,7 @@ export default {
   name: 'HomeContentComponent',
   mounted: function(){
     axios
-      .get('http://localhost:8080/RACompany/rest/helloWorld')
+      .get('http://localhost:8080/RACompany/rest/apartment/helloWorld')
       .then(response => (this.info = response.data))
   },
   data() {
