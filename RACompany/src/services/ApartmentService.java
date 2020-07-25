@@ -59,7 +59,7 @@ public class ApartmentService {
 	public Response helloWOrld(@Context HttpServletRequest request) {
 		ApartmentDAO apDAO = (ApartmentDAO)this.ctx.getAttribute("apartmentDAO");
 		
-		return Response.ok().entity(apDAO.findAll()).build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(apDAO.findAll()).build();
 		//return Response.status(200).entity("Hello World").build();
 	}
 	/**
@@ -78,7 +78,7 @@ public class ApartmentService {
 			return Response.status(403).build();
 		}
 		
-		return Response.ok().entity(apDAO.findAll()).build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(apDAO.findAll()).build();
 	}
 	
 	
