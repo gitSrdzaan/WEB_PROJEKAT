@@ -18,7 +18,7 @@ import beans.User;
 import dao.UserDAO;
 
 /**
- * Servic klasa za registraciju, logovanje i izlogovanje korisnika aplkacije
+ * Servis klasa za registraciju, logovanje i izlogovanje korisnika aplkacije
  * */
 @Path("/")
 public class LoginService {
