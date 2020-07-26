@@ -16,6 +16,9 @@
           <b-navbar-brand>
             <router-link to="/login">Log In</router-link>
           </b-navbar-brand>
+          <b-navbar-brand>
+            <router-link to="/reg">Sign In</router-link>
+          </b-navbar-brand>
  
         </b-navbar-nav>
       </b-collapse>

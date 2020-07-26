@@ -72,7 +72,7 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Sign Up</b-button>
+      <b-button type="submit" variant="primary">Submit</b-button>
     </b-form>
   </div>
 </template>
