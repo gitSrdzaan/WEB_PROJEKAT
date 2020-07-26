@@ -1,32 +1,38 @@
 <template>
-  <div class="row">
-    <form class="SearchBox">
-        <label>Type</label>
-        <br/>
-        <input type="text"/>
-        <label>Number of rooms</label>
-        <br/>
-        <input type="number"/>
-        <label>Number of guests</label>
-        <br/>
-        <input type="number"/>
-        <label>Price per Night</label>
-        <br/>
-        <input type="text"/>
-        <label>Host name</label>
-        <br/>
-        <input type="text"/>
+  <div>
+    <div>
+      <b-button class="searchBox" v-b-modal.modal-1>Search</b-button>
 
-    </form>
-    <form class="content">
-      <ul>
+      <b-modal id="modal-1" title="Search Box">
+        <p class="my-4">Treba napravit formu za search</p>
+     </b-modal>
+    </div>
+    <div class="content">
+      <ul class="ul-content">
         <li v-for="apartment in info"
-        :key="apartment.id">
-          {{apartment.type}}
-          
+          :key="apartment.id">
+          <div>
+            <b-card
+              img-src="https://picsum.photos/600/300/?image=25"
+              img-alt="Image"
+              img-top
+              tag="article"
+              style="max-width: 20rem;"
+              class="mb-2"
+            >
+            <b-card-text>
+              <p>
+                <b v-if="apartment.apartmentLocation.adress">
+                  {{ apartment.apartmentLocation.adress.street }}</b>
+              </p>
+            </b-card-text>
+
+            <b-button href="#" variant="primary">Open</b-button>
+            </b-card>
+          </div>
         </li>
       </ul>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -52,37 +58,18 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.row{
-  display: flex;
-}
 
-.SearchBox{
-  border-style: double;
-  background: lightblue;
-  width: 170px;
-  height: 600px;
-  margin: 40px;
+.searchBox{
+  margin: 20px;
 }
 
 .content{
-  width: 100%;
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  box-sizing: border-box;
+  display: inline;
 }
-ul{
-  display: flex;
-  flex-wrap: wrap;
-  list-style-type: none;
-  padding: 0;
+
+.ul-content li{
+  display: inline-flex;
+  margin: 15px;
 }
-li{
-  flex-grow: 1;
-  flex-basis: 300px;
-  text-align: center;
-  padding: 30px;
-  border: 1px solid #222;
-  margin: 10px;
-}
+
 </style>
