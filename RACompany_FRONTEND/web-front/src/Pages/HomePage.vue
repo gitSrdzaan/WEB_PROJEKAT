@@ -1,7 +1,26 @@
 <template>
   <div>
-    <router-link to="/">Home</router-link>
-    <router-link to="/login">LogIn</router-link>
+    <div>
+      <b-navbar toggleable="lg" type="dark" variant="dark">
+        <b-navbar-brand>
+          <router-link to="/">Home</router-link>
+        </b-navbar-brand>
+
+      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+      <b-collapse id="nav-collapse" is-nav>
+
+        <!-- Right aligned nav items -->
+        <b-navbar-nav class="ml-auto">
+
+          <b-navbar-brand>
+            <router-link to="/login">Log In</router-link>
+          </b-navbar-brand>
+ 
+        </b-navbar-nav>
+      </b-collapse>
+      </b-navbar>
+    </div>
     <router-view/>
   </div>
 </template>
