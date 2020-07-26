@@ -50,11 +50,11 @@ public class AmenitiesService {
 	public Response getAllAmenities( @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).entity("Nije dozvoljeno za druge osim za admine").build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
 		}
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
-		return Response.status(200).entity(dao.findAll()).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(dao.findAll()).build();
 		
 	}
 	
@@ -65,7 +65,7 @@ public class AmenitiesService {
 	public Response createNewAmenity(Amenities amenities, @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).entity("Nije dozvoljeno za druge osim za admine").build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
 		}
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
@@ -76,20 +76,20 @@ public class AmenitiesService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska u cuvanju sadrzaja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju sadrzaja apartmana").build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
 	}
 	
 	@PUT
-	@Path("/modfy")
+	@Path("/modify")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modifyAmenity(Amenities amenities, @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).entity("Nije dozvoljeno za druge osim za admine").build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
 		}
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
@@ -102,14 +102,14 @@ public class AmenitiesService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
 		}
 		
 		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		apDAO.modifyApartmentsWithAmenity(amenities);
 		
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
 	}
 	
@@ -119,7 +119,7 @@ public class AmenitiesService {
 		
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).entity("Nije dozvoljeno za druge osim za admine").build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
 		}
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
@@ -131,13 +131,13 @@ public class AmenitiesService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
 		}
 		
 		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		apDAO.deleteAmenityFromApartment(dao.findById(id));
 		
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 	}
 }

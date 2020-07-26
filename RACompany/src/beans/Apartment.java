@@ -27,7 +27,7 @@ public class Apartment {
 	private List<Amenities> amenities;
 	private List<Reservations> reservations;
 	
-
+	private String imageSource;
 	
 	public Apartment() {
 		super();
@@ -141,6 +141,22 @@ public class Apartment {
 	}
 	public void setReservations(List<Reservations> reservations) {
 		this.reservations = reservations;
+	}
+
+
+
+
+
+	public String getImageSource() {
+		return imageSource;
+	}
+
+
+
+
+
+	public void setImageSource(String imageSource) {
+		this.imageSource = imageSource;
 	}
 	
 	
