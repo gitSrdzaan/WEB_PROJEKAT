@@ -65,11 +65,11 @@ public class LoginService {
 		User currUser = dao.find(user.getUsername(), user.getPassword());
 		if(currUser == null) {
 			return Response.status(400).
-					entity("invalid username or password").build();
+					entity("invalid username or password").header("Access-Control-Allow-Origin", "*").build();
 		}
 		
 		request.getSession().setAttribute("user", currUser);
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@POST
@@ -87,19 +87,19 @@ public class LoginService {
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return Response.status(500).entity("Greska pri dodavanju registrovanog korisnika").build();
+				return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska pri dodavanju registrovanog korisnika").build();
 			}
 			try {
 				dao.saveUsers();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-				return Response.status(500).entity("Gresk pri cuvanju registrovanog korisnika").build();
+				return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Gresk pri cuvanju registrovanog korisnika").build();
 			}
-			return Response.status(200).build();
+			return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		}
 		
-		return Response.status(400).entity("Username already exists").build();
+		return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Username already exists").build();
 		
 		
 	}

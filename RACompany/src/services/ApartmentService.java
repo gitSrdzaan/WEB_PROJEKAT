@@ -75,7 +75,7 @@ public class ApartmentService {
 		User admin = (User) request.getSession().getAttribute("user");
 		
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").build();
 		}
 		
 		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(apDAO.findAll()).build();
@@ -92,12 +92,12 @@ public class ApartmentService {
 		Host host = (Host)dao.findByUsername(hostUsername);
 		
 		if(host == null) {
-			return Response.status(400).entity("Pogresan korisnika").build();
+			return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Pogresan korisnika").build();
 		}
 		
 		ApartmentDAO apDAO = (ApartmentDAO)this.ctx.getAttribute("apartmentDAO");
 		
-		return Response.status(200).entity(apDAO.findAllHostApartments(host)).build(); 
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(apDAO.findAllHostApartments(host)).build(); 
 		
 	}
 	
@@ -123,10 +123,10 @@ public class ApartmentService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska pri cuvanja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska pri cuvanja apartmana").build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 			
 	}
 	
@@ -142,10 +142,10 @@ public class ApartmentService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska pri cuvanju modifikovanog apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska pri cuvanju modifikovanog apartmana").build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 	}
 	
 	@DELETE
@@ -158,10 +158,10 @@ public class ApartmentService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska pri cuvanju obrisanog apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska pri cuvanju obrisanog apartmana").build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
 	}
 
@@ -187,10 +187,10 @@ public class ApartmentService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").build();
 		}
 		
-		return Response.status(200).build();	
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();	
 	}
 	
 	@PUT
@@ -200,7 +200,7 @@ public class ApartmentService {
 		User user = (User) request.getSession().getAttribute("user");
 		
 		if(user.getUserRole() != UserRole.HOST) {
-			return Response.status(403).build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").build();
 		}
 		ApartmentDAO dao = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		Apartment apartment = dao.find(apartmentId);
@@ -217,10 +217,10 @@ public class ApartmentService {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("Greska pri cuvanju modifikovanog apartmana pri modifikaciji"
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska pri cuvanju modifikovanog apartmana pri modifikaciji"
 					+ " vidljivosti komentara").build();
 		}
 		
-		return Response.ok().build();
+		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
 }

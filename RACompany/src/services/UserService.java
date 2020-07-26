@@ -45,7 +45,7 @@ public class UserService {
 	public Response helloWOrld(@Context HttpServletRequest request) {
 		/*UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		System.out.println(dao.findAll());*/
-		return Response.status(200).entity("Hello World").build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Hello World").build();
 	}
 	
 	@GET
@@ -63,7 +63,7 @@ public class UserService {
 		UserDAO dao = (UserDAO) request.getSession().getAttribute("userDAO");
 		
 		if(!dao.modifyUser(modifiedUser,username)) {
-			return Response.status(400).entity("Korisnicko ime je mijenjano").build();
+			return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Korisnicko ime je mijenjano").build();
 		}
 		
 		try {
@@ -71,10 +71,10 @@ public class UserService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).entity("greska pri cuvanju modifikovanog korisnika").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("greska pri cuvanju modifikovanog korisnika").build();
 		}
 		
-		return Response.status(200).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
 	}
 	
@@ -84,7 +84,7 @@ public class UserService {
 	public Response getAllUsers(@Context HttpServletRequest request){
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
-			return Response.status(403).build();
+			return Response.status(403).header("Access-Control-Allow-Origin", "*").build();
 		}
 		
 		
@@ -92,7 +92,7 @@ public class UserService {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
 		
-		return Response.status(200).entity(dao.findAll()).build();
+		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(dao.findAll()).build();
 		
 		
 	}
