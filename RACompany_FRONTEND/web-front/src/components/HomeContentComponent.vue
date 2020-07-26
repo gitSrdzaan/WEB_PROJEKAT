@@ -21,10 +21,21 @@
               class="mb-2"
             >
             <b-card-text>
-              <p>
-                <b v-if="apartment.apartmentLocation.adress">
-                  {{ apartment.apartmentLocation.adress.street }}</b>
-              </p>
+              <div v-if="apartment.apartmentLocation.adress">
+                <b>
+                  {{ apartment.apartmentLocation.adress.street }}
+                  {{ apartment.apartmentLocation.adress.number }}
+                </b>
+                <div>
+                  {{ apartment.apartmentLocation.adress.city}}
+                  {{ apartment.apartmentLocation.adress.postalCode }}
+                </div>
+                <div>
+                  {{ apartment.apartmentLocation.longitude }} ,
+                  {{ apartment.apartmentLocation.latitude }}
+                </div>
+
+              </div>
             </b-card-text>
 
             <b-button href="#" variant="primary">Open</b-button>
