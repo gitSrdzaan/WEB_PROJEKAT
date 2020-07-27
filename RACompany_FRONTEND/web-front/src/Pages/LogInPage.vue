@@ -30,11 +30,6 @@
       </b-form-group>
 
        <b-button type="submit" variant="primary">Submit</b-button>
-       <p>
-         {{info}} ispis
-         {{form.name}}
-         {{form.password}}
-       </p>
       
     </b-form>
   </div>
@@ -61,7 +56,7 @@ import axios from 'axios'
         }
         axios
         .post('http://localhost:8080/RACompany/rest/login',user)
-        .then(res => (this.info = res) )
+        
       }
     
     }

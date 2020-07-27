@@ -1,6 +1,6 @@
 <template>
   <div class="position">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+    <b-form @submit.prevent="onSubmit" method="post">
       <b-form-group 
         id="input-group-1"
         label="Password:"
@@ -8,7 +8,7 @@
       >
         <b-form-input
           id="input-1"
-          v-model="form.pasword"
+          v-model="form.password"
           type="password"
           required
           placeholder="Enter password"
@@ -78,12 +78,18 @@
 </template>
 
 <script>
+import axios from 'axios'
+
   export default {
     data() {
       return {
         form: {
           password: '',
           name: '',
+          firstname: '',
+          lastname:'',
+          sex:'',
+          role:''
         },
         sexes: [
           'Male',
@@ -93,13 +99,20 @@
           'GUEST',
           'HOST'
         ],
-        show: true
       }
     },
     methods: {
-      onSubmit(evt) {
-        evt.preventDefault()
-        alert(JSON.stringify(this.form))
+      onSubmit() {
+        var user = {
+          username: this.form.name,
+          password: this.form.password,
+          sex: this.form.sex,
+          userRole: this.form.role,
+          firstname: this.form.firstname,
+          lastname: this.form.lastname
+        }
+        axios
+          .post('http://localhost:8080/RACompany/rest/register',user)
       }
     }
   }

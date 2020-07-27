@@ -78,11 +78,12 @@ public class LoginService {
 	public Response registerMethod(User user, @Context HttpServletRequest request) {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
-		/*System.out.println(user.getUsername());
-		System.out.println(user.getUserRole());*/
-		
+		/*System.out.println("korisnicko ime "+user.getUsername());
+		System.out.println("rola " + user.getUserRole());
+		*/
 		if(dao.find(user.getUsername(), user.getPassword())==null) {
 			try {
+				
 				dao.putUser(user);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

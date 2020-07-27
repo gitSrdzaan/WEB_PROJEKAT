@@ -58,7 +58,7 @@ public class UserDAO {
 		}
 		//pogresna sifra
 		User user = users.get(username);
-		if(!user.getPassword().equals(password)) {
+		if(user == null || !user.getPassword().equals(password)) {
 			return null;
 		}
 		
@@ -191,15 +191,16 @@ public class UserDAO {
 		ArrayList<Admin> adminList = new ArrayList<Admin>();
 		for(User iter : this.users.values()) {
 			if(iter.getUserRole() == UserRole.ADMIN) {
-				System.out.println("username admina: "+iter.getUsername());
-				adminList.add((Admin)iter);
+				Admin temp = new Admin(iter);
+				adminList.add(temp);
 			}
 		}
 		//lista domacina
 		ArrayList<Host> hostList = new ArrayList<Host>();
 		for(User iter : this.users.values()) {
 			if(iter.getUserRole() == UserRole.HOST) {
-				hostList.add((Host)iter);
+				Host temp = new Host(iter);
+				hostList.add(temp);
 			}
 		}
 		
@@ -207,17 +208,18 @@ public class UserDAO {
 		ArrayList<Guest> guestList = new ArrayList<Guest>();
 		for(User iter : this.users.values()) {
 			if(iter.getUserRole() == UserRole.GUEST) {
-				guestList.add((Guest)iter);
+				Guest temp = new Guest(iter);
+				guestList.add(temp);
 			}
 		}
 		
 		/**
 		 * Upisivanje liste u fajl 
 		 * */
-		System.out.println(adminList);
+		//System.out.println(adminList);
 		
 		//upisivanje administratora
-		File adminFile = new File("WebContent/data"+File.separator+"admin.json");
+		File adminFile = new File(this.contextPath+"data/admin.json");
 		try {
 			System.out.println(adminFile.getAbsolutePath());
 			mapper.writerWithDefaultPrettyPrinter().writeValue(adminFile, 
