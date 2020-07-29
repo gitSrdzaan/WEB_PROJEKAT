@@ -1,11 +1,56 @@
 <template>
   <div>
-    <div>
-      <b-button class="searchBox" v-b-modal.modal-1>Search</b-button>
+    <div class="searchBox">
+      <b-container class="bv-example-row">
+        <b-row>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input location"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Number of guests" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input number"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
+              <b-form-datepicker id="datepicker" v-model="value" class="mb-2"></b-form-datepicker>
+            </b-form-group>
+          </b-col>
+        </b-row>
 
-      <b-modal id="modal-1" title="Search Box">
-        <p class="my-4">Treba napravit formu za search</p>
-     </b-modal>
+        <b-row>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="datepicker">
+              <b-form-datepicker id="datepicker" v-model="value" class="mb-2"></b-form-datepicker>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input min cost"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input max cost"></b-form-input>
+            </b-form-group>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Min room numbers" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input min rooms"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Max room numbers" label-for="input-default">
+              <b-form-input id="input-default" placeholder="Input max rooms"></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col></b-col>
+        </b-row>
+      </b-container>
     </div>
     <div class="content">
       <ul class="ul-content">
@@ -38,7 +83,7 @@
               </div>
             </b-card-text>
 
-            <b-button href="#" variant="primary">Open</b-button>
+            <b-button variant="primary">Open</b-button>
             </b-card>
           </div>
         </li>
@@ -72,7 +117,7 @@ export default {
 <style scoped>
 
 .searchBox{
-  margin: 20px;
+  margin: 15px;
 }
 
 .content{
