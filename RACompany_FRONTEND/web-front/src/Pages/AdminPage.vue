@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>AdminPage</h1>
-    {{user.username}}
   </div>
 </template>
 

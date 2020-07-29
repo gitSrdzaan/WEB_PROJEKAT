@@ -38,10 +38,11 @@ import axios from 'axios'
 
 export default {
   name: 'HomePage',
-  mounded: function(){
+  mounted: function(){
     axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(res => (this.user = res))
+      .catch(console.log("nesto"))
   },
   data() {
     return{
