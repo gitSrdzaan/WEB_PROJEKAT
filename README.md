@@ -22,3 +22,9 @@ GitHub nalog | Ime i prezime
 * Tehnologije
   * Vue.js
   * Node.js
+  
+## Pokretanje aplikacije
+  
+Otvoriti terminal u _RACompany_FRONTEND/web-front_ folderu. Ukucati komandu **npm run-script build**. Iz _dist_ folder prekopirati sav sadrzaj u _WebContent_ folder u _RACompany_ folderu.
+ 
+Dinamicki web projekat je spreman za pokretanje na odgovarajucem Tomcat serveru.

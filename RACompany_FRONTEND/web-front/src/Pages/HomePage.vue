@@ -24,12 +24,14 @@
           <b-navbar-brand>
             <router-link to="/reg">Sign In</router-link>
           </b-navbar-brand>
- 
+             <router-link to="/admin" v-bind:user="user">Admin</router-link>
         </b-navbar-nav>
       </b-collapse>
       </b-navbar>
     </div>
     <router-view/>
+    <router-link to="/admin">Admin</router-link>
+     
   </div>
 </template>
 
@@ -38,6 +40,7 @@ import axios from 'axios'
 
 export default {
   name: 'HomePage',
+<<<<<<< HEAD
   mounded: function(){
     axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
@@ -49,6 +52,20 @@ export default {
     }
   }
 
+=======
+  data(){
+    return {
+      user : {
+        username : "admin" 
+      }
+    }
+  },
+  mounted : function(){
+    console.log(this.user);
+  }
+ 
+  
+>>>>>>> 71e13021b92860d23429f9500899fa856069eef3
 }
 </script>
 
