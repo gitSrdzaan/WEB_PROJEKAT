@@ -40,7 +40,6 @@ import axios from 'axios'
 
 export default {
   name: 'HomePage',
-<<<<<<< HEAD
   mounded: function(){
     axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
@@ -51,21 +50,6 @@ export default {
       user: null
     }
   }
-
-=======
-  data(){
-    return {
-      user : {
-        username : "admin" 
-      }
-    }
-  },
-  mounted : function(){
-    console.log(this.user);
-  }
- 
-  
->>>>>>> 71e13021b92860d23429f9500899fa856069eef3
 }
 </script>
 
