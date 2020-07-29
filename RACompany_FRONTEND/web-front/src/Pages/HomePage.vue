@@ -24,13 +24,11 @@
           <b-navbar-brand>
             <router-link to="/reg">Sign In</router-link>
           </b-navbar-brand>
-             <router-link to="/admin" v-bind:user="user">Admin</router-link>
         </b-navbar-nav>
       </b-collapse>
       </b-navbar>
     </div>
     <router-view/>
-    <router-link to="/admin">Admin</router-link>
      
   </div>
 </template>
