@@ -60,7 +60,8 @@ export default {
   },
   data() {
     return{
-      info: null
+      info: null,
+      user: null
     }
   }
   

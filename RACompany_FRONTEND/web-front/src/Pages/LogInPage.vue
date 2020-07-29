@@ -29,7 +29,12 @@
         ></b-form-input>
       </b-form-group>
 
-       <b-button type="submit" variant="primary">Submit</b-button>
+       <b-button type="submit">
+         Submit
+         <div v-if="false">
+          <router-link to="/">Submit</router-link>
+         </div>
+       </b-button>
       
     </b-form>
   </div>
@@ -39,6 +44,9 @@
 import axios from 'axios'
 
   export default {
+    prop: [
+      'myRole'
+    ],
     data() {
       return {
         form: {
@@ -58,6 +66,7 @@ import axios from 'axios'
         .post('http://localhost:8080/RACompany/rest/login',user)
         
       }
+      
     
     }
   }

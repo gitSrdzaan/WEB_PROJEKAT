@@ -5,6 +5,11 @@
         <b-navbar-brand>
           <router-link to="/">Home</router-link>
         </b-navbar-brand>
+        <div>
+          <b-navbar-brand>
+            <router-link to="/user">User</router-link>
+          </b-navbar-brand>
+        </div>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -29,12 +34,24 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
   name: 'HomePage',
+  mounded: function(){
+    axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(res => (this.user = res))
+  },
+  data() {
+    return{
+      user: null
+    }
+  }
 
 }
 </script>
+
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
