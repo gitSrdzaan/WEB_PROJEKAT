@@ -3,8 +3,8 @@
       <h1>Admin Component</h1>
       <div id="tabs">
         <b-tabs content-class="mt-3">
-          <b-tab title="Personal Info" active ><UserInfoComponent v-bind:user="user"/></b-tab>
-          <b-tab title="Users" ><p>I'm the first tab</p></b-tab>
+          <b-tab title="Personal Info" ><UserInfoComponent v-bind:user="user"/></b-tab>
+          <b-tab title="Users" active><ViewAllUsers v-bind:user="user"/></b-tab>
           <b-tab title="Apartments"><p>I'm the second tab</p></b-tab>
           <b-tab title="Apartment amenities" ><p>I'm a disabled tab!</p></b-tab>
           <b-tab title="Reservations"><GuestComponent/></b-tab>
@@ -16,13 +16,15 @@
 <script>
 import GuestComponent from "../components/GuestComponent";
 import UserInfoComponent from "../components/UserInfoComponent";
+import ViewAllUsers from "../components/ViewAllUsers";
 import axios from 'axios';
 
 export default {
   name: 'AdminComponent',
   components: {
     GuestComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    ViewAllUsers
   },
   data(){
     return{

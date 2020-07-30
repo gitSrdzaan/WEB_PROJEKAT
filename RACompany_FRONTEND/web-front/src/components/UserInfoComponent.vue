@@ -2,7 +2,7 @@
     <div>
         <h1>UserInfoComponent</h1>
         <div class="position">
-            <b-form @submit.prevent="onSubmit" method="post">
+            <b-form @submit.prevent="submintModifiedUser" method="post">
                 <b-form-group 
                     id="input-group-1"
                     label="Password:"
@@ -83,11 +83,14 @@ export default {
             this.newUser.lastname = this.user.lastname
             this.newUser.sex = this.user.sex
 
-            this.newUser.username = this.user.newUser
+            this.newUser.username = this.user.username
+
+            let path = 'http://localhost:8080/rest/users/modify/';
+            let putPath = path.concat(this.newUser.username);
 
             Axios
-            .put()
-            .then()
+            .put(putPath,this.newUser)
+            .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
         }
     }
