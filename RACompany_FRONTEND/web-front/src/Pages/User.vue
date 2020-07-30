@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AdminComponent from '../components/AdminComponent'
+import AdminComponent from '../adminComponents/AdminComponent'
 
 export default {
   name: 'User',

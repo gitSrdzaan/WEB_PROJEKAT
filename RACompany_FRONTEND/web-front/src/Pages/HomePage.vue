@@ -29,7 +29,7 @@
       </b-navbar>
     </div>
     <router-view/>
-     
+     <button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -47,6 +47,12 @@ export default {
   data() {
     return{
       user: null
+    }
+  },
+  methods : {
+    logout : function(){
+      axios
+      .post('http://localhost:8080/RACompany/rest/logout')
     }
   }
 }

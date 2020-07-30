@@ -63,7 +63,18 @@ import axios from 'axios'
           password: this.form.password
         }
         axios
-        .post('http://localhost:8080/RACompany/rest/login',user)
+        .post('http://localhost:8080/RACompany/rest/login',user,{
+          headers : {
+            'Sec-Fetch-Mode': 'no-cors',
+            'Access-Control-Allow-Headers' : '*',
+            'Access-Control-Allow-Credentials': true,
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+            'Access-Control-Expose-Headers': '*',
+            'Access-Control-Request-Method' : 'POST',
+            'Access-Control-Request-Headers' : '*'
+          }
+        })
         
       }
       
