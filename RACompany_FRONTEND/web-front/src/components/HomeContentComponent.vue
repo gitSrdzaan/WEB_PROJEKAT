@@ -4,51 +4,53 @@
       <b-container class="bv-example-row">
         <b-row>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input location"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="location">
+              <b-form-input id="location" placeholder="Input location"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="6" label="Number of guests" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input number"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Number of guests" label-for="number-of-guest">
+              <b-form-input id="number-of-guest" placeholder="Input number"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" v-model="value" class="mb-2"></b-form-datepicker>
+              <b-form-datepicker id="datepicker" class="mb-2"></b-form-datepicker>
             </b-form-group>
           </b-col>
         </b-row>
 
         <b-row>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" v-model="value" class="mb-2"></b-form-datepicker>
+            <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="end-datepicker">
+              <b-form-datepicker id="end-datepicker" class="mb-2"></b-form-datepicker>
             </b-form-group>
           </b-col>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input min cost"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="min-cost">
+              <b-form-input id="min-cost" placeholder="Input min cost"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input max cost"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="max-cost">
+              <b-form-input id="max-cost" placeholder="Input max cost"></b-form-input>
             </b-form-group>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="6" label="Min room numbers" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input min rooms"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Min room numbers" label-for="min-room-numbers">
+              <b-form-input id="min-room-numbers" placeholder="Input min rooms"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="6" label="Max room numbers" label-for="input-default">
-              <b-form-input id="input-default" placeholder="Input max rooms"></b-form-input>
+            <b-form-group label-cols="4" label-cols-lg="6" label="Max room numbers" label-for="max-room-numbers">
+              <b-form-input id="max-room-numbers" placeholder="Input max rooms"></b-form-input>
             </b-form-group>
           </b-col>
-          <b-col></b-col>
+          <b-col>
+            <b-button>Search</b-button>
+          </b-col>
         </b-row>
       </b-container>
     </div>
