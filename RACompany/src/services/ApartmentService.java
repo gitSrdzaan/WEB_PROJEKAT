@@ -51,12 +51,14 @@ public class ApartmentService {
 		if(ctx.getAttribute("userDAO") == null) {
 			this.ctx.setAttribute("userDAO", new UserDAO(this.ctx.getRealPath("/")));
 		}
+		//System.out.println("nesto");
 	}
 	
 	@GET
 	@Path("/helloWorld")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response helloWOrld(@Context HttpServletRequest request) {
+		//System.out.println("da li ulzai");
 		ApartmentDAO apDAO = (ApartmentDAO)this.ctx.getAttribute("apartmentDAO");
 		
 		return Response.ok().header("Access-Control-Allow-Origin", "*").entity(apDAO.findAll()).build();
