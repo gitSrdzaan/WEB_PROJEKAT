@@ -85,7 +85,9 @@
               </div>
             </b-card-text>
 
-            <b-button variant="primary">Open</b-button>
+            <b-button variant="primary">
+              <router-link to="/res">Open</router-link>
+            </b-button>
             </b-card>
           </div>
         </li>

@@ -11,6 +11,12 @@
           </b-navbar-brand>
         </div>
 
+        <div>
+          <b-navbar-brand >
+            <router-link to="/res">pomoc rezervacija</router-link>
+          </b-navbar-brand>
+        </div>
+
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
@@ -34,7 +40,6 @@
       </b-navbar>
     </div>
     <router-view/>
-     <button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -68,13 +73,6 @@ export default {
         .post('http://localhost:8080/RACompany/rest/logout', user)
         .catch(console.log("logout"))
     },
-
-  methods : {
-    logout : function(){
-      axios
-      .post('http://localhost:8080/RACompany/rest/logout')
-    }
-  }
   }
   }
 </script>

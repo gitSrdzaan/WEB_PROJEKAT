@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import AdminComponent from '../components/AdminComponent'
+import AdminComponent from '../adminComponents/AdminComponent'
 import GuestComponent from '../components/GuestComponent'
 import HostComponent from '../components/HostComponent'
 import axios from 'axios'
