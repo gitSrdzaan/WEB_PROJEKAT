@@ -60,7 +60,7 @@ public class UserService {
 	@Path("/modify/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modifyUser(User modifiedUser , @Context HttpServletRequest request, @PathParam("username") String username) {
-		UserDAO dao = (UserDAO) request.getSession().getAttribute("userDAO");
+		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
 		if(!dao.modifyUser(modifiedUser,username)) {
 			return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Korisnicko ime je mijenjano").build();

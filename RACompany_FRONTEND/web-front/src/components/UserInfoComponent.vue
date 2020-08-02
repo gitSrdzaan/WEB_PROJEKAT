@@ -9,7 +9,7 @@
                     label-for="input-1">
                     <b-form-input
                     id="input-1"
-                    v-model="user.password"
+                    v-model="this.user.password"
                     type="password"
                     required
                     placeholder="Enter password"
@@ -23,27 +23,28 @@
                 >
                 <b-form-input
                 id="input-3"
-                v-model="user.firstname"
+                v-model="this.user.firstname"
                 required
                 placeholder="Enter firstname"
                 ></b-form-input>
             </b-form-group>
 
             <b-form-group id="input-group-4"  label="Your lastname:" label-for="input-4" >
-                <b-form-input  id="input-4"   v-model="user.lastname" required  placeholder="Enter lastname" >
+                <b-form-input  id="input-4"   v-model="this.user.lastname" required  placeholder="Enter lastname" >
                </b-form-input>
             </b-form-group>
 
             <b-form-group id="input-group-5" label="Sex:" label-for="input-5">
                 <b-form-select
                 id="input-5"
-                v-model="user.sex"
+                v-model="this.user.sex"
                 :options="sexes"
                 required
                 ></b-form-select>
             </b-form-group>
             <b-button type="submit">
-                <router-link to="/">Submit</router-link>
+               <!-- <router-link to="/">Submit</router-link>-->
+               Submit
             </b-button>
             </b-form>
         </div>
@@ -78,21 +79,35 @@ export default {
     },
     methods :{
         submintModifiedUser() {
-            this.newUser.password = this.user.password
-            this.newUser.firstname = this.user.firstname
-            this.newUser.lastname = this.user.lastname
-            this.newUser.sex = this.user.sex
-
-            this.newUser.username = this.user.username
+            this.newUser = this.user;
 
             let path = 'http://localhost:8080/rest/users/modify/';
             let putPath = path.concat(this.newUser.username);
+            console.log(putPath);
+            console.log(this.user);
+            console.log(this.newUser)
+
+            
 
             Axios
-            .put(putPath,this.newUser)
+            .put(putPath,this.newUser,{
+                 headers :{
+                'Access-Control-Allow-Headers' : '*',
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Origin': '*',
+               'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
+               'Access-Control-Expose-Headers': '*',
+               'Access-Control-Request-Method' : 'PUT',
+               'Access-Control-Request-Headers' : 'Authorization'
+            } 
+
+            })
             .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
         }
+    },
+    mounted (){
+        console.log(this.user.username)
     }
 }
 </script>

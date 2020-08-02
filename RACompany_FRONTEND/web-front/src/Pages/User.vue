@@ -18,6 +18,7 @@ import GuestComponent from '../components/GuestComponent'
 import HostComponent from '../components/HostComponent'
 import axios from 'axios'
 
+
 export default {
   name: 'User',
   components: {

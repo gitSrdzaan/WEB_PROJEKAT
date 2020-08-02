@@ -3,10 +3,10 @@
     <div>
       <b-navbar toggleable="lg" type="dark" variant="dark">
         <b-navbar-brand>
-          <router-link to="/">Home {{user.sex}}</router-link>
+          <router-link to="/">Home </router-link>
         </b-navbar-brand>
         <div>
-          <b-navbar-brand v-show="user =! ''">
+          <b-navbar-brand >
             <router-link to="/user">User: {{ user.firstname }}</router-link>
           </b-navbar-brand>
         </div>
@@ -34,7 +34,7 @@
       </b-navbar>
     </div>
     <router-view/>
-     
+     <button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -69,12 +69,12 @@ export default {
         .catch(console.log("logout"))
     },
 
+  methods : {
+    logout : function(){
+      axios
+      .post('http://localhost:8080/RACompany/rest/logout')
+    }
   }
-}
+  }
+  }
 </script>
-
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
