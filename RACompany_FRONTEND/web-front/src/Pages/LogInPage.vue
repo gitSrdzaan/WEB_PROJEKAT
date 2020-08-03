@@ -30,10 +30,7 @@
       </b-form-group>
 
        <b-button type="submit">
-         Submit
-         <div v-if="false">
-          <router-link to="/">Submit</router-link>
-         </div>
+         LogIn
        </b-button>
       
     </b-form>

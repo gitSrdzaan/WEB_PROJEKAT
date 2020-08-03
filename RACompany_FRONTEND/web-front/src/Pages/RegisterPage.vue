@@ -73,7 +73,7 @@
       </b-form-group>
 
       <b-button type="submit">
-        <router-link to="/">Submit</router-link>
+        Register
       </b-button>
     </b-form>
   </div>
