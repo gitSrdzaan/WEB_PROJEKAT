@@ -38,11 +38,11 @@ export default {
     }
   },
   methods : {
-    getAllApartments : function(event){
+    getAllApartments : function(){
       let path = 'http://localhost:8080/rest/apartment/hostAll/'
-      let getPaht = path.concat(this.user.username)
+      let getPath = path.concat(this.user.username)
       Axios
-      .get('http://localhost:8080/rest/apartment/hostAll/')
+      .get(getPath)
       .then(response => (this.apartments = response.data))
       .catch(console.log("greska pri dobavljanju apartmana"))
 
