@@ -81,7 +81,7 @@ export default {
         submintModifiedUser() {
             this.newUser = this.user;
 
-            let path = 'http://localhost:8080/rest/users/modify/';
+            let path = 'http://localhost:8080/rest/users/modify';
             let putPath = path.concat(this.newUser.username);
             console.log(putPath);
             console.log(this.user);
@@ -90,18 +90,7 @@ export default {
             
 
             Axios
-            .put(putPath,this.newUser,{
-                 headers :{
-                'Access-Control-Allow-Headers' : '*',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Origin': '*',
-               'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, PUT, DELETE',
-               'Access-Control-Expose-Headers': '*',
-               'Access-Control-Request-Method' : 'PUT',
-               'Access-Control-Request-Headers' : 'Authorization'
-            } 
-
-            })
+            .post(path,this.newUser)
             .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
         }

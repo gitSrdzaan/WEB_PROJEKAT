@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -26,6 +27,9 @@ public class LoginService {
 	@Context
 	ServletContext ctx;
 	
+	@Context
+	HttpServletRequest request;
+	
 	public LoginService() {
 		
 	}
@@ -36,7 +40,6 @@ public class LoginService {
 		if(ctx.getAttribute("userDAO") == null) {
 			ctx.setAttribute("userDAO", new UserDAO(ctx.getRealPath("/")));
 			
-			System.out.println(ctx.getContextPath());
 		}
 	}
 	
@@ -50,10 +53,17 @@ public class LoginService {
 	
 	@GET
 	@Path("currentUser")
-	@Consumes(MediaType.APPLICATION_JSON)
+	//@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User currentUser(@Context HttpServletRequest request) {
-		return (User) request.getSession().getAttribute("user");
+		
+		this.request.getSession(false);
+		System.out.println("currentUser");
+		System.out.println(this.request.toString());
+		System.out.println(this.request.getSession());
+		System.out.println((User)this.request.getSession().getAttribute("user"));
+		
+		return (User) this.request.getSession().getAttribute("user");
 	}
 	
 	@POST
@@ -67,9 +77,17 @@ public class LoginService {
 			return Response.status(400).
 					entity("invalid username or password").header("Access-Control-Allow-Origin", "*").build();
 		}
+		this.request.getSession(false);
 		
-		request.getSession().setAttribute("user", currUser);
+		this.request.getSession().setAttribute("user", currUser);
+				
+		System.out.println("login");
+		System.out.println(this.request.toString());
+		System.out.println(this.request.getSession());
+		System.out.println((User)this.request.getSession().getAttribute("user"));
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
+		
+		
 	}
 	
 	@POST

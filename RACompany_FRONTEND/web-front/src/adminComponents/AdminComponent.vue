@@ -58,7 +58,7 @@ export default {
   methods : {
     getCurrUser : function(){
       axios
-      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .get('http://localhost:8080/RACompany/rest/currentUser',{withCredentials: true})
       .then(response => (this.user = response.data))
       .catch(console.log("nema ulogovanog"))
       

@@ -7,7 +7,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -56,13 +56,13 @@ public class UserService {
 		return (User) request.getSession().getAttribute("user");
 	}
 	
-	@PUT
-	@Path("/modify/{username}")
+	@POST
+	@Path("/modify")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response modifyUser(User modifiedUser , @Context HttpServletRequest request, @PathParam("username") String username) {
+	public Response modifyUser(User modifiedUser , @Context HttpServletRequest request) {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
-		if(!dao.modifyUser(modifiedUser,username)) {
+		if(!dao.modifyUser(modifiedUser,modifiedUser.getUsername())) {
 			return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Korisnicko ime je mijenjano").build();
 		}
 		
