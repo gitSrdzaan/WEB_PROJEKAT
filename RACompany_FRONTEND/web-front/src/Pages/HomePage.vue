@@ -50,7 +50,14 @@ export default {
   name: 'HomePage',
   data() {
     return{
-      user: '',
+      user: {
+        username : '',
+        firstname : '',
+        lastname : '',
+        sex : '',
+        password : '',
+        userRole : 'HOST'
+      },
     }
   },
   created: function(){

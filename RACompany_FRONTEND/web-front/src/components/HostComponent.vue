@@ -2,15 +2,17 @@
   <div>
       <h1>Host Component</h1>
       <div>
-        <b-tab title="Personal Info" >
-          <UserInfoComponent v-bind:user="user"/>
-        </b-tab>
-        <b-tab title="Apartments">
-          <HostApartmentComponents @click="getAllApartments" v-bind:apartments = "apartments"/>
-        </b-tab>
-        <b-tab title="Reservations">
-          <HostReservationsComponent/>
-        </b-tab>
+        <b-tabs>
+          <b-tab title="Personal Info" >
+            <UserInfoComponent v-bind:user="user"/>
+          </b-tab>
+          <b-tab title="Apartments" @click="getAllApartments">
+            <HostApartmentComponents  v-bind:apartments = "apartments"/>
+          </b-tab>
+          <b-tab title="Reservations">
+            <HostReservationsComponent/>
+          </b-tab>
+        </b-tabs>
       </div>
 
   </div>
@@ -34,7 +36,24 @@ export default {
   data(){
     return{
       user : {},
-      apartments : []
+      apartments : [
+                {
+                  id : 1,
+                  type : 'FULL',
+                  roomNumber : '',
+                  guestNumber : '',
+                  apartmentLocation : {},
+                  apartmentResevartionDates : [],
+                  comments : [],
+                  pricePerNight : 0.0,
+                  checkInTime : '',
+                  checkOutTime : '',
+                  apartmentStatus : false,
+                  amenities : [],
+                  reservations : [],
+                  imageSource : ''
+            }
+      ]
     }
   },
   methods : {

@@ -35,7 +35,7 @@
                 <div>
                     <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
                         <b-list-group-item label>{{amenity.name}}</b-list-group-item>
-                        <input type="checkbox" name="CheckBoxInputName" value="Value1" id="CheckBox1"/>
+                        <input type="checkbox" name="CheckBoxInputName" value=amenity.name />
                     </b-list-group>
                 </div>
                 <ListAmenitiesComponent id="input-10"/>
@@ -68,24 +68,17 @@ export default {
         LocationComponent,
         ListAmenitiesComponent
     },
+    props : {
+         apartment : {
+               type : Object
+               
+            }
+
+
+    },
     data(){
         return {
-            apartment : {
-                id : '',
-                type : '',
-                roomNumber : '',
-                guestNumber : '',
-                apartmentLocation : {},
-                apartmentResevartionDates : [],
-                comments : [],
-                pricePerNight : 0.0,
-                checkInTime : '',
-                checkOutTime : '',
-                apartmentStatus : false,
-                amenities : [],
-                reservations : [],
-                imageSource : ''
-            },
+           
             types : [
                 "FULL",
                 "ROOM"
@@ -98,14 +91,15 @@ export default {
             event.prevent;
             console.log(this.apartment)
 
-        }
-    },
-    created : {
+        },
         getAllAmenities : function(){
             Axios
             .get('http://localhost:8080/RACompany/rest/amneities/all')
             .then(response => (this.amenities = response.data))
         }
+    },
+    created () {
+        this.getAllAmenities()
     }
 
 
