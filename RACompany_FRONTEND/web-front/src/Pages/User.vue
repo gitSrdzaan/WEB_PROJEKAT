@@ -9,6 +9,9 @@
   <div v-else-if="user.userRole === host">
       <HostComponent/>
   </div>
+  <div>
+    <ApartmentComponent/>
+  </div>
 </div>
 </template>
 
@@ -16,6 +19,7 @@
 import AdminComponent from '../adminComponents/AdminComponent'
 import GuestComponent from '../components/GuestComponent'
 import HostComponent from '../components/HostComponent'
+import ApartmentComponent from "../components/ApartmentComponent"
 import axios from 'axios'
 
 
@@ -24,7 +28,8 @@ export default {
   components: {
     AdminComponent,
     GuestComponent,
-    HostComponent
+    HostComponent,
+    ApartmentComponent
   },
   created: function(){
     axios
