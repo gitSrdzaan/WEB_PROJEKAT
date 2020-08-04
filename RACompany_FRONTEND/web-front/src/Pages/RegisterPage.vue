@@ -1,6 +1,6 @@
 <template>
   <div class="position">
-    <b-form @submit.prevent="onSubmit" method="post">
+    <b-form >
       <b-form-group 
         id="input-group-1"
         label="Password:"
@@ -72,7 +72,7 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-button type="submit">
+      <b-button @click="signUp()">
         Register
       </b-button>
     </b-form>
@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import AuthService from '../service/AuthService'
 
   export default {
     data() {
@@ -91,7 +91,8 @@ import axios from 'axios'
           firstname: '',
           lastname:'',
           sex:'',
-          role:''
+          role:'',
+          msg: ''
         },
         sexes: [
           'Male',
@@ -104,17 +105,22 @@ import axios from 'axios'
       }
     },
     methods: {
-      onSubmit() {
-        var user = {
-          username: this.form.name,
-          password: this.form.password,
-          sex: this.form.sex,
-          userRole: this.form.role,
-          firstname: this.form.firstname,
-          lastname: this.form.lastname
+      async signUp() {
+        try{ 
+          const credentials = {
+            username: this.form.name,
+            password: this.form.password,
+            sex: this.form.sex,
+            userRole: this.form.role,
+            firstname: this.form.firstname,
+            lastname: this.form.lastname
+          };
+          await AuthService.signUp(credentials);
+
+          this.$router.push('/login');
+        }catch (e) {
+          this.form.msg = e.response.data
         }
-        axios
-          .post('http://localhost:8080/RACompany/rest/register',user)
       }
     }
   }
