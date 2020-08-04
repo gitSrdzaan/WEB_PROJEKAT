@@ -49,13 +49,20 @@
             </b-form-group>
           </b-col>
           <b-col>
-            <b-button>Search</b-button>
+            <b-button @click="search()">
+              Search
+            </b-button>
           </b-col>
         </b-row>
       </b-container>
     </div>
     <div class="content">
-      <ul class="ul-content">
+      <ul v-if="!show">
+        <li>
+          radi
+        </li>
+      </ul>
+      <ul class="ul-content" v-if="show">
         <li v-for="apartment in info"
           :key="apartment.id">
           <div>
@@ -85,7 +92,7 @@
               </div>
             </b-card-text>
 
-            <b-button variant="primary">
+            <b-button v-if="user != ''">
               <router-link to="/res">Open</router-link>
             </b-button>
             </b-card>
@@ -110,10 +117,21 @@ export default {
   data() {
     return{
       info: null,
-      user: null
+      user: '',
+      show: true
+    }
+  },
+  created: function(){
+    axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(res => (this.user = res.data))
+      .catch(console.log("nesto"))
+  },
+  methods: {
+    search() {
+      return this.show=!this.show
     }
   }
-  
 }
 </script>
 

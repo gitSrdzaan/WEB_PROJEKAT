@@ -1,6 +1,6 @@
 <template>
   <div class="position">
-    <b-form  @submit.prevent="onSubmit()" method="post">
+    <b-form >
       <b-form-group 
         id="input-group-1"
         label="Password:"
@@ -29,7 +29,7 @@
         ></b-form-input>
       </b-form-group>
 
-       <b-button type="submit">
+       <b-button @click="login()">
          LogIn
        </b-button>
       
@@ -38,30 +38,32 @@
 </template>
 
 <script>
-import axios from 'axios'
+import AuthService from '../service/AuthService'
 
   export default {
-    prop: [
-      'myRole'
-    ],
     data() {
       return {
         form: {
           password: '',
           name: ''
         },
-        info: null
+        msg: ''
       }
     },
     methods: {
-      onSubmit() {
-        var user = {
+      async login() {
+        try{
+        const credentials = {
           username: this.form.name,
           password: this.form.password
         }
-        axios
-        .post('http://localhost:8080/RACompany/rest/login',user,{ withCredentials: true})
-        
+        await AuthService.login(credentials);
+
+        this.$router.push('/');
+        this.$router.go();
+        }catch (e){
+          this.msg = e.response.data
+        }
       }
       
     
