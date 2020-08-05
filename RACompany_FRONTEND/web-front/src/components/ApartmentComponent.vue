@@ -34,8 +34,10 @@
                 <b-button type="primary">Choose amenities</b-button>
                 <div>
                     <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
-                        <b-list-group-item label>{{amenity.name}}</b-list-group-item>
-                        <input type="checkbox" name="CheckBoxInputName" value=amenity.name />
+                        <input type="checkbox" :id="amenity.id" name="CheckBoxInputName"
+                         @click="checkBoxClicked(amenity,$event)" />
+                        <b-list-group-item label :for="amenity.id">{{amenity.name}}</b-list-group-item>
+                        
                     </b-list-group>
                 </div>
                 <ListAmenitiesComponent id="input-10"/>
@@ -61,7 +63,7 @@
 
 import LocationComponent from "../components/LocationComponent"
 import ListAmenitiesComponent from "../components/ListAmenitiesComponent"
-import Axios from 'axios'
+
 
 export default {
     components:{
@@ -92,14 +94,37 @@ export default {
             console.log(this.apartment)
 
         },
-        getAllAmenities : function(){
-            Axios
-            .get('http://localhost:8080/RACompany/rest/amneities/all')
-            .then(response => (this.amenities = response.data))
+        
+        checkBoxClicked(value,event){
+            if(event.target.checked){
+              
+                let temp = {
+                    id : value.id,
+                    name : value.name
+                }
+                this.apartment.amenities.push(temp);
+            }
+            else{
+               
+                let temp = {
+                    id : value.id,
+                    name : value.name
+                }
+              
+                for(let a in this.apartment.amenities){
+                    if(this.apartment.amenities[a].id === temp.id){
+                       
+                        this.apartment.amenities.splice(a,1);
+                    }
+                }
+
+
+            }
+
         }
     },
     created () {
-        this.getAllAmenities()
+       
     }
 
 
