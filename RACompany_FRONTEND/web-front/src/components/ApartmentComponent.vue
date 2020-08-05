@@ -49,11 +49,8 @@
             </b-form-group>
 
             <b-form-group id="submitBtn">
-                <b-button type="submit">
-                    Submit
-                </b-button>
-            </b-form-group>
-
+                <b-button type="submit"> Submit</b-button>
+            </b-form-group>     
 
         </b-form>
     </div>
