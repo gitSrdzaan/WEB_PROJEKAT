@@ -9,7 +9,7 @@
 <script>
 import Axios from 'axios'
 export default {
-    name : 'UserInfoComponent',
+    name : 'ViewAllUsers',
     props : {
         user :{
             type : Object, //validacija tipa koji se prenosi

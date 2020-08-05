@@ -3,15 +3,13 @@
   <div v-if="user.userRole === admin">
       <AdminComponent/>
   </div>
-  <div v-else-if="user.userRole === guest">
-      <GuestComponent/>
-  </div>
-  <div ><!--v-else-if="user.userRole === host"-->
+  <div v-else-if="user.userRole === host">
       <HostComponent/>
   </div>
-  <div>
-    <!--<ApartmentComponent/>-->
+  <div> <!--v-else-if="user.userRole === guest"-->
+      <GuestComponent/>
   </div>
+  
 </div>
 </template>
 
@@ -19,7 +17,7 @@
 import AdminComponent from '../adminComponents/AdminComponent'
 import GuestComponent from '../components/GuestComponent'
 import HostComponent from '../components/HostComponent'
-//import ApartmentComponent from "../components/ApartmentComponent"
+
 import axios from 'axios'
 
 
@@ -29,7 +27,7 @@ export default {
     AdminComponent,
     GuestComponent,
     HostComponent,
-    //ApartmentComponent
+
   },
   created: function(){
     axios

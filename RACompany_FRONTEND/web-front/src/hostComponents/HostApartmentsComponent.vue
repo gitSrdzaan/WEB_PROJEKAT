@@ -16,6 +16,8 @@
 <script>
 import ApartmentComponent from "../components/ApartmentComponent"
 
+import Axios from 'axios'
+
 export default {
     name : "HostApartmentsComponent",
     components : {
@@ -29,20 +31,7 @@ export default {
     data(){
         return {
             selectedApartment : {
-                id : '',
-                type : '',
-                roomNumber : '',
-                guestNumber : '',
-                apartmentLocation : {},
-                apartmentResevartionDates : [],
-                comments : [],
-                pricePerNight : 0.0,
-                checkInTime : '',
-                checkOutTime : '',
-                apartmentStatus : false,
-                amenities : [],
-                reservations : [],
-                imageSource : ''
+               
             }
         }
     },
@@ -71,7 +60,16 @@ export default {
                 reservations : [],
                 imageSource : ''
             }
+
+
             this.selectedApartment = emptyApartment;
+            this.getAllAmenities();
+           
+        },
+        getAllAmenities : function(){
+            Axios
+            .get('http://localhost:8080/RACompany/rest/amneities/all')
+            .then(response => (this.selectedApartment.amenities = response.data))
         }
     }
     
