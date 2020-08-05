@@ -5,7 +5,7 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="location">
-              <b-form-input id="location" placeholder="Input location" v-model="location"></b-form-input>
+              <b-form-input id="location" placeholder="NE RADI" v-model="location"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
@@ -28,12 +28,12 @@
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="min-cost">
-              <b-form-input id="min-cost" placeholder="Input min cost"></b-form-input>
+              <b-form-input id="min-cost" placeholder="NE RADI"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="max-cost">
-              <b-form-input id="max-cost" placeholder="Input max cost"></b-form-input>
+              <b-form-input id="max-cost" placeholder="NE RADI"></b-form-input>
             </b-form-group>
           </b-col>
         </b-row>
