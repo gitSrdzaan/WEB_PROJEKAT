@@ -5,12 +5,12 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="location">
-              <b-form-input id="location" placeholder="Input location"></b-form-input>
+              <b-form-input id="location" placeholder="Input location" v-model="location"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Number of guests" label-for="number-of-guest">
-              <b-form-input id="number-of-guest" placeholder="Input number"></b-form-input>
+              <b-form-input id="number-of-guest" placeholder="Input number" v-model="guestNumber"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
@@ -40,30 +40,22 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Min room numbers" label-for="min-room-numbers">
-              <b-form-input id="min-room-numbers" placeholder="Input min rooms"></b-form-input>
+              <b-form-input id="min-room-numbers" placeholder="Input min rooms" v-model="minRoomNumber"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Max room numbers" label-for="max-room-numbers">
-              <b-form-input id="max-room-numbers" placeholder="Input max rooms"></b-form-input>
+              <b-form-input id="max-room-numbers" placeholder="Input max rooms" v-model="maxRoomNumber"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
-            <b-button @click="search()">
-              Search
-            </b-button>
           </b-col>
         </b-row>
       </b-container>
     </div>
     <div class="content">
-      <ul v-if="!show">
-        <li>
-          radi
-        </li>
-      </ul>
-      <ul class="ul-content" v-if="show">
-        <li v-for="apartment in info"
+      <ul class="ul-content" >
+        <li v-for="apartment in filteredApartment"
           :key="apartment.id">
           <div>
             <b-card
@@ -116,20 +108,37 @@ export default {
   },
   data() {
     return{
-      info: null,
+      info: [],
       user: '',
-      show: true
+      infoHelp: null,
+      location: "",
+      guestNumber: '',
+      minRoomNumber: '',
+      maxRoomNumber: '',
     }
   },
   created: function(){
     axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(res => (this.user = res.data))
-      .catch(console.log("nesto"))
   },
-  methods: {
-    search() {
-      return this.show=!this.show
+  computed: {
+    filteredApartment() {
+      let data = this.info
+      if(this.guestNumber != ''){
+        data = data.filter(item =>
+        String(item.guestNumber).match(this.guestNumber))
+      }
+      if(this.minRoomNumber != ''){
+        data = data.filter(item =>
+        parseInt(item.roomNumber) >= parseInt(this.minRoomNumber))
+      }
+      if(this.maxRoomNumber != ''){
+        data = data.filter(item =>
+        parseInt(item.roomNumber) <= parseInt(this.maxRoomNumber))
+      }
+      
+      return data
     }
   }
 }
