@@ -15,7 +15,7 @@
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" class="mb-2"></b-form-datepicker>
+              <b-form-datepicker id="datepicker" class="mb-2" v-model="starting_date"></b-form-datepicker>
             </b-form-group>
           </b-col>
         </b-row>
@@ -148,8 +148,10 @@ export default {
       status: '',
       statuses: [
         'true',
-        'false'
-      ]
+        'false',
+        ''
+      ],
+      starting_date: '',
     }
   },
   created: function(){
@@ -191,6 +193,7 @@ export default {
           }
         })
       }
+      // ovde ide date search!
       // for Guest nije ya wifi napravljeno
       if(this.type != ''){
         data = data.filter(item =>
