@@ -42,7 +42,16 @@ export default {
                   type : 'FULL',
                   roomNumber : '',
                   guestNumber : '',
-                  apartmentLocation : {},
+                  apartmentLocation : {
+                    longitude : 25.478,
+                    latitude : 24.486,
+                    adress : {
+                      city : "Novi Sad",
+                      street : "Lasla Gala",
+                      postalCode : "21000",
+                      number : 3
+                    }
+                  },
                   apartmentResevartionDates : [],
                   comments : [],
                   pricePerNight : 0.0,

@@ -14,13 +14,14 @@
                 <b-form-input id="input-4" v-model="apartment.guestNumber" type="number" placeholder="Entert number of guests"/>
             </b-form-group>
             <b-form-group id="input-group-5" label="Location" label-for="input-5">
-                <LocationComponent v-model="apartment.apartmentLocation" id="input-5"/><!--Two way binding-->
+                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocation" id="input-5"/><!--Two way binding-->
             </b-form-group>
             <b-form-group id="input-group-6" label="Available dates" label-for="input-6" >
                 <b-calendar id="input-6"/>
             </b-form-group>
             <b-form-group id="input-group-7" label="Price per night" label-for="input-7">
-                <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" step="0.0001" placeholder="Entert price per night"/>
+                <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" 
+                step="0.0001" placeholder="Entert price per night"/>
             </b-form-group>
 
             <b-form-group id="input-group-8" label="Check in time" label-for="input-8">
@@ -102,21 +103,16 @@ export default {
         },
         
         checkBoxClicked(value,event){
-            if(event.target.checked){
-              
-                let temp = {
+             let temp = {
                     id : value.id,
                     name : value.name
-                }
+            }
+            if(event.target.checked){
+              
+               
                 this.apartment.amenities.push(temp);
             }
             else{
-               
-                let temp = {
-                    id : value.id,
-                    name : value.name
-                }
-              
                 for(let a in this.apartment.amenities){
                     if(this.apartment.amenities[a].id === temp.id){
                        
