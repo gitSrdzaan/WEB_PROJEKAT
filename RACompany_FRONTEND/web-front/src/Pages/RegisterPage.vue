@@ -1,6 +1,6 @@
 <template>
   <div class="position">
-    <b-form >
+    <b-form @submit.prevent="signUp()">
       <b-form-group 
         id="input-group-1"
         label="Password:"
@@ -8,11 +8,15 @@
       >
         <b-form-input
           id="input-1"
-          v-model="form.password"
+          v-model="$v.form.password.$model"
           type="password"
-          required
+          :state="validatePassword('password')"
+          aria-describedby="password"
           placeholder="Enter password"
         ></b-form-input>
+        <b-form-invalid-feedback id="password">
+          This is a requrired field and must be at least 4 characters
+        </b-form-invalid-feedback> 
       </b-form-group>
 
       <b-form-group 
@@ -22,10 +26,14 @@
         >
         <b-form-input
           id="input-2"
-          v-model="form.name"
-          required
+          v-model="$v.form.name.$model"
+          :state="validateName('name')"
+          aria-describedby="name"
           placeholder="Enter username"
         ></b-form-input>
+        <b-form-invalid-feedback id="name">
+          This is a requrired field and must be at least 3 characters
+        </b-form-invalid-feedback> 
       </b-form-group>
 
       <b-form-group 
@@ -35,10 +43,14 @@
         >
         <b-form-input
           id="input-2"
-          v-model="form.firstname"
-          required
+          v-model="$v.form.firstname.$model"
+          :state="validateFirstname('firstname')"
+          aria-describedby="firstname"
           placeholder="Enter firstname"
         ></b-form-input>
+        <b-form-invalid-feedback id="firstname">
+          This is a requrired field and must be at least 3 characters
+        </b-form-invalid-feedback> 
       </b-form-group>
 
       <b-form-group 
@@ -48,31 +60,43 @@
         >
         <b-form-input
           id="input-2"
-          v-model="form.lastname"
-          required
+          v-model="$v.form.lastname.$model"
+          :state="validateLastname('lastname')"
+          aria-describedby="lastname"
           placeholder="Enter lastname"
         ></b-form-input>
+        <b-form-invalid-feedback id="lastname">
+          This is a requrired field and must be at least 3 characters
+        </b-form-invalid-feedback> 
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Sex:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="form.sex"
+          v-model="$v.form.sex.$model"
           :options="sexes"
-          required
+          :state="validateSex('sex')"
+          aria-describedby="sex"
         ></b-form-select>
+        <b-form-invalid-feedback id="sex">
+          This is a requrired field.
+        </b-form-invalid-feedback> 
       </b-form-group>
 
       <b-form-group id="input-group-3" label="Role:" label-for="input-3">
         <b-form-select
           id="input-3"
-          v-model="form.role"
+          v-model="$v.form.role.$model"
           :options="roles"
-          required
+          :state="validateRole('role')"
+          aria-describedby="role"
         ></b-form-select>
+        <b-form-invalid-feedback id="role">
+          This is a requrired field.
+        </b-form-invalid-feedback> 
       </b-form-group>
 
-      <b-button @click="signUp()">
+      <b-button type="submit">
         Register
       </b-button>
     </b-form>
@@ -81,8 +105,11 @@
 
 <script>
 import AuthService from '../service/AuthService'
+import { validationMixin } from 'vuelidate'
+import { required, minLength } from 'vuelidate/lib/validators'
 
   export default {
+    mixins: [validationMixin],
     data() {
       return {
         form: {
@@ -104,8 +131,63 @@ import AuthService from '../service/AuthService'
         ],
       }
     },
+    validations: {
+      form: {
+        password: {
+          required,
+          minLength: minLength(4)
+        },
+        name: {
+          required,
+          minLength: minLength(3)
+        },
+        firstname: {
+          required,
+          minLength: minLength(3)
+        },
+        lastname: {
+          required,
+          minLength: minLength(3)
+        },
+        sex: {
+          required
+        },
+        role: {
+          required
+        }
+      }
+    },
     methods: {
+      validateName(name) {
+        const { $dirty, $error } = this.$v.form[name];
+        return $dirty ? !$error : null;
+      },
+      validatePassword(password){
+        const { $dirty, $error } = this.$v.form[password];
+        return $dirty ? !$error : null;
+      },
+      validateFirstname(firstname) {
+        const { $dirty, $error } = this.$v.form[firstname];
+        return $dirty ? !$error : null;
+      },
+      validateLastname(lastname){
+        const { $dirty, $error } = this.$v.form[lastname];
+        return $dirty ? !$error : null;
+      },
+      validateSex(sex) {
+        const { $dirty, $error } = this.$v.form[sex];
+        return $dirty ? !$error : null;
+      },
+      validateRole(role){
+        const { $dirty, $error } = this.$v.form[role];
+        return $dirty ? !$error : null;
+      },
       async signUp() {
+        this.$v.form.$touch();
+        if(this.$v.form.$anyError) {
+          return;
+        }
+
         try{ 
           const credentials = {
             username: this.form.name,

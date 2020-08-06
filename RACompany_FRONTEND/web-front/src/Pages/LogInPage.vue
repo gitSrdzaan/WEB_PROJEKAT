@@ -1,6 +1,6 @@
 <template>
   <div class="position">
-    <b-form >
+    <b-form @submit.prevent="login()">
       <b-form-group 
         id="input-group-1"
         label="Password:"
@@ -8,11 +8,15 @@
       >
         <b-form-input
           id="input-1"
-          v-model="form.password"
+          v-model="$v.form.password.$model"
           type="password"
-          required
+          :state="validatePassword('password')"
+          aria-describedby="input-2-live-feedback"
           placeholder="Enter password"
         ></b-form-input>
+        <b-form-invalid-feedback id="input-2-live-feedback">
+          This is a requrired field and must be at least 4 characters
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group 
@@ -23,7 +27,7 @@
         <b-form-input
           id="input-2"
           v-model="$v.form.name.$model"
-          :state="validateState('name')"
+          :state="validateName('name')"
           aria-describedby="input-1-live-feedback"
           placeholder="Enter username"
         ></b-form-input>
@@ -32,7 +36,7 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
-       <b-button @click="login()">
+       <b-button type="submit">
          LogIn
        </b-button>
       
@@ -69,22 +73,26 @@ import { required, minLength } from 'vuelidate/lib/validators'
       }
     },
     methods: {
-      validateState(name) {
+      validateName(name) {
         const { $dirty, $error } = this.$v.form[name];
         return $dirty ? !$error : null;
       },
+      validatePassword(password){
+        const { $dirty, $error } = this.$v.form[password];
+        return $dirty ? !$error : null;
+      },
       async login() {
+        this.$v.form.$touch();
+        if(this.$v.form.$anyError) {
+          return;
+        }
+
         try{
         const credentials = {
           username: this.form.name,
           password: this.form.password
         }
         await AuthService.login(credentials);
-
-        this.$v.form.$touch();
-        if(this.$v.form.$anyError) {
-          return;
-        }
 
         this.$router.push('/');
         this.$router.go();
@@ -93,7 +101,6 @@ import { required, minLength } from 'vuelidate/lib/validators'
         }
       }
       
-    
     }
   }
 </script>
