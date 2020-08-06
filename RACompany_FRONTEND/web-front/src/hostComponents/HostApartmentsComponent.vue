@@ -31,7 +31,20 @@ export default {
     data(){
         return {
             selectedApartment : {
-               
+                id : 2,
+                type : '',
+                roomNumber : '',
+                guestNumber : '',
+                apartmentLocation : {},
+                apartmentResevartionDates : [],
+                comments : [],
+                pricePerNight : 0.0,
+                checkInTime : '',
+                checkOutTime : '',
+                apartmentStatus : false,
+                amenities : [],
+                reservations : [],
+                imageSource : []
             }
         }
     },
@@ -58,7 +71,7 @@ export default {
                 apartmentStatus : false,
                 amenities : [],
                 reservations : [],
-                imageSource : ''
+                imageSource : []
             }
 
 
