@@ -5,7 +5,7 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="location">
-              <b-form-input id="location" placeholder="NE RADI" v-model="location"></b-form-input>
+              <b-form-input id="location" placeholder="Input city" v-model="location"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
@@ -62,6 +62,15 @@
         <b-row>
           <b-col v-if="user != ''">
             <b-button @click="sortMethod()">{{ sortButtonName }}</b-button>
+          </b-col>
+          <b-col v-if="user.userRole === 'HOST' || user.userRole === 'ADMIN'">
+            <b-form-group label-cols="4" label-cols-lg="6" label="Apartment status:" label-for="input-4">
+              <b-form-select
+                id="input-4"
+                v-model="status"
+                :options="statuses"
+              ></b-form-select>
+            </b-form-group>
           </b-col>
         </b-row>
 
@@ -124,7 +133,7 @@ export default {
     return{
       info: [],
       user: '',
-      location: "",
+      location: '',
       guestNumber: '',
       minRoomNumber: '',
       maxRoomNumber: '',
@@ -136,6 +145,11 @@ export default {
       type: '',
       sort: false,
       sortButtonName: 'Descending order',
+      status: '',
+      statuses: [
+        'true',
+        'false'
+      ]
     }
   },
   created: function(){
@@ -170,6 +184,13 @@ export default {
         data = data.filter(item =>
         parseInt(item.roomNumber) <= parseInt(this.maxRoomNumber))
       }
+      if(this.location != ''){
+        data = data.filter(item => {
+          if(item.apartmentLocation.adress){
+        return item.apartmentLocation.adress.city.toLowerCase().includes(this.location.toLowerCase())
+          }
+        })
+      }
       // for Guest nije ya wifi napravljeno
       if(this.type != ''){
         data = data.filter(item =>
@@ -180,6 +201,11 @@ export default {
       }
       if(!this.sort){
         data = data.sort(function(a, b){return b.pricePerNight-a.pricePerNight})
+      }
+      // host admin pretraga 
+      if(this.status != ''){
+        data = data.filter(item =>
+        String(item.apartmentStatus).match(this.status))
       }
       
       return data
