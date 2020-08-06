@@ -3,11 +3,11 @@
   <div v-if="user.userRole === admin">
       <AdminComponent/>
   </div>
-  <div v-else-if="user.userRole === host">
-      <HostComponent/>
-  </div>
-  <div> <!--v-else-if="user.userRole === guest"-->
+  <div v-else-if="user.userRole === guest">
       <GuestComponent/>
+  </div>
+  <div ><!--v-else-if="user.userRole === host">-->
+      <HostComponent/>
   </div>
   
 </div>

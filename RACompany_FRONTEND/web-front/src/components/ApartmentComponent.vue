@@ -48,6 +48,11 @@
                 <b-form-radio v-model="apartment.apartmentStatus" name="some-radios" value=false>Not-Active</b-form-radio>
             </b-form-group>
 
+            <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
+                <input id="input-group-12" type="file" @change="chooseImages" multiple
+                accept="image/*"/>
+            </b-form-group>
+
             <b-form-group id="submitBtn">
                 <b-button type="submit"> Submit</b-button>
             </b-form-group>     
@@ -82,13 +87,17 @@ export default {
                 "FULL",
                 "ROOM"
             ],
-            amenities : [{id : 1, name : 'name'},{id : 2, name : 'name'}]
+            amenities : [{id : 1, name : 'name'},{id : 2, name : 'name'}],
+            images : []
         }
+        
     },
     methods : {
         onSubmit(event){
             event.prevent;
+            this.uploadImages();
             console.log(this.apartment)
+            
 
         },
         
@@ -117,6 +126,22 @@ export default {
 
 
             }
+
+        },
+        chooseImages(event){          
+            let length = event.target.files.length;
+            for(let i=0; i < length; i++){
+                this.images.push(event.target.files[i]);
+            }
+            
+           
+
+        },
+        uploadImages(){
+            for(let image in this.images) {
+                this.apartment.imageSource.push(this.images[image].name);
+            }
+            
 
         }
     },

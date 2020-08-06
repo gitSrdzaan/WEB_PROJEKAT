@@ -51,7 +51,7 @@ export default {
                   apartmentStatus : false,
                   amenities : [],
                   reservations : [],
-                  imageSource : ''
+                  imageSource : []
             }
       ]
     }
