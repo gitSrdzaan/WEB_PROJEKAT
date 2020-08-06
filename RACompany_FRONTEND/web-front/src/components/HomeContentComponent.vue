@@ -5,17 +5,25 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="3" label="Location" label-for="location">
-              <b-form-input id="location" placeholder="Input city" v-model="location"></b-form-input>
+              <b-form-input id="location"
+               placeholder="Input city"
+               v-model="location"
+               type="text"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Number of guests" label-for="number-of-guest">
-              <b-form-input id="number-of-guest" placeholder="Input number" v-model="guestNumber"></b-form-input>
+              <b-form-input id="number-of-guest" 
+              placeholder="Input number" 
+              v-model="guestNumber"
+              type="number"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" class="mb-2" v-model="starting_date"></b-form-datepicker>
+              <b-form-datepicker id="datepicker" 
+              class="mb-2" 
+              v-model="starting_date"></b-form-datepicker>
             </b-form-group>
           </b-col>
         </b-row>
@@ -23,29 +31,40 @@
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="end-datepicker">
-              <b-form-datepicker id="end-datepicker" class="mb-2"></b-form-datepicker>
+              <b-form-datepicker id="end-datepicker" 
+              class="mb-2"></b-form-datepicker>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="min-cost">
-              <b-form-input id="min-cost" placeholder="NE RADI"></b-form-input>
+              <b-form-input id="min-cost" 
+              placeholder="NE RADI"
+              type="number"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="max-cost">
-              <b-form-input id="max-cost" placeholder="NE RADI"></b-form-input>
+              <b-form-input id="max-cost" 
+              placeholder="NE RADI"
+              type="number"></b-form-input>
             </b-form-group>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Min room numbers" label-for="min-room-numbers">
-              <b-form-input id="min-room-numbers" placeholder="Input min rooms" v-model="minRoomNumber"></b-form-input>
+              <b-form-input id="min-room-numbers" 
+              placeholder="Input min rooms" 
+              v-model="minRoomNumber"
+              type="number"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Max room numbers" label-for="max-room-numbers">
-              <b-form-input id="max-room-numbers" placeholder="Input max rooms" v-model="maxRoomNumber"></b-form-input>
+              <b-form-input id="max-room-numbers" 
+              placeholder="Input max rooms" 
+              v-model="maxRoomNumber"
+              type="number"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col v-if="user != ''">
