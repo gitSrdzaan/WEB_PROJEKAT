@@ -15,6 +15,7 @@
     "core-js": "^3.6.5",
     "mdbvue": "6.7.1",
     "vue": "^2.6.11",
+    "vue-functional-calendar": "^2.8.87",
     "vue-router": "^3.3.4",
     "vuelidate": "^0.7.5"
   },
