@@ -48,9 +48,23 @@
               <b-form-input id="max-room-numbers" placeholder="Input max rooms" v-model="maxRoomNumber"></b-form-input>
             </b-form-group>
           </b-col>
-          <b-col>
+          <b-col v-if="user != ''">
+            <b-form-group label-cols="4" label-cols-lg="6" label="Type:" label-for="input-3">
+              <b-form-select
+                id="input-3"
+                v-model="type"
+                :options="types"
+              ></b-form-select>
+            </b-form-group>
           </b-col>
         </b-row>
+
+        <b-row>
+          <b-col v-if="user != ''">
+            <b-button @click="sortMethod()">{{ sortButtonName }}</b-button>
+          </b-col>
+        </b-row>
+
       </b-container>
     </div>
     <div class="content">
@@ -110,17 +124,36 @@ export default {
     return{
       info: [],
       user: '',
-      infoHelp: null,
       location: "",
       guestNumber: '',
       minRoomNumber: '',
       maxRoomNumber: '',
+      types: [
+        'ROOM',
+        'FULL',
+        ''
+      ],
+      type: '',
+      sort: false,
+      sortButtonName: 'Descending order',
     }
   },
   created: function(){
     axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(res => (this.user = res.data))
+  },
+  methods: {
+    sortMethod(){
+      if(this.sort){
+        this.sortButtonName = "Ascending order"
+        this.sort = false
+      }else{
+        this.sortButtonName = "Descending order"
+        this.sort = true
+      }
+      return this.sortButtonName
+    }
   },
   computed: {
     filteredApartment() {
@@ -136,6 +169,17 @@ export default {
       if(this.maxRoomNumber != ''){
         data = data.filter(item =>
         parseInt(item.roomNumber) <= parseInt(this.maxRoomNumber))
+      }
+      // for Guest nije ya wifi napravljeno
+      if(this.type != ''){
+        data = data.filter(item =>
+        item.type.match(this.type))
+      }
+      if(this.sort){
+        data = data.sort(function(a, b){return a.pricePerNight-b.pricePerNight})
+      }
+      if(!this.sort){
+        data = data.sort(function(a, b){return b.pricePerNight-a.pricePerNight})
       }
       
       return data
