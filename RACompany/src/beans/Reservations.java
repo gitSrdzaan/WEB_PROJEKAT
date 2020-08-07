@@ -4,6 +4,16 @@ import java.util.Date;
 
 public class Reservations {
 
+	private long ID;
+	public long getID() {
+		return ID;
+	}
+
+
+
+	public void setID(long iD) {
+		ID = iD;
+	}
 	private Apartment reservedAppatment;
 	private Date startDate;
 	private Integer nightNumber = 1;

@@ -24,7 +24,7 @@ import beans.UserRole;
 
 public class UserDAO {
 	
-	private Map<String, User> users = new HashMap<String,User>();;
+	private Map<String, User> users = new HashMap<String,User>();
 	private String contextPath;
 	
 	public UserDAO() {
@@ -221,7 +221,6 @@ public class UserDAO {
 		//upisivanje administratora
 		File adminFile = new File(this.contextPath+"data/admin.json");
 		try {
-			System.out.println(adminFile.getAbsolutePath());
 			mapper.writerWithDefaultPrettyPrinter().writeValue(adminFile, 
 					adminList);
 		}
