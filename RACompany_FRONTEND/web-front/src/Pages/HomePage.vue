@@ -117,5 +117,5 @@ export default {
 			this.daysNumber = value;
 		}
 	}
-	}
+}
 </script>

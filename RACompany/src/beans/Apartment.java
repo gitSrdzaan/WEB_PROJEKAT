@@ -27,7 +27,7 @@ public class Apartment {
 	private List<Amenities> amenities;
 	private List<Reservations> reservations;
 	
-	private String imageSource;
+	private List<String> imageSource;
 	
 	public Apartment() {
 		super();
@@ -36,6 +36,7 @@ public class Apartment {
 		this.comments = new ArrayList<Comment>();
 		this.amenities = new ArrayList<>();
 		this.reservations = new ArrayList<>();
+		this.imageSource = new ArrayList<>();
 	}
 	
 	
@@ -147,7 +148,7 @@ public class Apartment {
 
 
 
-	public String getImageSource() {
+	public List<String> getImageSource() {
 		return imageSource;
 	}
 
@@ -155,7 +156,7 @@ public class Apartment {
 
 
 
-	public void setImageSource(String imageSource) {
+	public void setImageSource(List<String> imageSource) {
 		this.imageSource = imageSource;
 	}
 	
