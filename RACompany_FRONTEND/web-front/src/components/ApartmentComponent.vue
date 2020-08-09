@@ -16,9 +16,12 @@
             <b-form-group id="input-group-5" label="Location" label-for="input-5">
                 <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocation" id="input-5"/><!--Two way binding-->
             </b-form-group>
+
             <b-form-group id="input-group-6" label="Available dates" label-for="input-6" >
-                <b-calendar id="input-6"/>
+                <FunctionalCalendar  v-model="calendarData" :configs="calendarConfigs"
+                @choseDay="dayClicked" @selectedDaysCount="daysCount" id="input-6"/>
             </b-form-group>
+
             <b-form-group id="input-group-7" label="Price per night" label-for="input-7">
                 <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" 
                 step="0.0001" placeholder="Entert price per night"/>
@@ -66,12 +69,14 @@
 
 import LocationComponent from "../components/LocationComponent"
 import ListAmenitiesComponent from "../components/ListAmenitiesComponent"
+import {FunctionalCalendar} from 'vue-functional-calendar';
 
 
 export default {
     components:{
         LocationComponent,
-        ListAmenitiesComponent
+        ListAmenitiesComponent,
+        FunctionalCalendar
     },
     props : {
          apartment : {
@@ -89,7 +94,29 @@ export default {
                 "ROOM"
             ],
             amenities : [{id : 1, name : 'name'},{id : 2, name : 'name'}],
-            images : []
+            images : [],
+            calendarData : {},
+            calendarConfigs : {
+                sundayStart : false,
+				dataFormat : 'dd/mm/yyyy',
+				limits : false,
+				isDatePicker : true,
+				isDateRange : true,
+				isMultipleDatePicker : true,
+				isMultiple : false,
+				withTimePicker : false,
+                isDark : true,
+                markedDateRange : [],
+                markedDates : []
+				//isModal : true
+            },
+            daysNumber : 0,
+			startDate : null,
+            endDate : null,
+            dateRange : {
+                start : false,
+                end : false
+            }
         }
         
     },
@@ -139,6 +166,42 @@ export default {
             }
             
 
+        },
+        dayClicked(value){
+			if(this.daysNumber === 0){
+				this.startDate = value;
+                this.startDate.isDateRangeStart = true;
+                this.dateRange.start =  this.startDate.date;
+                
+			}
+			else{
+				this.endDate = value;
+                this.endDate.isDateRangeEnd = true;
+                this.dateRange.end = this.endDate.date;
+                this.calendarConfigs.markedDateRange.push(this.dateRange);
+                
+                this.markDatesFromRange();
+                this.daysNumber = 0;
+			}
+			
+
+		},
+		daysCount(value){
+			this.daysNumber = value;
+        },
+        markDatesFromRange(){
+          
+            let dateIter = this.startDate.date;
+            let [day,month,year] = dateIter.split("/");
+            dateIter = new Date(year,month,day);
+             
+            for(let i = 0; i < this.daysNumber; i++){              
+                let markDate = dateIter.getDate() + "/" + dateIter.getMonth() + "/" + dateIter.getFullYear();
+                this.calendarConfigs.markedDates.push(markDate);
+                dateIter.setDate(dateIter.getDate() + 1);
+                
+            }
+           
         }
     },
     created () {
