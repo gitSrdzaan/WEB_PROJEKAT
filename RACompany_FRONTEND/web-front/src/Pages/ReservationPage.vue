@@ -21,26 +21,15 @@
         <b-row>
           <b-col></b-col>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" 
-              class="mb-2" 
-              v-model="starting_date"></b-form-datepicker>
-            </b-form-group>
-          </b-col>
-          <b-col></b-col>
-          <b-col>
-            <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="datepicker-end">
-              <b-form-datepicker id="datepicker-end" 
-              class="mb-2" 
-              v-model="ending_date"></b-form-datepicker>
-            </b-form-group>
+            <FunctionalCalendar v-model="calendarData" :configs ="calendarConfigs" 
+            @choseDay="dayClicked" @selectedDaysCount="daysCount"/>
           </b-col>
         </b-row>
         <b-row>
           <b-col></b-col>
           <b-col>Price per night: {{ apartments.pricePerNight }} </b-col>
           <b-col></b-col>
-          <b-col> Total price: </b-col>
+          <b-col> Total price: {{totalPrice}} </b-col>
         </b-row>
         <b-row>
           <b-col></b-col>
@@ -58,24 +47,68 @@
 </template>
 
 <script>
+import {FunctionalCalendar} from 'vue-functional-calendar';
+
 export default {
-  
   name: 'ReservationPage',
+  components: {
+    FunctionalCalendar
+  },
   data() {
     return {
-      starting_date: '',
-      ending_date: '',
       apartments: [],
+      calendarData : {},
+			calendarConfigs : {
+				sundayStart : false,
+				dataFormat : 'dd/mm/yyyy',
+				limits : false,
+				isDatePicker : true,
+				isDateRange : true,
+				isMultipleDatePicker : true,
+				isMultiple : false,
+				withTimePicker : false,
+        isDark : true,
+				//isModal : true
+				
+			},
+			daysNumber : 0,
+			startDate : null,
+			endDate : null
     }
   },
   created(){
     this.apartments = this.$route.params.data
   },
+  computed: {
+    totalPrice(){
+      if(this.daysNumber > 0){
+        return this.daysNumber * this.apartments.pricePerNight
+      }
+      return this.apartments.pricePerNight
+    }
+  },
   methods: {
     goBack() {
       this.$router.push('/')
-    }
-  }
+    },
+    dayClicked(value){
+			if(this.daysNumber === null){
+				this.startDate = value;
+				this.startDate.isDateRangeStart = true;
+			}
+			else{
+				this.endDate = value;
+				this.endDate.isDateRangeEnd = true;
+			}
+			console.log(value);
+
+		},
+		daysCount(value){
+			console.log("number of days "+value);
+			this.daysNumber = value;
+		}
+  },
+  
   
 }
 </script>
