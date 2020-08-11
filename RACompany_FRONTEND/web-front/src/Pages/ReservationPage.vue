@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Reservation Page</h1>
+      <h1>Make your reservation</h1>
       <b-container>
         <b-row>
           <b-col>
@@ -50,7 +50,7 @@
             <b-button>Submit</b-button>
           </b-col>
           <b-col>
-            <b-button>Cancle</b-button>
+            <b-button @click="goBack()">Cancle</b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -70,6 +70,11 @@ export default {
   },
   created(){
     this.apartments = this.$route.params.data
+  },
+  methods: {
+    goBack() {
+      this.$router.push('/')
+    }
   }
   
 }
