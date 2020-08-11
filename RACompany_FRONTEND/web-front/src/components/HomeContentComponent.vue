@@ -126,8 +126,8 @@
               </div>
             </b-card-text>
 
-            <b-button v-if="user != ''">
-              <router-link to="/res">Open</router-link>
+            <b-button @click="shareData(apartment)" v-if="user.userRole === 'GUEST'">
+              Open
             </b-button>
             </b-card>
           </div>
@@ -179,6 +179,9 @@ export default {
       .then(res => (this.user = res.data))
   },
   methods: {
+    shareData(data){
+      this.$router.push({name:"ReservationPage", params: {data: data}})
+    },
     sortMethod(){
       if(this.sort){
         this.sortButtonName = "Ascending order"
