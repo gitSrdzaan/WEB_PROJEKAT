@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import dao.ReservationDAO;
 
 @Path("/reservations")
-public class ReservationServise {
+public class ReservationService {
 
 	@Context
 	public ServletContext ctx;
