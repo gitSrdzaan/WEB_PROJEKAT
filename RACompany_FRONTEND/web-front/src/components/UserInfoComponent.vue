@@ -81,7 +81,7 @@ export default {
         submintModifiedUser() {
             this.newUser = this.user;
 
-            let path = 'http://localhost:8080/rest/users/modify';
+            let path = 'http://localhost:8080/RACompany/rest/users/modify';
             let putPath = path.concat(this.newUser.username);
             console.log(putPath);
             console.log(this.user);

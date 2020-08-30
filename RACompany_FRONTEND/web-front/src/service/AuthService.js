@@ -5,7 +5,11 @@ const url = "http://localhost:8080/RACompany/rest/";
 export default {
   login(credentials) {
     return axios
-      .post(url + "login", credentials)
+      .post(url + "login", credentials, {
+          headers : {
+            'Access-Control-Allow-Origin' : '*'
+          }
+      })
       .then((response) => response.data);
   },
   signUp(credentials) {
