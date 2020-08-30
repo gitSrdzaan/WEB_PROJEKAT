@@ -1,5 +1,7 @@
 package services;
 
+import java.util.ArrayList;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,7 +17,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import beans.Reservation;
+import beans.User;
+import beans.UserRole;
 import dao.ReservationDAO;
+import dao.UserDAO;
 
 @Path("/reservation")
 public class ReservationService {
@@ -33,6 +38,9 @@ public class ReservationService {
 			this.ctx.setAttribute("reservationDAO", new ReservationDAO(this.ctx.getRealPath("/")));
 			
 		}
+		if(ctx.getAttribute("userDAO") == null) {
+			this.ctx.setAttribute("userDAO", new UserDAO(this.ctx.getRealPath("/")));
+		}
 	}
 	
 	@GET
@@ -44,7 +52,7 @@ public class ReservationService {
 	}
 	
 	@GET
-	@Path("/get/{id}")
+	@Path("/getOne/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getReservation (@PathParam("id") Long id, @Context HttpServletRequest request) {
 		
@@ -61,10 +69,46 @@ public class ReservationService {
 		
 	}
 	
+	@GET
+	@Path("/getHost/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getHostReservations(@PathParam("username") String username, @Context HttpServletRequest request) {
+		UserDAO userDAO = (UserDAO) this.ctx.getAttribute("userDAO");
+		
+		User host = userDAO.findByUsername(username);
+		if(host.getUserRole() != UserRole.HOST) {
+			return Response.status(403).build();
+		}
+		
+		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
+		ArrayList<Reservation> allReservations = (ArrayList<Reservation>) dao.findAll();
+		ArrayList<Reservation> returnList = new ArrayList<Reservation>();
+		
+		for(Reservation iter : allReservations) {
+			if(iter.getReservedAppatment().getApartmentHost().getUsername() == host.getUsername()) {
+				returnList.add(iter);
+			}
+		}
+		
+		return Response.status(200).entity(returnList).build();
+		
+		
+	}
+	
 	@POST
-	@Path("/new")
+	@Path("/new/{username}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createReservation(Reservation reservation,@Context HttpServletRequest request) {
+	public Response createReservation(Reservation reservation,@PathParam("username") String username
+			,@Context HttpServletRequest request) {
+		UserDAO userDAO = (UserDAO) this.ctx.getAttribute("userDAO");
+		
+		User guest = userDAO.findByUsername(username);
+		
+		if(guest.getUserRole() != UserRole.GUEST) {
+			return Response.status(403).build();
+		}
+		
+		
 		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
 		
 		dao.putReservation(reservation);
