@@ -16,7 +16,7 @@ public class ReservationService {
 	@Context
 	public ServletContext ctx;
 	
-	public ReservationServise() {
+	public ReservationService() {
 		
 	}
 	
