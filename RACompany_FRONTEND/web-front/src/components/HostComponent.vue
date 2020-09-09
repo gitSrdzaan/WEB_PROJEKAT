@@ -33,9 +33,14 @@ export default {
     HostApartmentComponents,
     HostReservationsComponent
   },
+  props : {
+    user :{
+      type : Object
+    }
+  },
   data(){
     return{
-      user : {},
+      
       apartments : [
                 {
                   id : 1,
