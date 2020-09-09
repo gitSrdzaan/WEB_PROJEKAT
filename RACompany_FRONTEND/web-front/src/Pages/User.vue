@@ -6,7 +6,7 @@
   <div v-else-if="user.userRole === guest">
       <GuestComponent/>
   </div>
-  <div ><!--v-else-if="user.userRole === host">-->
+  <div v-else-if="user.userRole === host">
       <HostComponent/>
   </div>
   
