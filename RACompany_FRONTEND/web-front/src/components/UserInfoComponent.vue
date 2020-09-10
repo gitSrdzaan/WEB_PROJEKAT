@@ -30,7 +30,10 @@
             </b-form-group>
 
             <b-form-group id="input-group-4"  label="Your lastname:" label-for="input-4" >
-                <b-form-input  id="input-4"   v-model="this.user.lastname" required  placeholder="Enter lastname" >
+                <b-form-input  id="input-4"  
+                 v-model="this.user.lastname" 
+                required 
+                 placeholder="Enter lastname" >
                </b-form-input>
             </b-form-group>
 
@@ -85,8 +88,8 @@ export default {
             let path = 'http://localhost:8080/RACompany/rest/users/modify';
             let putPath = path.concat(this.newUser.username);
             console.log(putPath);
-            console.log(this.user);
-            console.log(this.newUser)
+            console.log("user "+this.user);
+            console.log("newUser "+ this.newUser)
 
             
 
@@ -96,7 +99,7 @@ export default {
             .catch(console.log("modifikacija nije prosla"))
         }
     },
-    mounted (){
+    created (){
         console.log(this.user.username)
     }
 }

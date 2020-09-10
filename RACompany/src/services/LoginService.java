@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -97,7 +96,9 @@ public class LoginService {
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));
 		*/
-		this.loggedUser = currUser;
+
+		//this.loggedUser = currUser;
+
 		//System.out.println(this.loggedUser.getFirstname());
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
