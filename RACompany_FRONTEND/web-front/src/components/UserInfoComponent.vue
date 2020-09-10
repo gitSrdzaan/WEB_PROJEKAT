@@ -74,6 +74,10 @@ export default {
                 lastname : '',
                 sex : ''
             },
+            password : '',
+            firstname : '',
+            lastname : '',
+            sex : '',
             sexes: [
             'Male',
             'Female'
@@ -82,14 +86,20 @@ export default {
     },
     methods :{
         submintModifiedUser() {
-            this.newUser = this.user;
+            this.newUser.password = document.getElementById("input-1").value;
+            this.newUser.firstname = document.getElementById("input-3").value;
+            this.newUser.lastname = document.getElementById("input-4").value;
+            this.newUser.sex = document.getElementById("input-5").value;
+
+
+            this.newUser.username = this.user.username;
+            this.newUser.userRole = this.user.userRole;
             console.log(this.newUser);
 
             let path = 'http://localhost:8080/RACompany/rest/users/modify';
             let putPath = path.concat(this.newUser.username);
             console.log(putPath);
-            console.log("user "+this.user);
-            console.log("newUser "+ this.newUser)
+            
 
             
 
@@ -100,7 +110,8 @@ export default {
         }
     },
     created (){
-        console.log(this.user.username)
+        
+        
     }
 }
 </script>

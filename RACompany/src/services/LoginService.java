@@ -64,7 +64,7 @@ public class LoginService {
 
 
 		
-		System.out.println("currentUser");
+		//System.out.println("currentUser");
 		/*System.out.println(this.request.toString());
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));*/
