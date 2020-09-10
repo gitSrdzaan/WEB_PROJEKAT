@@ -91,7 +91,7 @@ public class LoginService {
 		
 		this.request.getSession().setAttribute("user", currUser);
 				
-		System.out.println("login");
+		//System.out.println("login");
 		/*System.out.println(this.request.toString());
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));
