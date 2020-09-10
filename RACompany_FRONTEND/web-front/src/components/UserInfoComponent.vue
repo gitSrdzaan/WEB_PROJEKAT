@@ -80,6 +80,7 @@ export default {
     methods :{
         submintModifiedUser() {
             this.newUser = this.user;
+            console.log(this.newUser);
 
             let path = 'http://localhost:8080/RACompany/rest/users/modify';
             let putPath = path.concat(this.newUser.username);
@@ -90,7 +91,7 @@ export default {
             
 
             Axios
-            .post(path,this.newUser)
+            .put(path,this.newUser)
             .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
         }
