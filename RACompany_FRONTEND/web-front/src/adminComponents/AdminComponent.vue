@@ -3,7 +3,7 @@
       <h1>Admin Component</h1>
       <div id="tabs">
         <b-tabs content-class="mt-3">
-          <b-tab title="Personal Info" >
+          <b-tab title="Personal Info">
             <UserInfoComponent v-bind:user="user"/>
             </b-tab>
           <b-tab title="Users" @click="getAllUsers" >
@@ -45,7 +45,7 @@ export default {
   data(){
     return{
       user : {
-        
+         
       },
       users : [],
       apartments : [],
@@ -61,7 +61,7 @@ export default {
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(response => (this.user = response.data))
       .catch(console.log("nema ulogovanog"))
-      console.log(this.user)
+     
       
       
     },
@@ -87,9 +87,9 @@ export default {
       
     }
   },
-  mounted (){
+  created (){
     this.getCurrUser();
-    console.log(this.user.username)
+    
     
 
   }

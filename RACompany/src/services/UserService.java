@@ -59,7 +59,7 @@ public class UserService {
 	@PUT
 	@Path("/modify")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response modifyUser(User modifiedUser , @Context HttpServletRequest request) {
+	public Response modifyUser(User modifiedUser, @Context HttpServletRequest request) {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
 		if(!dao.modifyUser(modifiedUser,modifiedUser.getUsername())) {
