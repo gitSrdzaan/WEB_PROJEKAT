@@ -63,7 +63,7 @@ public class UserService {
 		UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		
 		if(!dao.modifyUser(modifiedUser,modifiedUser.getUsername())) {
-			System.out.println("los zhejtev");
+			
 			return Response.status(400).header("Access-Control-Allow-Origin", "*").entity("Korisnicko ime je mijenjano").build();
 		}
 		
@@ -74,6 +74,8 @@ public class UserService {
 			e.printStackTrace();
 			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("greska pri cuvanju modifikovanog korisnika").build();
 		}
+		
+		request.getSession().setAttribute("user", modifiedUser);
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		

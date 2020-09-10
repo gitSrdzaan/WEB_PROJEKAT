@@ -97,8 +97,7 @@ export default {
             console.log(this.newUser);
 
             let path = 'http://localhost:8080/RACompany/rest/users/modify';
-            let putPath = path.concat(this.newUser.username);
-            console.log(putPath);
+            
             
 
             
@@ -107,6 +106,8 @@ export default {
             .put(path,this.newUser)
             .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
+
+            
         }
     },
     created (){

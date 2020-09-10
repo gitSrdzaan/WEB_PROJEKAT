@@ -75,7 +75,16 @@ export default {
       .catch(console.log("greska pri dobavljanju apartmana"))
 
 
+    },
+    getCurrUser(){
+         Axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(response => (this.user = response.data))
+      .catch(console.log("nema ulogovanog"));
     }
+  },
+  created(){
+    this.getCurrUser();
   }
   
 }
