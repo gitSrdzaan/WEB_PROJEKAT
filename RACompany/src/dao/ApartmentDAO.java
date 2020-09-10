@@ -120,7 +120,7 @@ public class ApartmentDAO {
 	 * */
 	public void putApartment(Apartment apartment) {
 		
-		List<Apartment> allApartments = (List<Apartment>) this.apartments.values();
+		List<Apartment> allApartments = new ArrayList<Apartment>(this.apartments.values()) ;
 		
 		/**
 		 * Java Lambda funckija za sortiranje liste apartmana po id-u 
@@ -150,7 +150,7 @@ public class ApartmentDAO {
 	public Collection<Apartment> findAllHostApartments(Host host){
 		ArrayList<Apartment> apArrayList = new ArrayList<Apartment>();
 		for(Apartment iter : this.apartments.values()) {
-			if(iter.getApartmentHost().getUsername() == host.getUsername()) {
+			if(iter.getApartmentHost().getUsername().equals(host.getUsername())) {
 				apArrayList.add(iter);
 			}
 		}

@@ -48,7 +48,14 @@
 		"roomNumber" : 1,
 		"guestNumber" : 1,
 		"apartmentLocation" : {},
-		"apartmentHost" : {},
+		"apartmentHost" :{
+							"username" : "narco",
+							"password" : "traficante",
+							"firstname" : "Miguel",
+							"lastname" : "Felix",
+							"sex" : "Male",
+							"userRole" : "HOST"
+							},
 		"apartmentResevartionDates" : [],
 		"comments" : [],
 		"pricePerNight" : 5.0,

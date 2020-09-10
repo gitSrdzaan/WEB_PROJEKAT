@@ -49,9 +49,9 @@ public class AmenitiesService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllAmenities( @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
-		if(admin.getUserRole() != UserRole.ADMIN) {
+		/*if(admin.getUserRole() != UserRole.ADMIN) {
 			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
-		}
+		}*/
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(dao.findAll()).build();

@@ -1,15 +1,20 @@
 <template>
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
-            <b-list-group-item button v-b-modal.modal  @click="selectApartment(apartment)">{{apartment.id}}</b-list-group-item>
+            <b-list-group-item button   @click="selectApartment(apartment)">{{apartment.id}}
+                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id" />
+            </b-list-group-item>
+           
+
         </b-list-group>
         <div>
-            <b-button type="primary" @click="createNewApartment" v-b-modal.modal>Create new apartment</b-button>
+            <b-button type="primary" @click="createNewApartment" >Create new apartment</b-button>
         </div>
+        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showApartment"/>
 
-        <b-modal id="modal" scrollable >
-           <ApartmentComponent v-bind:apartment="selectedApartment"/>
-        </b-modal>
+    
+           
+        
     </div>
 </template>
 
@@ -26,26 +31,17 @@ export default {
     props : {
         apartments : {
             type : Array
+        },
+        host :{
+            type : Object,
+            required : true
         }
     },
     data(){
         return {
-            selectedApartment : {
-                id : 2,
-                type : '',
-                roomNumber : '',
-                guestNumber : '',
-                apartmentLocation : {},
-                apartmentResevartionDates : [],
-                comments : [],
-                pricePerNight : 0.0,
-                checkInTime : '',
-                checkOutTime : '',
-                apartmentStatus : false,
-                amenities : [],
-                reservations : [],
-                imageSource : []
-            }
+            selectedApartment : {             
+            },
+            showApartment : false
         }
     },
    
@@ -54,6 +50,8 @@ export default {
             console.log(apartment);
             this.selectedApartment = apartment;
             console.log(this.selectedApartment);
+            this.showApartment = false;
+           
 
         },
         createNewApartment(){
@@ -76,7 +74,10 @@ export default {
 
 
             this.selectedApartment = emptyApartment;
+            this.selectedApartment.apartmentHost = this.host;
+            
             this.getAllAmenities();
+            this.showApartment = true;
            
         },
         getAllAmenities : function(){

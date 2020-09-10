@@ -73,7 +73,7 @@ public class LoginService {
 		
 		//return this.loggedUser;
 		
-		return (User) this.request.getSession().getAttribute("user");
+		return (User) request.getSession().getAttribute("user");
 	}
 	
 	@POST
@@ -89,7 +89,7 @@ public class LoginService {
 		}
 		
 		
-		this.request.getSession().setAttribute("user", currUser);
+		request.getSession().setAttribute("user", currUser);
 				
 		//System.out.println("login");
 		/*System.out.println(this.request.toString());
