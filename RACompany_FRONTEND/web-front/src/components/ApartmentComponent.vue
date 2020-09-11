@@ -28,10 +28,10 @@
             </b-form-group>
 
             <b-form-group id="input-group-8" label="Check in time" label-for="input-8">
-                <b-time v-model="apartment.checkInTime" id="input-8" locale="en"/>
+                <b-time v-model="checkInTime" id="input-8" locale="en"/>
             </b-form-group>
             <b-form-group id="input-group-9" label="Check out time" label-for="input-9">
-                <b-time v-model="apartment.checkOutTime" id="input-9" locale="en"/>
+                <b-time v-model="checkOutTime" id="input-9" locale="en"/>
             </b-form-group>
 
             <b-form-group id="input-group-10" label="Apartment amenities" label-for="input-10">
@@ -59,9 +59,12 @@
 
             <b-form-group id="submitBtn">
                 <b-button type="submit"> Submit</b-button>
+                
             </b-form-group>     
 
+
         </b-form>
+        <b-button type="warning" @click="deleteApartment($event)">Delete apartment</b-button>
     </div>
 </template>
 
@@ -117,7 +120,9 @@ export default {
             dateRange : {
                 start : false,
                 end : false
-            }
+            },
+            checkInTime : '',
+            checkOutTime : '',
         }
         
     },
@@ -126,17 +131,35 @@ export default {
             event.prevent;
             this.uploadImages();
             this.setApartmentDates();
-            console.log(this.apartment)
-            Axios
-            .post("http://localhost:8080/RACompany/rest/apartment/new",this.apartment)
-            .catch(console.log("greska pri kreiranju apartmana"));
+            this.getCheckIOTime();
 
-            
 
+            console.log(this.apartment);
+
+            if(this.apartment.id != null){
+                Axios
+                .put('http://localhost:8080/RACompany/rest/apartment/modify/'+this.apartment.id, this.apartment)
+                .then(response => (console.log(response)));
+
+            }
+            else{
+                
             Axios
             .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
-            .then(response => (console.log(response)))
+            .then(response => (console.log(response)));
+            }
+
             
+
+        },
+        deleteApartment(event){
+            event.prevent;
+
+            Axios
+            .delete("http://localhost:8080/RACompany/rest/apartment/delete/"+this.apartment.id)
+            .then(response =>(console.log(response)));
+
+
 
         },
         
@@ -208,11 +231,7 @@ export default {
             dateIter = new Date(year,month,day);
              
             for(let i = 0; i < this.daysNumber; i++){  
-                let dateStatus = {
-                    date : dateIter,
-                    status : false
-                } 
-                this.apartment.apartmentResevartionDates.push(dateStatus);
+              
                            
                 let markDate = dateIter.getDate() + "/" + dateIter.getMonth() + "/" + dateIter.getFullYear();
                 this.calendarConfigs.markedDates.push(markDate);
@@ -221,6 +240,7 @@ export default {
             }
            
         },
+        //#region podesavanje datuma i vremena ulazska/izlaska apartmana 
         setApartmentDates(){
             for(let i = 0 ; i < this.calendarConfigs.markedDates.length ; i++){
                 let [day,month,year] = this.calendarConfigs.markedDates[i].split("/");
@@ -231,9 +251,47 @@ export default {
                     status : false
                 });
             }
+        },
+        getApartmentDates(){
+            
+            for(let index in this.apartment.apartmentResevartionDates){
+                let date = new Date(this.apartment.apartmentResevartionDates[index].date);
+               
+                
+                let markDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+                this.calendarConfigs.markedDates.push(markDate);
+                
+
+
+            }
+
+        },
+        getCheckIOTime(){
+            let [hour,minutes,seconds] = this.checkInTime.split(":");
+            
+            this.apartment.checkInTime = new Date(2020, 1,1,hour,minutes,seconds);
+            
+            [hour, minutes, seconds] = this.checkOutTime.split(":");
+            
+           this.apartment.checkOutTime = new Date(2020,1,1,hour,minutes,seconds);
+        },
+        setCheckIOTime(milliseconds){
+            let date = new Date(milliseconds);
+            let hour = date .getHours();
+            let minutes = date .getMinutes();
+            let seconds = date .getSeconds();
+
+            return hour + ":" + minutes + ":" + seconds;
+
+
         }
+        //#endregion kraj podesavanja datuma apartmana
+
     },
     created () {
+        this.checkInTime = this.setCheckIOTime(this.apartment.checkInTime);
+        this.checkOutTime = this.setCheckIOTime(this.apartment.checkOutTime);
+        this.getApartmentDates();
        
     }
 
