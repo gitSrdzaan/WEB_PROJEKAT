@@ -121,8 +121,8 @@ export default {
                 start : false,
                 end : false
             },
-            checkInTime : '',
-            checkOutTime : '',
+            checkInTime : '14:00:00',
+            checkOutTime : '10:00:00',
         }
         
     },
@@ -276,6 +276,11 @@ export default {
            this.apartment.checkOutTime = new Date(2020,1,1,hour,minutes,seconds);
         },
         setCheckIOTime(milliseconds){
+
+            if(milliseconds === new Date(0)){
+                return 0;
+            }
+
             let date = new Date(milliseconds);
             let hour = date .getHours();
             let minutes = date .getMinutes();
@@ -290,7 +295,13 @@ export default {
     },
     created () {
         this.checkInTime = this.setCheckIOTime(this.apartment.checkInTime);
+        if(this.checkInTime === 0){
+            this.checkInTime = "14:00:00";
+        }
         this.checkOutTime = this.setCheckIOTime(this.apartment.checkOutTime);
+        if(this.checkOutTime === 0){
+            this.checkOutTime = "10:00:00";
+        }
         this.getApartmentDates();
        
     }
