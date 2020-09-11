@@ -37,7 +37,7 @@
             <b-form-group id="input-group-10" label="Apartment amenities" label-for="input-10">
                 <b-button type="primary">Choose amenities</b-button>
                 <div>
-                    <b-list-group v-for="amenity in this.apartment.amenities" :key="amenity.id">
+                    <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
                         <input type="checkbox" :id="amenity.id" name="CheckBoxInputName"
                          @click="checkBoxClicked(amenity,$event)" />
                         <b-list-group-item label :for="amenity.id">{{amenity.name}}</b-list-group-item>
@@ -97,7 +97,7 @@ export default {
                 "FULL",
                 "ROOM"
             ],
-            amenities : [{id : 1, name : 'name'},{id : 2, name : 'name'}],
+            amenities : [],
             images : [],
             calendarData : {},
             calendarConfigs : {
@@ -289,8 +289,13 @@ export default {
             return hour + ":" + minutes + ":" + seconds;
 
 
-        }
+        },
         //#endregion kraj podesavanja datuma apartmana
+        getAmaneties(){
+            for(let index in this.apartment.amenities){
+                this.amenities.push(this.apartment.amenities[index]);
+            }
+        }
 
     },
     created () {
@@ -303,6 +308,7 @@ export default {
             this.checkOutTime = "10:00:00";
         }
         this.getApartmentDates();
+        this.getAmaneties();
        
     }
 
