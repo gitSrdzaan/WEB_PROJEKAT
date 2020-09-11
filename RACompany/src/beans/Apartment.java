@@ -25,7 +25,7 @@ public class Apartment {
 	private boolean apartmentStatus;
 	
 	private List<Amenities> amenities;
-	private List<Reservations> reservations;
+	private List<Reservation> reservations;
 	
 	private List<String> imageSource;
 	
@@ -137,10 +137,10 @@ public class Apartment {
 	public void setAmenities(List<Amenities> amenities) {
 		this.amenities = amenities;
 	}
-	public List<Reservations> getReservations() {
+	public List<Reservation> getReservations() {
 		return reservations;
 	}
-	public void setReservations(List<Reservations> reservations) {
+	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
 

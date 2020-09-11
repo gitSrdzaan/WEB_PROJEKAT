@@ -13,12 +13,13 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import beans.Reservations;
+import beans.Reservation;
+
 
 
 public class ReservationDAO {
 
-	private Map<Long, Reservations> reservations = new HashMap<Long,Reservations>();
+	private Map<Long, Reservation> reservations = new HashMap<Long,Reservation>();
 	private String contextPath;
 	
 	public ReservationDAO(String contexPath){
@@ -31,7 +32,9 @@ public class ReservationDAO {
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Metoda za ucitavanje rezervacija
+	 * */
 	private void loadReservation() throws IOException {
 		// TODO Auto-generated method stub
 		ObjectMapper mapper = new ObjectMapper();
@@ -53,18 +56,70 @@ public class ReservationDAO {
 			br.close();
 		}
 		
-		List<Reservations> reservations = mapper.readValue(json.toString(), 
-				new TypeReference<ArrayList<Reservations>>() {
+		List<Reservation> reservations = mapper.readValue(json.toString(), 
+				new TypeReference<ArrayList<Reservation>>() {
 			
 		});
 		this.reservations.clear();
-		for (Reservations reservation : reservations) {
+		for (Reservation reservation : reservations) {
 			this.reservations.put(reservation.getID(), reservation);
 		}
 	}
 
-	public List<Reservations> findAll() {
+	
+	public List<Reservation> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return (List<Reservation>) this.reservations.values();
+	}
+
+	public void putReservation(Reservation reservation) {
+		// TODO Auto-generated method stub
+		List<Reservation> allReservations = (List<Reservation>) this.reservations.values();
+		
+		allReservations.sort((a,b) -> Long.compare(b.getID(), a.getID()));
+		
+		Long maxId = allReservations.get(0).getID();
+		reservation.setID(++maxId);
+		
+		this.reservations.put(reservation.getID(), reservation);
+		
+	}
+	public Reservation findById(Long id) {
+		// TODO Auto-generated method stub
+		Reservation reservation  = this.reservations.get(id);
+
+		return reservation;
+		
+	}
+	
+	
+	/**
+	 * Metoda za cuvanje rezervavija
+	 * @throws Exception
+	 * */
+	public void saveReservation() throws Exception {
+		// TODO Auto-generated method stub
+		ObjectMapper mapper = new ObjectMapper();
+		File reservationFile = new File(this.contextPath + "data/reservation.json");
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(reservationFile, 
+					this.reservations.values());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw new Exception("Greska pri upisivanju rezervacija u fajl");
+		}
+		
+		
+		
+	}
+	public void modifyReservation(Reservation reservation, Long id) {
+		// TODO Auto-generated method stub
+		Reservation temp = this.findById(id);
+		temp = reservation;
+		this.reservations.put(id, temp);
+		
+		
 	}
 }

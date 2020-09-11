@@ -7,7 +7,7 @@
             <UserInfoComponent v-bind:user="user"/>
           </b-tab>
           <b-tab title="Apartments" @click="getAllApartments">
-            <HostApartmentComponents  v-bind:apartments = "apartments"/>
+            <HostApartmentComponents  v-bind:apartments = "apartments" v-bind:host="user"/>
           </b-tab>
           <b-tab title="Reservations">
             <HostReservationsComponent/>
@@ -43,7 +43,7 @@ export default {
       
       apartments : [
                 {
-                  id : 1,
+                  id : 3,
                   type : 'FULL',
                   roomNumber : '',
                   guestNumber : '',
@@ -72,15 +72,24 @@ export default {
   },
   methods : {
     getAllApartments : function(){
-      let path = 'http://localhost:8080/rest/apartment/hostAll/'
-      let getPath = path.concat(this.user.username)
+      let path = 'http://localhost:8080/RACompany/rest/apartment/hostAll/'+this.user.username;
+      
       Axios
-      .get(getPath)
+      .get(path)
       .then(response => (this.apartments = response.data))
       .catch(console.log("greska pri dobavljanju apartmana"))
 
 
+    },
+    getCurrUser(){
+         Axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(response => (this.user = response.data))
+      .catch(console.log("nema ulogovanog"));
     }
+  },
+  created(){
+    this.getCurrUser();
   }
   
 }

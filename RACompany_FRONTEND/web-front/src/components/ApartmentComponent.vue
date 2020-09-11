@@ -37,7 +37,7 @@
             <b-form-group id="input-group-10" label="Apartment amenities" label-for="input-10">
                 <b-button type="primary">Choose amenities</b-button>
                 <div>
-                    <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
+                    <b-list-group v-for="amenity in this.apartment.amenities" :key="amenity.id">
                         <input type="checkbox" :id="amenity.id" name="CheckBoxInputName"
                          @click="checkBoxClicked(amenity,$event)" />
                         <b-list-group-item label :for="amenity.id">{{amenity.name}}</b-list-group-item>
@@ -133,10 +133,16 @@ export default {
 
             
 
+            Axios
+            .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
+            .then(response => (console.log(response)))
+            
+
         },
         
         checkBoxClicked(value,event){
              let temp = {
+
                     id : value.id,
                     name : value.name
             }
@@ -201,7 +207,13 @@ export default {
             let [day,month,year] = dateIter.split("/");
             dateIter = new Date(year,month,day);
              
-            for(let i = 0; i < this.daysNumber; i++){              
+            for(let i = 0; i < this.daysNumber; i++){  
+                let dateStatus = {
+                    date : dateIter,
+                    status : false
+                } 
+                this.apartment.apartmentResevartionDates.push(dateStatus);
+                           
                 let markDate = dateIter.getDate() + "/" + dateIter.getMonth() + "/" + dateIter.getFullYear();
                 this.calendarConfigs.markedDates.push(markDate);
                 dateIter.setDate(dateIter.getDate() + 1);

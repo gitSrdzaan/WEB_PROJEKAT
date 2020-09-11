@@ -7,7 +7,11 @@
       <GuestComponent/>
   </div>
   <div v-else-if="user.userRole === host">
+
       <HostComponent v-bind:user="user"/>
+
+      <HostComponent/>
+
   </div>
   
 </div>
