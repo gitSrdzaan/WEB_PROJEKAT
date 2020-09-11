@@ -7,7 +7,11 @@
       <GuestComponent/>
   </div>
   <div v-else-if="user.userRole === host">
+
+      <HostComponent v-bind:user="user"/>
+
       <HostComponent/>
+
   </div>
   
 </div>
@@ -37,7 +41,7 @@ export default {
   },
   data() {
     return {
-      user: '',
+      user: {},
       admin: "ADMIN",
       guest: "GUEST",
       host: "HOST"

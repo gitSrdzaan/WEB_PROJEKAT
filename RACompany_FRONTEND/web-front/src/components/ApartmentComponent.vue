@@ -99,20 +99,20 @@ export default {
             calendarData : {},
             calendarConfigs : {
                 sundayStart : false,
-				dataFormat : 'dd/mm/yyyy',
-				limits : false,
-				isDatePicker : true,
-				isDateRange : true,
-				isMultipleDatePicker : true,
-				isMultiple : false,
-				withTimePicker : false,
+                dataFormat : 'dd/mm/yyyy',
+                limits : false,
+                isDatePicker : true,
+                isDateRange : true,
+                isMultipleDatePicker : true,
+                isMultiple : false,
+                withTimePicker : false,
                 isDark : true,
                 markedDateRange : [],
                 markedDates : []
-				//isModal : true
+                //isModal : true
             },
             daysNumber : 0,
-			startDate : null,
+            startDate : null,
             endDate : null,
             dateRange : {
                 start : false,
@@ -125,7 +125,12 @@ export default {
         onSubmit(event){
             event.prevent;
             this.uploadImages();
+            this.setApartmentDates();
             console.log(this.apartment)
+            Axios
+            .post("http://localhost:8080/RACompany/rest/apartment/new",this.apartment)
+            .catch(console.log("greska pri kreiranju apartmana"));
+
             
 
             Axios
@@ -175,26 +180,26 @@ export default {
 
         },
         dayClicked(value){
-			if(this.daysNumber === 0){
-				this.startDate = value;
+            if(this.daysNumber === 0){
+                this.startDate = value;
                 this.startDate.isDateRangeStart = true;
                 this.dateRange.start =  this.startDate.date;
                 
-			}
-			else{
-				this.endDate = value;
+            }
+            else{
+                this.endDate = value;
                 this.endDate.isDateRangeEnd = true;
                 this.dateRange.end = this.endDate.date;
                 this.calendarConfigs.markedDateRange.push(this.dateRange);
                 
                 this.markDatesFromRange();
                 this.daysNumber = 0;
-			}
-			
+            }
+            
 
-		},
-		daysCount(value){
-			this.daysNumber = value;
+        },
+        daysCount(value){
+            this.daysNumber = value;
         },
         markDatesFromRange(){
           
@@ -215,6 +220,17 @@ export default {
                 
             }
            
+        },
+        setApartmentDates(){
+            for(let i = 0 ; i < this.calendarConfigs.markedDates.length ; i++){
+                let [day,month,year] = this.calendarConfigs.markedDates[i].split("/");
+                let markDate = new Date(year,month,day);
+                
+                this.apartment.apartmentResevartionDates.push({
+                    date : markDate.getTime(),
+                    status : false
+                });
+            }
         }
     },
     created () {
