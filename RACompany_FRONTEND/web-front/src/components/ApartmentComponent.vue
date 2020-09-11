@@ -59,9 +59,12 @@
 
             <b-form-group id="submitBtn">
                 <b-button type="submit"> Submit</b-button>
+                
             </b-form-group>     
 
+
         </b-form>
+        <b-button type="warning" @click="deleteApartment($event)">Delete apartment</b-button>
     </div>
 </template>
 
@@ -131,11 +134,32 @@ export default {
             this.getCheckIOTime();
 
 
-            console.log(this.apartment)
+            console.log(this.apartment);
+
+            if(this.apartment.id != null){
+                Axios
+                .put('http://localhost:8080/RACompany/rest/apartment/modify/'+this.apartment.id, this.apartment)
+                .then(response => (console.log(response)));
+
+            }
+            else{
+                
             Axios
             .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
-            .then(response => (console.log(response)))
+            .then(response => (console.log(response)));
+            }
+
             
+
+        },
+        deleteApartment(event){
+            event.prevent;
+
+            Axios
+            .delete("http://localhost:8080/RACompany/rest/apartment/delete/"+this.apartment.id)
+            .then(response =>(console.log(response)));
+
+
 
         },
         
