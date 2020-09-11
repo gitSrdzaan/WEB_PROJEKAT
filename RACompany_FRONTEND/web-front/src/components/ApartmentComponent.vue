@@ -144,9 +144,9 @@ export default {
             }
             else{
                 
-            Axios
-            .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
-            .then(response => (console.log(response)));
+                Axios
+                .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
+                .then(response => (console.log(response)));
             }
 
             
