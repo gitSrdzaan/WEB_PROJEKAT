@@ -216,6 +216,7 @@ export default {
             }
            
         },
+        //#region podesavanje datuma i vremena ulazska/izlaska apartmana 
         setApartmentDates(){
             for(let i = 0 ; i < this.calendarConfigs.markedDates.length ; i++){
                 let [day,month,year] = this.calendarConfigs.markedDates[i].split("/");
@@ -226,6 +227,20 @@ export default {
                     status : false
                 });
             }
+        },
+        getApartmentDates(){
+            
+            for(let index in this.apartment.apartmentResevartionDates){
+                let date = new Date(this.apartment.apartmentResevartionDates[index].date);
+               
+                
+                let markDate = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+                this.calendarConfigs.markedDates.push(markDate);
+                
+
+
+            }
+
         },
         getCheckIOTime(){
             let [hour,minutes,seconds] = this.checkInTime.split(":");
@@ -246,14 +261,13 @@ export default {
 
 
         }
+        //#endregion kraj podesavanja datuma apartmana
 
     },
     created () {
-        
-       
         this.checkInTime = this.setCheckIOTime(this.apartment.checkInTime);
-        
         this.checkOutTime = this.setCheckIOTime(this.apartment.checkOutTime);
+        this.getApartmentDates();
        
     }
 
