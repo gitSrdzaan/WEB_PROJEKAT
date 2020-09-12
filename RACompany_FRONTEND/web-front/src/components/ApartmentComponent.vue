@@ -277,7 +277,7 @@ export default {
         },
         setCheckIOTime(milliseconds){
 
-            if(milliseconds === new Date(0)){
+            if(milliseconds === null){
                 return 0;
             }
 

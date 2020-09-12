@@ -73,8 +73,8 @@ export default {
                 apartmentResevartionDates : [],
                 comments : [],
                 pricePerNight : 0.0,
-                checkInTime : new Date(0),
-                checkOutTime : new Date(0),
+                checkInTime : null,
+                checkOutTime : null,
                 apartmentStatus : false,
                
                 reservations : [],
