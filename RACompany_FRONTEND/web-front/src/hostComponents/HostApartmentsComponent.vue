@@ -40,7 +40,8 @@ export default {
     },
     data(){
         return {
-            selectedApartment : {             
+            selectedApartment : {     
+                      
             },
             showNewApartment : false,
             showUpdApartment : false
@@ -52,7 +53,7 @@ export default {
             console.log(apartment);
             this.selectedApartment = apartment;
             console.log(this.selectedApartment);
-            this.showApartment = false;
+            this.showNewApartment = false;
             this.showUpdApartment = true;
            
 
@@ -90,7 +91,7 @@ export default {
             this.selectedApartment.apartmentHost = this.host;
             
             
-            this.showApartment = true;
+            this.showNewApartment = true;
            
         },
         getAllAmenities : function(){

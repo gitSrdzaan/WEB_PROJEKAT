@@ -14,7 +14,7 @@
                 <b-form-input id="input-4" v-model="apartment.guestNumber" type="number" placeholder="Entert number of guests"/>
             </b-form-group>
             <b-form-group id="input-group-5" label="Location" label-for="input-5">
-                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocaiton" id="input-5"/><!--Two way binding-->
+                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocation"  id="input-5"/><!--Two way binding-->
             </b-form-group>
 
             <b-form-group id="input-group-6" label="Available dates" label-for="input-6" >
@@ -85,10 +85,7 @@ export default {
     props : {
          apartment : {
                type : Object
-               
             }
-
-
     },
     data(){
         return {
@@ -150,9 +147,6 @@ export default {
             }
 
             this.$emit('input');
-
-            
-
         },
         deleteApartment(event){
             event.prevent;
@@ -162,14 +156,6 @@ export default {
             .then(response =>(console.log(response)));
 
              this.$emit('remove');
-
-         
-
-
-            
-
-
-
         },
         
         checkBoxClicked(value,event){
