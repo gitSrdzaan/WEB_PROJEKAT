@@ -2,8 +2,8 @@
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
             <b-list-group-item button   @click="selectApartment(apartment)" >{{apartment.id}}
-                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id" v-on:remove="deleteApartment(selectedApartment.id)" 
-                 />
+                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showUpdApartment" v-on:remove="deleteApartment(selectedApartment.id)" 
+                 v-on:input="closeComponent()" />
             </b-list-group-item>
            
 
@@ -11,7 +11,7 @@
         <div>
             <b-button type="primary" @click="createNewApartment" >Create new apartment</b-button>
         </div>
-        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showApartment"  v-on:input="closeComponent()"/>
+        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showNewApartment"  v-on:input="closeComponent()"/>
 
     
            
@@ -42,7 +42,8 @@ export default {
         return {
             selectedApartment : {             
             },
-            showApartment : false
+            showNewApartment : false,
+            showUpdApartment : false
         }
     },
    
@@ -52,6 +53,7 @@ export default {
             this.selectedApartment = apartment;
             console.log(this.selectedApartment);
             this.showApartment = false;
+            this.showUpdApartment = true;
            
 
         },
@@ -100,7 +102,10 @@ export default {
             this.apartments.splice(id-1,1);
         },
         closeComponent(){
-            this.showApartment = false;
+            this.showNewApartment = false;
+            this.showUpdApartment = false;
+           
+             
         
         }
     }
