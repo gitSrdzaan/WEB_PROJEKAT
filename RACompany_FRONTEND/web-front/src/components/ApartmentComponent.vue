@@ -149,15 +149,17 @@ export default {
                 .then(response => (console.log(response)));
             }
 
+            this.$emit('input');
+
             
 
         },
         deleteApartment(event){
             event.prevent;
 
-            /*Axios
+            Axios
             .delete("http://localhost:8080/RACompany/rest/apartment/delete/"+this.apartment.id)
-            .then(response =>(console.log(response)));*/
+            .then(response =>(console.log(response)));
 
              this.$emit('remove');
 
