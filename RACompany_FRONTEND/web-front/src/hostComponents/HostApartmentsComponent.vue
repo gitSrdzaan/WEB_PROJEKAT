@@ -60,23 +60,33 @@ export default {
                 type : '',
                 roomNumber : 0,
                 guestNumber : 0,
-                apartmentLocation : {},
+                apartmentLocation : {
+                    longitude : '',
+                    latitude : '',
+                    adress : {
+                        street : '',
+                        number : 0,
+                        city : '',
+                        postalCode : 0
+                    }
+                },
                 apartmentResevartionDates : [],
                 comments : [],
                 pricePerNight : 0.0,
                 checkInTime : new Date(0),
                 checkOutTime : new Date(0),
                 apartmentStatus : false,
-                amenities : [],
+               
                 reservations : [],
                 imageSource : []
             }
 
 
             this.selectedApartment = emptyApartment;
+            this.getAllAmenities();
             this.selectedApartment.apartmentHost = this.host;
             
-            this.getAllAmenities();
+            
             this.showApartment = true;
            
         },
