@@ -1,8 +1,8 @@
 <template>
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
-            <b-list-group-item button   @click="selectApartment(apartment)">{{apartment.id}}
-                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id" />
+            <b-list-group-item button   @click="selectApartment(apartment)" >{{apartment.id}}
+                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id" v-on:remove="deleteApartment(selectedApartment.id)" />
             </b-list-group-item>
            
 
@@ -94,6 +94,13 @@ export default {
             Axios
             .get('http://localhost:8080/RACompany/rest/amneities/all')
             .then(response => (this.selectedApartment.amenities = response.data))
+        },
+        deleteApartment(id){
+            
+            this.apartments.splice(id-1,1);
+
+
+             
         }
     }
     

@@ -77,7 +77,7 @@ export default {
       Axios
       .get(path)
       .then(response => (this.apartments = response.data))
-      .catch(console.log("greska pri dobavljanju apartmana"))
+      .catch(error =>(console.log("greska pri dobavljanju apartmana"+error.response)));
 
 
     },
