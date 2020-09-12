@@ -14,7 +14,7 @@
                 <b-form-input id="input-4" v-model="apartment.guestNumber" type="number" placeholder="Entert number of guests"/>
             </b-form-group>
             <b-form-group id="input-group-5" label="Location" label-for="input-5">
-                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocation" id="input-5"/><!--Two way binding-->
+                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocaiton" id="input-5"/><!--Two way binding-->
             </b-form-group>
 
             <b-form-group id="input-group-6" label="Available dates" label-for="input-6" >
@@ -136,7 +136,7 @@ export default {
 
             console.log(this.apartment);
 
-            if(this.apartment.id != null){
+            if(this.apartment.id != ""){
                 Axios
                 .put('http://localhost:8080/RACompany/rest/apartment/modify/'+this.apartment.id, this.apartment)
                 .then(response => (console.log(response)));
@@ -149,6 +149,8 @@ export default {
                 .then(response => (console.log(response)));
             }
 
+            this.$emit('input');
+
             
 
         },
@@ -158,6 +160,13 @@ export default {
             Axios
             .delete("http://localhost:8080/RACompany/rest/apartment/delete/"+this.apartment.id)
             .then(response =>(console.log(response)));
+
+             this.$emit('remove');
+
+         
+
+
+            
 
 
 

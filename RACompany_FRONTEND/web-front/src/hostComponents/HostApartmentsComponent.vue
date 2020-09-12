@@ -1,8 +1,9 @@
 <template>
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
-            <b-list-group-item button   @click="selectApartment(apartment)">{{apartment.id}}
-                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id" />
+            <b-list-group-item button   @click="selectApartment(apartment)" >{{apartment.id}}
+                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showUpdApartment" v-on:remove="deleteApartment(selectedApartment.id)" 
+                 v-on:input="closeComponent()" />
             </b-list-group-item>
            
 
@@ -10,7 +11,7 @@
         <div>
             <b-button type="primary" @click="createNewApartment" >Create new apartment</b-button>
         </div>
-        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showApartment"/>
+        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showNewApartment"  v-on:input="closeComponent()"/>
 
     
            
@@ -41,7 +42,8 @@ export default {
         return {
             selectedApartment : {             
             },
-            showApartment : false
+            showNewApartment : false,
+            showUpdApartment : false
         }
     },
    
@@ -51,6 +53,7 @@ export default {
             this.selectedApartment = apartment;
             console.log(this.selectedApartment);
             this.showApartment = false;
+            this.showUpdApartment = true;
            
 
         },
@@ -94,6 +97,16 @@ export default {
             Axios
             .get('http://localhost:8080/RACompany/rest/amneities/all')
             .then(response => (this.selectedApartment.amenities = response.data))
+        },
+        deleteApartment(id){
+            this.apartments.splice(id-1,1);
+        },
+        closeComponent(){
+            this.showNewApartment = false;
+            this.showUpdApartment = false;
+           
+             
+        
         }
     }
     

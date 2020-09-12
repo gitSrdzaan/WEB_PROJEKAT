@@ -30,7 +30,7 @@ export default {
     },
     methods :{
         output : function(){
-            this.$emit('input',this.apartmentLocation);
+            this.$emit('input',this.adress);
         }
     }
     
