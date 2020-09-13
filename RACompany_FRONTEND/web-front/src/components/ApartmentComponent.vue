@@ -24,7 +24,7 @@
 
             <b-form-group id="input-group-7" label="Price per night" label-for="input-7">
                 <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" 
-                step="0.0001" placeholder="Entert price per night"/>
+                step="0.0001" placeholder="Entert price per night"/>s
             </b-form-group>
 
             <b-form-group id="input-group-8" label="Check in time" label-for="input-8">
@@ -53,8 +53,16 @@
             </b-form-group>
 
             <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
-                <input id="input-group-12" type="file" @change="chooseImages" multiple
+                <div v-for="source in imageSources" :key="source">
+                    <img  
+                        :src="source"  fluid alt="source"  style="width : 100px;height : 100px"/>
+                </div>
+                
+
+                
+                <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
+
             </b-form-group>
 
             <b-form-group id="submitBtn">
@@ -65,6 +73,8 @@
 
         </b-form>
         <b-button type="warning" @click="deleteApartment($event)">Delete apartment</b-button>
+
+
     </div>
 </template>
 
@@ -74,6 +84,7 @@ import LocationComponent from "../components/LocationComponent"
 import ListAmenitiesComponent from "../components/ListAmenitiesComponent"
 import {FunctionalCalendar} from 'vue-functional-calendar';
 import Axios from 'axios';
+
 
 
 export default {
@@ -120,6 +131,7 @@ export default {
             },
             checkInTime : '14:00:00',
             checkOutTime : '10:00:00',
+            imageSources : []
         }
         
     },
@@ -304,7 +316,16 @@ export default {
         }
         this.getApartmentDates();
         this.getAmaneties();
+
+        this.imageSources = this.apartment.imageSource;
+        console.log(this.imageSources);
        
+    },
+    computed : {
+        assetsPath : function(){
+            
+            return "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg";
+        }
     }
 
 

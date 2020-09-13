@@ -14,7 +14,7 @@
         <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showNewApartment"  v-on:input="closeComponent()"/>
 
     
-           
+        
         
     </div>
 </template>
@@ -82,7 +82,7 @@ export default {
                 apartmentStatus : false,
                
                 reservations : [],
-                imageSource : []
+                imageSource : [ "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "../../data/images/nathan-fertig-FBXuXp57eM0-unsplash.jpg"]
             }
 
 

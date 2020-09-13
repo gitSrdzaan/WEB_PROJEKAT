@@ -133,8 +133,32 @@ public class ApartmentDAO {
 		
 		
 		apartment.setApartmentStatus(false);//inicijalno stanje apartmana je neaktivno
+		uploadPictures(apartment);
+		
+		
 		this.apartments.put(apartment.getId(), apartment);
 	}
+	
+	/**
+	 * Metoda za ucitavanje slika 
+	 * */
+	private void uploadPictures(Apartment apartment) {
+		// TODO Auto-generated method stub
+		ArrayList<String> imageSources = new ArrayList<String>();
+		
+		for(String imageName : apartment.getImageSource()) {
+			imageName = "../../data/images/" + imageName;
+			System.out.println(imageName);
+			imageSources.add(imageName);
+		}
+		
+		apartment.setImageSource(imageSources);
+		
+		
+		
+		
+	}
+
 	/**
 	 * Metoda za dobavljanje svih ucitanih apartmana mape
 	 * */
@@ -219,6 +243,7 @@ public class ApartmentDAO {
 		// TODO Auto-generated method stub
 		Apartment apartment = this.find(id);
 		apartment = modifiedApartment;
+		uploadPictures(apartment);
 		this.apartments.put(id, apartment);
 		
 		
@@ -274,5 +299,18 @@ public class ApartmentDAO {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Metoda za izcitavanje slika odredjenog apartmana*/
+	public ArrayList<String> uploadApartmentImages(Long id) {
+		// TODO Auto-generated method stub
+		
+		Apartment apartment = this.find(id);
+		if(apartment != null) {
+			return (ArrayList<String>) apartment.getImageSource();
+		}
+		
+		return null;
 	}
 }
