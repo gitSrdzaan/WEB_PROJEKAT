@@ -44,7 +44,7 @@
                         
                     </b-list-group>
                 </div>
-                <ListAmenitiesComponent id="input-10"/>
+               
             </b-form-group>
 
             <b-form-group id="input-group-11" label="Apartment status" label-for="input-11">
@@ -81,7 +81,7 @@
 <script>
 
 import LocationComponent from "../components/LocationComponent"
-import ListAmenitiesComponent from "../components/ListAmenitiesComponent"
+
 import {FunctionalCalendar} from 'vue-functional-calendar';
 import Axios from 'axios';
 
@@ -90,7 +90,7 @@ import Axios from 'axios';
 export default {
     components:{
         LocationComponent,
-        ListAmenitiesComponent,
+        
         FunctionalCalendar
     },
     props : {

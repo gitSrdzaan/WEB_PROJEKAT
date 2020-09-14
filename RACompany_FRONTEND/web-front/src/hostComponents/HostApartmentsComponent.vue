@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
-            <b-list-group-item button   @click="selectApartment(apartment)" >{{apartment.id}}
+            <b-list-group-item li   @click="selectApartment(apartment)" >{{apartment.id}}
                  <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showUpdApartment" v-on:remove="deleteApartment(selectedApartment.id)" 
                  v-on:input="closeComponent()"  v-bind:amenities="amenities"/>
             </b-list-group-item>
@@ -53,7 +53,7 @@ export default {
         selectApartment(apartment)  {
             
             this.selectedApartment = apartment;
-            this.getAllAmenities();
+            //this.getAllAmenities();
             this.showNewApartment = false;
             this.showUpdApartment = true;
            
@@ -88,7 +88,7 @@ export default {
 
 
             this.selectedApartment = emptyApartment;
-            this.getAllAmenities();
+           // this.getAllAmenities();
             this.selectedApartment.apartmentHost = this.host;
             
             
