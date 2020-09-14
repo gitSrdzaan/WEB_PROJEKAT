@@ -3,7 +3,7 @@
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
             <b-list-group-item button   @click="selectApartment(apartment)" >{{apartment.id}}
                  <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showUpdApartment" v-on:remove="deleteApartment(selectedApartment.id)" 
-                 v-on:input="closeComponent()" />
+                 v-on:input="closeComponent()"  v-bind:amenities="amenities"/>
             </b-list-group-item>
            
 
@@ -11,7 +11,8 @@
         <div>
             <b-button type="primary" @click="createNewApartment" >Create new apartment</b-button>
         </div>
-        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showNewApartment"  v-on:input="closeComponent()"/>
+        <ApartmentComponent v-bind:apartment="selectedApartment" v-if="showNewApartment"  v-on:input="closeComponent()"
+        v-bind:amenities="amenities"/>
 
     
         
@@ -33,10 +34,9 @@ export default {
         apartments : {
             type : Array
         },
-        host :{
-            type : Object,
-            required : true
-        }
+        host : {
+            type : Object
+        }      
     },
     data(){
         return {
@@ -44,15 +44,16 @@ export default {
                       
             },
             showNewApartment : false,
-            showUpdApartment : false
+            showUpdApartment : false,
+            amenities : []
         }
     },
    
     methods :{
         selectApartment(apartment)  {
-            console.log(apartment);
+            
             this.selectedApartment = apartment;
-            console.log(this.selectedApartment);
+            this.getAllAmenities();
             this.showNewApartment = false;
             this.showUpdApartment = true;
            
@@ -91,13 +92,16 @@ export default {
             this.selectedApartment.apartmentHost = this.host;
             
             
+            
             this.showNewApartment = true;
            
         },
         getAllAmenities : function(){
             Axios
             .get('http://localhost:8080/RACompany/rest/amneities/all')
-            .then(response => (this.selectedApartment.amenities = response.data))
+            .then(response => (this.amenities = response.data))
+            
+           
         },
         deleteApartment(id){
             this.apartments.splice(id-1,1);
@@ -109,6 +113,9 @@ export default {
              
         
         }
+    },
+    created : function(){
+        this.getAllAmenities();
     }
     
 }

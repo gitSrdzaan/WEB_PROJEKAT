@@ -38,7 +38,7 @@
                 <b-button type="primary">Choose amenities</b-button>
                 <div>
                     <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
-                        <input type="checkbox" :id="amenity.id" name="CheckBoxInputName"
+                        <input type="checkbox" :id="amenity.id + '-' + amenity.name" name="CheckBoxInputName"
                          @click="checkBoxClicked(amenity,$event)" />
                         <b-list-group-item label :for="amenity.id">{{amenity.name}}</b-list-group-item>
                         
@@ -96,6 +96,9 @@ export default {
     props : {
          apartment : {
                type : Object
+            },
+            amenities :{
+                type : Array
             }
     },
     data(){
@@ -105,7 +108,7 @@ export default {
                 "FULL",
                 "ROOM"
             ],
-            amenities : [],
+            
             images : [],
             calendarData : {},
             calendarConfigs : {
@@ -298,9 +301,15 @@ export default {
 
         },
         //#endregion kraj podesavanja datuma apartmana
-        getAmaneties(){
-            for(let index in this.apartment.amenities){
-                this.amenities.push(this.apartment.amenities[index]);
+        
+        checkedAmenities(){
+            for(let i in this.amenities){
+                for(let j in this.apartment.amenities){
+                    if(this.amenities[i].id === this.apartment.amenities[j].id){
+                        //ne radi jer nije renderovan html
+                       document.getElementById(this.amenities[i].id+"-"+this.amenities[i].name).checked = true;
+                    }
+                }
             }
         }
 
@@ -315,15 +324,19 @@ export default {
             this.checkOutTime = "10:00:00";
         }
         this.getApartmentDates();
-        this.getAmaneties();
+        
 
         this.imageSources = this.apartment.imageSource;
-        console.log(this.imageSources);
+        
+        //sadrzaj apartmana
+       
+        this.checkedAmenities();
+
        
     },
     computed : {
-        assetsPath : function(){
-            
+        assetsPath : function(source){
+            console.log(source);
             return "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg";
         }
     }
