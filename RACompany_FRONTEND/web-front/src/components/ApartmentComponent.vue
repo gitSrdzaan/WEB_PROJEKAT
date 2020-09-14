@@ -330,7 +330,7 @@ export default {
         
         //sadrzaj apartmana
        
-        this.checkedAmenities();
+        
 
        
     },
@@ -339,6 +339,10 @@ export default {
             console.log(source);
             return "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg";
         }
+    },
+    mounted(){
+        this.checkedAmenities();
+
     }
 
 
