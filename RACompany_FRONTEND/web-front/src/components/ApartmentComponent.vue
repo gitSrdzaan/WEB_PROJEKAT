@@ -14,7 +14,7 @@
                 <b-form-input id="input-4" v-model="apartment.guestNumber" type="number" placeholder="Entert number of guests"/>
             </b-form-group>
             <b-form-group id="input-group-5" label="Location" label-for="input-5">
-                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocaiton" id="input-5"/><!--Two way binding-->
+                <LocationComponent v-bind:apartmentLocation="apartment.apartmentLocation"  id="input-5"/><!--Two way binding-->
             </b-form-group>
 
             <b-form-group id="input-group-6" label="Available dates" label-for="input-6" >
@@ -24,7 +24,7 @@
 
             <b-form-group id="input-group-7" label="Price per night" label-for="input-7">
                 <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" 
-                step="0.0001" placeholder="Entert price per night"/>
+                step="0.0001" placeholder="Entert price per night"/>s
             </b-form-group>
 
             <b-form-group id="input-group-8" label="Check in time" label-for="input-8">
@@ -38,7 +38,7 @@
                 <b-button type="primary">Choose amenities</b-button>
                 <div>
                     <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
-                        <input type="checkbox" :id="amenity.id" name="CheckBoxInputName"
+                        <input type="checkbox" :id="amenity.id + '-' + amenity.name" name="CheckBoxInputName"
                          @click="checkBoxClicked(amenity,$event)" />
                         <b-list-group-item label :for="amenity.id">{{amenity.name}}</b-list-group-item>
                         
@@ -53,8 +53,16 @@
             </b-form-group>
 
             <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
-                <input id="input-group-12" type="file" @change="chooseImages" multiple
+                <div v-for="source in imageSources" :key="source">
+                    <img  
+                        :src="source"  fluid alt="source"  style="width : 100px;height : 100px"/>
+                </div>
+                
+
+                
+                <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
+
             </b-form-group>
 
             <b-form-group id="submitBtn">
@@ -65,6 +73,8 @@
 
         </b-form>
         <b-button type="warning" @click="deleteApartment($event)">Delete apartment</b-button>
+
+
     </div>
 </template>
 
@@ -76,6 +86,7 @@ import {FunctionalCalendar} from 'vue-functional-calendar';
 import Axios from 'axios';
 
 
+
 export default {
     components:{
         LocationComponent,
@@ -85,10 +96,10 @@ export default {
     props : {
          apartment : {
                type : Object
-               
+            },
+            amenities :{
+                type : Array
             }
-
-
     },
     data(){
         return {
@@ -97,7 +108,7 @@ export default {
                 "FULL",
                 "ROOM"
             ],
-            amenities : [],
+            
             images : [],
             calendarData : {},
             calendarConfigs : {
@@ -123,6 +134,7 @@ export default {
             },
             checkInTime : '14:00:00',
             checkOutTime : '10:00:00',
+            imageSources : []
         }
         
     },
@@ -150,9 +162,6 @@ export default {
             }
 
             this.$emit('input');
-
-            
-
         },
         deleteApartment(event){
             event.prevent;
@@ -162,14 +171,6 @@ export default {
             .then(response =>(console.log(response)));
 
              this.$emit('remove');
-
-         
-
-
-            
-
-
-
         },
         
         checkBoxClicked(value,event){
@@ -300,9 +301,15 @@ export default {
 
         },
         //#endregion kraj podesavanja datuma apartmana
-        getAmaneties(){
-            for(let index in this.apartment.amenities){
-                this.amenities.push(this.apartment.amenities[index]);
+        
+        checkedAmenities(){
+            for(let i in this.amenities){
+                for(let j in this.apartment.amenities){
+                    if(this.amenities[i].id === this.apartment.amenities[j].id){
+                        //ne radi jer nije renderovan html
+                       document.getElementById(this.amenities[i].id+"-"+this.amenities[i].name).checked = true;
+                    }
+                }
             }
         }
 
@@ -317,8 +324,21 @@ export default {
             this.checkOutTime = "10:00:00";
         }
         this.getApartmentDates();
-        this.getAmaneties();
+        
+
+        this.imageSources = this.apartment.imageSource;
+        
+        //sadrzaj apartmana
        
+        this.checkedAmenities();
+
+       
+    },
+    computed : {
+        assetsPath : function(source){
+            console.log(source);
+            return "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg";
+        }
     }
 
 

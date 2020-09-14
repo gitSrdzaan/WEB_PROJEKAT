@@ -25,8 +25,6 @@ export default {
     props : {
         apartmentLocation : {
             type : Object
-           
-        
         }
     },
     methods :{

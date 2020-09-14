@@ -1,13 +1,14 @@
 <template>
     <div>
         <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
-            <b-list-group-item button v-b-modal.modal @click="selectApartment(apartment)">{{apartment.id}}</b-list-group-item>
+            <b-list-group-item button  @click="selectApartment(apartment)">{{apartment.id}}
+                 <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showApartment"
+                v-on:remove="deleteApartment(selectedApartment.id)" v-on:input="closeComponent()" />
+            </b-list-group-item>
         </b-list-group>
        
 
-        <b-modal id="modal" scrollable>
-            <ApartmentComponent v-bind:apartment="selectedApartment"/>
-        </b-modal>
+        
 
     </div>
 </template>
@@ -28,13 +29,22 @@ export default {
     },
     data(){
         return{
-            selectedApartment : {}
+            selectedApartment : {},
+            showApartment : false
         }
     },
     methods :{
         selectApartment(apartment){
             this.selectedApartment = apartment;
+            this.showApartment = true;
+        },
+        deletedApartmen(id){
+            this.apartments.splice(id-1,1);
+        },
+        closeComponent(){
+            this.showApartment = false;
         }
+
     }
     
 }
