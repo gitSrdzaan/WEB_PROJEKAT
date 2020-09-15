@@ -53,21 +53,16 @@
             </b-form-group>
 
             <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
-                <div v-for="source in imageSources" :key="source">
+                <div v-for="source in apartment.imageSource" :key="source">
                     <img  
-                        :src="source"  fluid alt="source"  style="width : 100px;height : 100px"/>
+                        :src="getImage(source)"  fluid :alt="source"  style="width : 100px;height : 100px"/>
                 </div>
-                
-
-                
                 <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
-
             </b-form-group>
 
             <b-form-group id="submitBtn">
                 <b-button type="submit"> Submit</b-button>
-                
             </b-form-group>     
 
 
@@ -196,6 +191,7 @@ export default {
             }
 
         },
+        //#region odabir slike i upload slike
         chooseImages(event){          
             let length = event.target.files.length;
             for(let i=0; i < length; i++){
@@ -209,9 +205,10 @@ export default {
             for(let image in this.images) {
                 this.apartment.imageSource.push(this.images[image].name);
             }
-            
-
+           
         },
+        //#endregion
+        //#region funckije za citanje datuma iz kalendara
         dayClicked(value){
             if(this.daysNumber === 0){
                 this.startDate = value;
@@ -250,6 +247,7 @@ export default {
             }
            
         },
+        //#endregion
         //#region podesavanje datuma i vremena ulazska/izlaska apartmana 
         setApartmentDates(){
             for(let i = 0 ; i < this.calendarConfigs.markedDates.length ; i++){
@@ -311,6 +309,10 @@ export default {
                     }
                 }
             }
+        },
+        getImage(source){
+            console.log(source);
+             return require("../data/images/"+source);
         }
 
     },
@@ -333,12 +335,6 @@ export default {
         
 
        
-    },
-    computed : {
-        assetsPath : function(source){
-            console.log(source);
-            return "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg";
-        }
     },
     mounted(){
         this.checkedAmenities();

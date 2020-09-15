@@ -228,7 +228,8 @@ public class ApartmentService {
 	
 	
 	/**
-	 * REST poziv za pronalazenje putanje slika odredjenog apartmana*/
+	 * REST poziv za pronalazenje putanje slika odredjenog apartmana
+	 * */
 	@GET
 	@Path("/images/{id}")
 	public Response getApartmentPictures(@Context HttpServletRequest request, @PathParam("id") Long id) {
