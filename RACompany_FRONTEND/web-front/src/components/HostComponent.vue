@@ -7,7 +7,7 @@
             <UserInfoComponent v-bind:user="user"/>
           </b-tab>
           <b-tab title="Apartments" @click="getAllApartments">
-            <HostApartmentComponents  v-bind:apartments = "apartments" v-bind:host="user"/>
+            <HostApartmentComponents  v-bind:apartments = "apartments" v-bind:host="user" v-on:update="getAllApartments"/>
           </b-tab>
           <b-tab title="Reservations">
             <HostReservationsComponent/>
@@ -41,33 +41,7 @@ export default {
   data(){
     return{
       
-      apartments : [
-                {
-                  id : 3,
-                  type : 'FULL',
-                  roomNumber : '',
-                  guestNumber : '',
-                  apartmentLocation : {
-                    longitude : 25.478,
-                    latitude : 24.486,
-                    adress : {
-                      city : "Novi Sad",
-                      street : "Lasla Gala",
-                      postalCode : "21000",
-                      number : 3
-                    }
-                  },
-                  apartmentResevartionDates : [],
-                  comments : [],
-                  pricePerNight : 0.0,
-                  checkInTime : '',
-                  checkOutTime : '',
-                  apartmentStatus : false,
-                  amenities : [],
-                  reservations : [],
-                  imageSource : []
-            }
-      ]
+      apartments : []
     }
   },
   methods : {

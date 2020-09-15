@@ -108,6 +108,14 @@ public class AmenitiesService {
 		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		apDAO.modifyApartmentsWithAmenity(amenities);
 		
+		try {
+			apDAO.saveApartments();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog apartmana sa novim sadrzajem").build();
+		}
+		
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
@@ -124,6 +132,10 @@ public class AmenitiesService {
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		
+		
+		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
+		apDAO.deleteAmenityFromApartment(dao.findById(id));
+		
 		dao.deleteAmenity(id);
 		
 		try {
@@ -131,11 +143,18 @@ public class AmenitiesService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izbrisanog sadrzaja apartmana").build();
 		}
 		
-		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
-		apDAO.deleteAmenityFromApartment(dao.findById(id));
+		try {
+			apDAO.saveApartments();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izbirsanog sadrzaja apartmana iz apartmana").build();
+		}
+		
+		
 		
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
