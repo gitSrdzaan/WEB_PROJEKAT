@@ -13,7 +13,7 @@
             <ViewAllApartments v-bind:apartments = "apartments"/>
           </b-tab>
           <b-tab title="Apartment amenities" @click="getAllAmenities" >
-            <ViewAllAmenities v-bind:amenities="amenities"/>
+            <ViewAllAmenities v-bind:amenities="amenities" v-on:update="getAllAmenities"/>
           </b-tab>
           <b-tab title="Reservations" @click="getAllReservations">
             <ViewAllResevations v-bind:reservations="reservations" />
