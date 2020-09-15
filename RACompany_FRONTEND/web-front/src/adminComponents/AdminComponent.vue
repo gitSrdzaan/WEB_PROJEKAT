@@ -10,7 +10,7 @@
             <ViewAllUsers v-bind:user="user" v-bind:users = "users"/>                                               
             </b-tab>
           <b-tab title="Apartments" @click="getAllApartments" >
-            <ViewAllApartments v-bind:apartments = "apartments"/>
+            <ViewAllApartments v-bind:apartments="apartments" v-on:update="getAllApartments"/>
           </b-tab>
           <b-tab title="Apartment amenities" @click="getAllAmenities" >
             <ViewAllAmenities v-bind:amenities="amenities" v-on:update="getAllAmenities"/>
@@ -76,6 +76,7 @@ export default {
       axios
       .get('http://localhost:8080/RACompany/rest/apartment/all')
       .then(response => (this.apartments = response.data))
+      this.$forceUpdate();
 
     },
     getAllAmenities : function(){

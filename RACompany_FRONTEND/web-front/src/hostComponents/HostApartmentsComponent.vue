@@ -81,7 +81,7 @@ export default {
                 checkInTime : null,
                 checkOutTime : null,
                 apartmentStatus : false,
-               
+                amenities : [],
                 reservations : [],
                 imageSource : [ "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "../../data/images/nathan-fertig-FBXuXp57eM0-unsplash.jpg"]
             }
@@ -105,11 +105,12 @@ export default {
         },
         deleteApartment(id){
             this.apartments.splice(id-1,1);
+            this.$emit('update');
         },
         closeComponent(){
             this.showNewApartment = false;
             this.showUpdApartment = false;
-           
+            this.$emit('update');
              
         
         }
