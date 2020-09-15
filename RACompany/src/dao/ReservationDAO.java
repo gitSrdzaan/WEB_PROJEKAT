@@ -70,7 +70,7 @@ public class ReservationDAO {
 	public List<Reservation> findAll() {
 		// TODO Auto-generated method stub
 		
-		return (List<Reservation>) this.reservations.values();
+		return new ArrayList<Reservation>(this.reservations.values());
 	}
 
 	public void putReservation(Reservation reservation) {

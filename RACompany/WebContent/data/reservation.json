@@ -37,7 +37,7 @@
 	  "reservations" : [ ],
 	  "imageSource" : [ "deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "nathan-van-egmond-9LMRQdVv7hw-unsplash.jpg" ]
 	},
-	"startDate" : "20200505T05:05:05.001Z",
+	"startDate" : "2020-05-05T00:00:00.001",
 	"nightNumber" : 3,
 	"price" : 700,
 	"message" : "poruke",
