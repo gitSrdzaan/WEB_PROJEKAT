@@ -84,9 +84,9 @@ public class AmenitiesService {
 	}
 	
 	@PUT
-	@Path("/modify")
+	@Path("/modify/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response modifyAmenity(Amenities amenities, @Context HttpServletRequest request) {
+	public Response modifyAmenity(Amenities amenities, @PathParam("id") Long id,@Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
 			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
@@ -94,7 +94,7 @@ public class AmenitiesService {
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		
-		dao.modifyAmenity(amenities);
+		dao.modifyAmenity(amenities,id);
 		
 		
 		try {

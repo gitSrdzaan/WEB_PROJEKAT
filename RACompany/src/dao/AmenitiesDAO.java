@@ -130,7 +130,7 @@ public class AmenitiesDAO {
 
 	public void putAmenities(Amenities amenities) {
 		// TODO Auto-generated method stub
-		List<Amenities> list = (List<Amenities>) this.amnieties.values();
+		List<Amenities> list = new ArrayList<Amenities>(this.findAll());
 		
 		list.sort((a,b) -> Long.compare(b.getId(), a.getId()));
 		
@@ -141,9 +141,12 @@ public class AmenitiesDAO {
 		
 	}
 
-	public void modifyAmenity(Amenities amenities) {
+	public void modifyAmenity(Amenities amenities, Long id) {
 		// TODO Auto-generated method stub
-		this.amnieties.put(amenities.getId(), amenities);
+		Amenities temp = this.findById(id);
+		temp = amenities;
+		
+		this.amnieties.put(id, amenities);
 		
 	}
 

@@ -1,15 +1,16 @@
 <template>
     <div>
          <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
-            <b-list-group-item button @click="showAmenity(amenity)" v-b-modal.modal>{{amenity.id}}</b-list-group-item>
+            <b-list-group-item li @click="showAmenity(amenity)" >{{amenity.id}}
+                 <AmenityComponent v-bind:amenity="selectedAmenity" v-if="selectedAmenity.id === amenity.id && showUpdAmenity"
+                 v-on:remove="deleteAmenity(selectedAmenity.id)" v-on:input="closeComponent()"/>
+            </b-list-group-item>
         </b-list-group>
         <div>
-            <b-button @click="createNewAmenity" v-b-modal.modal>Create new Amenity</b-button>
+            <b-button @click="createNewAmenity" >Create new Amenity</b-button>
         </div>
-
-        <b-modal id="modal">
-            <AmenityComponent v-bind:amenity="selectedAmenity"/>
-        </b-modal>
+        <AmenityComponent v-bind:amenity="selectedAmenity" v-if="showNewAmenity" v-on:input="closeComponent()"/>
+        
 
     </div>
 </template>
@@ -28,13 +29,16 @@ export default {
     },
     data() {
         return {
-            selectedAmenity : {}
+            selectedAmenity : {},
+            showUpdAmenity : false,
+            showNewAmenity : false
             
         }
     },
     methods : {
         showAmenity(amenity){
             this.selectedAmenity = amenity;
+            this.showUpdAmenity = true;
         },
         createNewAmenity(){
             let emptyAmenity = {
@@ -42,6 +46,16 @@ export default {
                 name : ''
             }
             this.selectedAmenity = emptyAmenity;
+            this.showNewAmenity = true;
+        },
+        deleteAmenity(index){
+            this.amenities.splice(index-1,1);
+            this.$emit('update');
+        },
+        closeComponent(){
+            this.showUpdAmenity = false;
+            this.showNewAmenity = false;
+            this.$emit('update');
         }
     }
 }

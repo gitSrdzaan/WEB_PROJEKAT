@@ -259,7 +259,7 @@ public class ApartmentDAO {
 
 	public void modifyApartmentsWithAmenity(Amenities amenities) {
 		// TODO Auto-generated method stub
-		ArrayList<Apartment> list = (ArrayList<Apartment>) this.apartments.values();
+		ArrayList<Apartment> list = new ArrayList<Apartment>(this.findAll());
 		//lista svih apartmana
 		for(Apartment iter : list) {
 			if(iter.getAmenities() != null) {
@@ -282,7 +282,7 @@ public class ApartmentDAO {
 
 	public void deleteAmenityFromApartment(Amenities amenity) {
 		// TODO Auto-generated method stub
-		ArrayList<Apartment> list = (ArrayList<Apartment>) this.apartments.values();
+		ArrayList<Apartment> list = new ArrayList<Apartment>(this.findAll());
 		//lista svih apartmana
 		for(Apartment iter : list) {
 			if(iter.getAmenities() != null) {
