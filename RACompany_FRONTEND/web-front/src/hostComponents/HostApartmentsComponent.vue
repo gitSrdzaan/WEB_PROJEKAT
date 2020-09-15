@@ -1,6 +1,9 @@
 <template>
     <div>
-        <b-list-group v-for="apartment in this.apartments" :key="apartment.id">
+
+        <b-button @click="sortMethod">{{ sortOrder}}</b-button>
+
+        <b-list-group v-for="apartment in filterApartments" :key="apartment.id">
             <b-list-group-item li   @click="selectApartment(apartment)" >{{apartment.id}}
                  <ApartmentComponent v-bind:apartment="selectedApartment" v-if="selectedApartment.id === apartment.id && showUpdApartment" v-on:remove="deleteApartment(selectedApartment.id)" 
                  v-on:input="closeComponent()"  v-bind:amenities="amenities"/>
@@ -45,7 +48,9 @@ export default {
             },
             showNewApartment : false,
             showUpdApartment : false,
-            amenities : []
+            amenities : [],
+            sortOrder : 'Descending order',
+            sort : 'desc'
         }
     },
    
@@ -113,10 +118,38 @@ export default {
             this.$emit('update');
              
         
+        },
+        sortMethod(){
+            if(this.sort === 'asc'){
+                this.sortOrder = "Ascending order";
+                this.sort = "desc";
+            }else{
+                this.sortOrder = 'Descending order';
+                this.sort = 'asc';
+            }
         }
     },
     created : function(){
         this.getAllAmenities();
+    },
+    computed :{
+        filterApartments(){
+            let data = this.apartments;
+            if(this.sort === 'asc'){
+                data = data.sort(function(a,b){
+                    return  a.pricePerNight-b.pricePerNight
+                });
+            
+            }
+            if(this.sort === 'desc'){
+                data = data.sort(function(a,b){
+                    return  b.pricePerNight-a.pricePerNight
+                });
+            }
+
+            return data;
+        
+        }
     }
     
 }
