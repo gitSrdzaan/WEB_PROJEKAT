@@ -133,7 +133,7 @@ public class ApartmentDAO {
 		
 		
 		apartment.setApartmentStatus(false);//inicijalno stanje apartmana je neaktivno
-		uploadPictures(apartment);
+		
 		
 		
 		this.apartments.put(apartment.getId(), apartment);
@@ -243,7 +243,7 @@ public class ApartmentDAO {
 		// TODO Auto-generated method stub
 		Apartment apartment = this.find(id);
 		apartment = modifiedApartment;
-		uploadPictures(apartment);
+		
 		this.apartments.put(id, apartment);
 		
 		
