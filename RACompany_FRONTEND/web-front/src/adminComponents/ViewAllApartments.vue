@@ -1,6 +1,20 @@
 <template>
     <div>
 
+        <div>
+            <b-form>
+                 <b-form-group id="input-group-type" label="Type" label-for="input-type">
+                    <b-form-select id="input-type" v-model="type" :options="types" />
+                </b-form-group>
+                <b-form-group id="input-group-status" label="Status" label-for="input-status">
+                    <b-form-select id="input-status" v-model="status" :options="statuses" />
+                </b-form-group>
+                <b-form-group id="input-group-amenities" label="Amenities" label-for="input-amenities">
+                    <b-form-select id="input-amenities" v-model="amenity" :options="getAmenitiesNames" />
+                </b-form-group>
+            </b-form>
+        </div>
+
 
         <b-button @click="sortMethod">{{ sortOrder}}</b-button>
 
@@ -22,6 +36,7 @@ import Axios from 'axios';
 import ApartmentComponent from "../components/ApartmentComponent"
 
 
+
 export default {
     name : "ViewAllApartments",
     props : {
@@ -39,8 +54,22 @@ export default {
             selectedApartment : {},
             showApartment : false,
             amenities : [],
+           
             sortOrder : 'Descending order',
-            sort : 'desc'
+            sort : 'desc',
+            type : '',
+            types : [
+                "FULL",
+                "ROOM",
+                ""
+            ],
+            status : null,
+            statuses : [
+                "Active",
+                "Not-Active",
+                ""
+            ],
+            amenity : "",
         }
     },
     methods :{
@@ -92,8 +121,45 @@ export default {
                     return  b.pricePerNight-a.pricePerNight
                 });
             }
+            if(this.type != ''){
+                data = data.filter(item =>
+                String(item.type).match(this.type));
+            }
+            if(this.status != ''){
+                let filter = false;
+                if(this.status === "Active"){
+                    filter = true;
+                }
+                data = data.filter(item =>
+                (item.apartmentStatus === filter));
+            }
+            if(this.amenity != ''){
+                data = data.filter(item =>
+                {
+                    for(let iter in item.amenities){
+                        
+                        if(item.amenities[iter].name === this.amenity){
+                           
+                            return item;
+                        }
+                        
+                    }
+                    
+                }
+                )
+            }
 
             return data;
+        },
+        getAmenitiesNames(){
+            let names = [];
+            for(let iter in this.amenities){
+                names.push(this.amenities[iter].name);
+            }
+
+            names.push("");
+
+            return names;
         }
     }
     
