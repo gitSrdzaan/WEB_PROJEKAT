@@ -9,8 +9,8 @@
           <b-tab title="Apartments" @click="getAllApartments">
             <HostApartmentComponents  v-bind:apartments = "apartments" v-bind:host="user" v-on:update="getAllApartments"/>
           </b-tab>
-          <b-tab title="Reservations">
-            <HostReservationsComponent/>
+          <b-tab title="Reservations" @click="getHostReservations">
+            <HostReservationsComponent v-bind:reservations="reservations" v-bind:role="user.userRole"/>
           </b-tab>
         </b-tabs>
       </div>
@@ -41,7 +41,8 @@ export default {
   data(){
     return{
       
-      apartments : []
+      apartments : [],
+      reservations : []
     }
   },
   methods : {
@@ -59,7 +60,13 @@ export default {
          Axios
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(response => (this.user = response.data))
-      .catch(console.log("nema ulogovanog"));
+      .catch(error => (console.log(error.data)));
+    },
+    getHostReservations(){
+      Axios
+      .get('http://localhost:8080/RACompany/rest/reservation/getHost/'+this.user.username)
+      .then(response => (this.reservations = response.data))
+      .catch(response => (console.log(response.data)))
     }
   },
   created(){

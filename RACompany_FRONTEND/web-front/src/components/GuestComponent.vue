@@ -6,8 +6,8 @@
           <b-tab title="Personal info">
             <UserInfoComponent v-bind:user="user"/>
           </b-tab>
-          <b-tab title="Reservations">
-            <p>Yours reservations</p>
+          <b-tab title="Reservations" @click="getGuestReservation">
+            <GuestReservationComponent v-bind:reservations="reservations" v-bind:role="user.userRole"/>
           </b-tab>
         </b-tabs>
       </div>
@@ -16,15 +16,18 @@
 
 <script>
 import UserInfoComponent from "../components/UserInfoComponent"
+import GuestReservationComponent from "../guest/GuestReservationComponent"
 import Axios from 'axios';
 export default {
   name: 'GuestComponent',
   components :{
-    UserInfoComponent
+    UserInfoComponent,
+    GuestReservationComponent
   },
   data(){
     return {
-      user : {}
+      user : {},
+      reservations : []
     }
   },
   methods : {
@@ -34,6 +37,12 @@ export default {
       .then(response => (this.user = response.data))
       .catch(console.log("nema ulogovanog"));
       
+    },
+    getGuestReservation(){
+      Axios
+      .get('http://localhost:8080/RACompany/rest/reservation/getGuest/'+this.user.username)
+      .then(response => (this.reservations = response.data))
+      .catch(error => (console.log(error)));
     }
   },
   created(){
