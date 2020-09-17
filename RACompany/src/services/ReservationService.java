@@ -16,9 +16,11 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import beans.Apartment;
 import beans.Reservation;
 import beans.User;
 import beans.UserRole;
+import dao.ApartmentDAO;
 import dao.ReservationDAO;
 import dao.UserDAO;
 
@@ -109,6 +111,15 @@ public class ReservationService {
 		
 		
 		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
+		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
+		
+		Apartment apartment = apDAO.find(reservation.getReservedAppatment().getId());
+		
+		if(!dao.checkForAvailability(reservation,apartment)) {
+			
+			return Response.status(400).entity("Apartment is taken for that date").build();
+			
+		}
 		
 		dao.putReservation(reservation);
 		
