@@ -215,7 +215,9 @@ export default {
           }
         })
       }
-      // ovde ide date search!
+      if(this.starting_date != ''){
+        console.log(this.starting_date);
+      }
       // for Guest nije ya wifi napravljeno
       if(this.type != ''){
         data = data.filter(item =>

@@ -27,16 +27,38 @@
         </b-row>
         <b-row>
           <b-col></b-col>
-          <b-col>Price per night: {{ apartments.pricePerNight }} </b-col>
           <b-col></b-col>
+          <b-col v-if="endDate != null">
+            First day for your reservation: {{calendarData.dateRange.start}}
+          </b-col>
+          <b-col v-if="endDate != null">
+            Last day for your reservation: {{endDate.date}}
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col></b-col>
+          <b-col>Price per night: {{ apartments.pricePerNight }} </b-col>
+          <b-col>Number of picked days: {{daysNumber}} </b-col>
           <b-col> Total price: {{totalPrice}} </b-col>
+        </b-row>
+        <b-row>
+          <b-col></b-col>
+          <b-col>
+            <b-form-textarea
+              id="textarea"
+              v-model="message"
+              placeholder="Enter your message."
+              rows="3"
+              max-rows="6"
+          ></b-form-textarea>
+          </b-col>
         </b-row>
         <b-row>
           <b-col></b-col>
           <b-col></b-col>
           <b-col></b-col>
           <b-col>
-            <b-button>Submit</b-button>
+            <b-button @click="Submit()">Submit</b-button>
           </b-col>
           <b-col>
             <b-button @click="goBack()">Cancle</b-button>
@@ -48,6 +70,7 @@
 
 <script>
 import {FunctionalCalendar} from 'vue-functional-calendar';
+import axios from 'axios'
 
 export default {
   name: 'ReservationPage',
@@ -56,7 +79,7 @@ export default {
   },
   data() {
     return {
-      apartments: [],
+      apartments: {},
       calendarData : {},
 			calendarConfigs : {
 				sundayStart : false,
@@ -73,12 +96,19 @@ export default {
 			},
 			daysNumber : 0,
 			startDate : null,
-			endDate : null
+			endDate : null,
+      user: {},
+      message: "",
+      status: "CREATED"
     }
   },
   created(){
-    this.apartments = this.$route.params.data
+    this.apartments = this.$route.params.data,
+    axios.get('http://localhost:8080/RACompany/rest/currentUser')
+			.then(res => (this.user = res.data))
+			.catch(console.log("currentUser"))
   },
+  
   computed: {
     totalPrice(){
       if(this.daysNumber > 0){
@@ -88,6 +118,24 @@ export default {
     }
   },
   methods: {
+    Submit(){
+
+      let [day,month,year] = this.calendarData.dateRange.start.split("/");
+      let markDate = new Date(year,month,day);
+      let date = markDate.getTime();
+
+      let inputData = {
+        reservedAppatment: this.apartments,
+        startDate: date,
+        nightNumber: this.daysNumber,
+        price: this.totalPrice,
+        message: this.message,
+        guest: this.user,
+        status: this.status
+      }
+      axios
+        .post('http://localhost:8080/RACompany/rest/reservation/new/'+ this.user.username, inputData)
+    },
     goBack() {
       this.$router.push('/')
     },
