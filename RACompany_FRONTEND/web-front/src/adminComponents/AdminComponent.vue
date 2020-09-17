@@ -16,7 +16,7 @@
             <ViewAllAmenities v-bind:amenities="amenities" v-on:update="getAllAmenities"/>
           </b-tab>
           <b-tab title="Reservations" @click="getAllReservations">
-            <ViewAllResevations v-bind:reservations="reservations" />
+            <ViewAllResevations v-bind:reservations="reservations"  v-bind:role="user.userRole"/>
             </b-tab>
         </b-tabs>
     </div>

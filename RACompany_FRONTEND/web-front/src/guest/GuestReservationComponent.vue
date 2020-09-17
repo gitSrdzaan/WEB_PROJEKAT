@@ -6,14 +6,13 @@
                v-bind:role="role"/>
             </b-list-group-item>
         </b-list-group>
-
     </div>
 </template>
 
 <script>
 import ReservationComponent from "../components/ReservationComponent"
 export default {
-    name : "ViewAllReservations",
+    name : "GuestReservationComponent",
     components :{
         ReservationComponent
     },
@@ -22,7 +21,7 @@ export default {
             type : Array
         },
         role : {
-            type :String
+            type : String
         }
     },
     data(){

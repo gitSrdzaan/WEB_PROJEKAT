@@ -115,7 +115,7 @@ export default {
                 apartmentStatus : false,
                 amenities : [],
                 reservations : [],
-                imageSource : [ "../../data/images/deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "../../data/images/nathan-fertig-FBXuXp57eM0-unsplash.jpg"]
+                imageSource : [ ]
             }
 
 
