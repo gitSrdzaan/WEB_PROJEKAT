@@ -67,17 +67,35 @@ export default {
     computed :{
         filterStatues(){
             let data = this.statuses;
+            //#region status kod domacina
             if(this.reservation.status === "CREATED" && this.role === "HOST"){
                 data =["ACCEPTED","DENIED","CREATED"];
             }
             if(this.reservation.status === "ACCEPTED" && this.role === "HOST" && this.dateCompare){
                 data = ["ACCEPTED", "FINISHED"];
-                console.log(this.dateCompare)
-
+                
             }
-            if(this.reservation.status === "FINISHED" && this.role === "HOST"){
+           
+            //#endregion
+            //#region status kod gosta
+            if((this.reservation.status === "CREATED" || this.reservation.status === "ACCEPTED") && this.role === "GUEST"){
+                data = ["CREATED", "ACCEPTED", "CANCELED"];
+            }
+            //#endregion
+
+            if(this.reservation.status === "FINISHED"){
                 data = ["FINISHED"];
             }
+            if(this.reservation.status === "CANCELED"){
+                data = ["CANCELED"]
+            }
+
+            if(this.reservation.status === "CANCELED" && this.role === "HOST"){
+                alert("Host can't cancel a reservation");
+                data  = this.statuses;
+                
+            }
+
             
 
             return data;
