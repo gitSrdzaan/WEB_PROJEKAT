@@ -122,4 +122,18 @@ public class ReservationDAO {
 		
 		
 	}
+	public ArrayList<Reservation> findByUser(String username) {
+		// TODO Auto-generated method stub
+		ArrayList<Reservation> retList = new ArrayList<Reservation>(this.reservations.values());
+		
+		for(Reservation iter : retList) {
+			if(!iter.getGuest().getUsername().equals(username)) {
+				retList.remove(iter);
+			}
+			
+		}
+		
+		
+		return retList;
+	}
 }
