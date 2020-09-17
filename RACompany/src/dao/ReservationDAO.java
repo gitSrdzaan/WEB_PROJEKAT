@@ -75,7 +75,7 @@ public class ReservationDAO {
 
 	public void putReservation(Reservation reservation) {
 		// TODO Auto-generated method stub
-		List<Reservation> allReservations = (List<Reservation>) this.reservations.values();
+		List<Reservation> allReservations = this.findAll();
 		
 		allReservations.sort((a,b) -> Long.compare(b.getID(), a.getID()));
 		
