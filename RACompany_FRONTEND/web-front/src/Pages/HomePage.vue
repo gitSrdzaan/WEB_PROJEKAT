@@ -34,44 +34,27 @@
 			</b-navbar>
 		</div>
 		<router-view/>
-		<FunctionalCalendar v-model="calendarData" :configs ="calendarConfigs" 
-			@choseDay="dayClicked" @selectedDaysCount="daysCount"/>
+	
 	</div>
 </template>
 
 <script>
 import AuthService from '../service/AuthService'
-import {FunctionalCalendar} from 'vue-functional-calendar';
+
 
 import axios from 'axios'
 
 export default {
 	name: 'HomePage',
 	components : {
-		FunctionalCalendar
+		
 	},
 	data() {
 		return{
 
 			user: '',
 			msg: '',
-			calendarData : {},
-			calendarConfigs : {
-				sundayStart : false,
-				dataFormat : 'dd/mm/yyyy',
-				limits : false,
-				isDatePicker : true,
-				isDateRange : true,
-				isMultipleDatePicker : true,
-				isMultiple : false,
-				withTimePicker : false,
-				isDark : true,
-				//isModal : true
-				
-			},
-			daysNumber : 0,
-			startDate : null,
-			endDate : null
+			
 
 		}
 	},
@@ -99,23 +82,8 @@ export default {
 			}catch (e) {
 				this.msg = e.response.data
 			}
-		},
-		dayClicked(value){
-			if(this.daysNumber === null){
-				this.startDate = value;
-				this.startDate.isDateRangeStart = true;
-			}
-			else{
-				this.endDate = value;
-				this.endDate.isDateRangeEnd = true;
-			}
-			console.log(value);
-
-		},
-		daysCount(value){
-			console.log("number of days "+value);
-			this.daysNumber = value;
 		}
+		
 	}
 }
 </script>

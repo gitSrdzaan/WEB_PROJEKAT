@@ -325,7 +325,7 @@ public class UserDAO {
 	public boolean modifyUser(User modifiedUser, String username) {
 		// TODO Auto-generated method stub
 		User user = this.findByUsername(username);
-		if(user.getUsername() != modifiedUser.getUsername()) {
+		if(!user.getUsername().equals(modifiedUser.getUsername())) {
 			return false;
 		}
 		

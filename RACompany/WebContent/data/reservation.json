@@ -1,0 +1,54 @@
+[{
+
+	"id" : 1 ,
+	"reservedAppatment" : {
+		"id" : 5,
+	  "type" : "FULL",
+	  "roomNumber" : 0,
+	  "guestNumber" : 0,
+	  "apartmentLocation" : {
+	    "longitude" : null,
+	    "latitude" : null,
+	    "adress" : {
+	      "street" : "",
+	      "number" : 0,
+	      "city" : "",
+	      "postalCode" : 0
+	    }
+	  },
+	  "apartmentHost" : {
+	    "username" : "narco",
+	    "password" : "traficante",
+	    "firstname" : "Miguel",
+	    "lastname" : "Felix",
+	    "sex" : "Male",
+	    "userRole" : "HOST"
+	  },
+	  "apartmentResevartionDates" : [ ],
+	  "comments" : [ ],
+	  "pricePerNight" : 0.0,
+	  "checkInTime" : 1580562000000,
+	  "checkOutTime" : 1580547600000,
+	  "apartmentStatus" : false,
+	  "amenities" : [ {
+	    "id" : 1,
+	    "name" : "WiFi"
+	  } ],
+	  "reservations" : [ ],
+	  "imageSource" : [ "deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "nathan-van-egmond-9LMRQdVv7hw-unsplash.jpg" ]
+	},
+	"startDate" : "2020-05-05T00:00:00.001",
+	"nightNumber" : 3,
+	"price" : 700,
+	"message" : "poruke",
+	"guest" : {
+		"username" : "dea",
+		"password" : "police",
+		"firstname" : "Chichi",
+		"lastname" : "Camarena",
+		"sex" : "Male",
+		"userRole" : "GUEST"
+	},
+	"status" : "CREATED"
+	
+}]

@@ -16,6 +16,7 @@
 
 <script>
 import UserInfoComponent from "../components/UserInfoComponent"
+import Axios from 'axios';
 export default {
   name: 'GuestComponent',
   components :{
@@ -25,6 +26,18 @@ export default {
     return {
       user : {}
     }
+  },
+  methods : {
+    getCurrUser(){
+       Axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(response => (this.user = response.data))
+      .catch(console.log("nema ulogovanog"));
+      
+    }
+  },
+  created(){
+    this.getCurrUser();
   }
   
 }

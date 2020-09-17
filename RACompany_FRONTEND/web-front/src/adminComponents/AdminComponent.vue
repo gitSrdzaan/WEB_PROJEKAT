@@ -3,17 +3,17 @@
       <h1>Admin Component</h1>
       <div id="tabs">
         <b-tabs content-class="mt-3">
-          <b-tab title="Personal Info" >
+          <b-tab title="Personal Info">
             <UserInfoComponent v-bind:user="user"/>
             </b-tab>
           <b-tab title="Users" @click="getAllUsers" >
             <ViewAllUsers v-bind:user="user" v-bind:users = "users"/>                                               
             </b-tab>
           <b-tab title="Apartments" @click="getAllApartments" >
-            <ViewAllApartments v-bind:apartments = "apartments"/>
+            <ViewAllApartments v-bind:apartments="apartments" v-on:update="getAllApartments"/>
           </b-tab>
           <b-tab title="Apartment amenities" @click="getAllAmenities" >
-            <ViewAllAmenities v-bind:amenities="amenities"/>
+            <ViewAllAmenities v-bind:amenities="amenities" v-on:update="getAllAmenities"/>
           </b-tab>
           <b-tab title="Reservations" @click="getAllReservations">
             <ViewAllResevations v-bind:reservations="reservations" />
@@ -45,7 +45,7 @@ export default {
   data(){
     return{
       user : {
-        
+         
       },
       users : [],
       apartments : [],
@@ -61,7 +61,7 @@ export default {
       .get('http://localhost:8080/RACompany/rest/currentUser')
       .then(response => (this.user = response.data))
       .catch(console.log("nema ulogovanog"))
-      console.log(this.user)
+     
       
       
     },
@@ -76,6 +76,7 @@ export default {
       axios
       .get('http://localhost:8080/RACompany/rest/apartment/all')
       .then(response => (this.apartments = response.data))
+      this.$forceUpdate();
 
     },
     getAllAmenities : function(){
@@ -87,9 +88,9 @@ export default {
       
     }
   },
-  mounted (){
+  created (){
     this.getCurrUser();
-    console.log(this.user.username)
+    
     
 
   }

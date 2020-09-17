@@ -2,9 +2,23 @@ package beans;
 
 import java.util.Date;
 
-public class Reservations {
+public class Reservation {
 
 	private long ID;
+	
+	private Apartment reservedAppatment;
+	private Date startDate;
+	private Integer nightNumber = 1;
+	private Double price;
+	private String message;
+	private Guest guest;
+	private Status status;
+	
+	public Reservation() {
+		
+	}
+	
+
 	public long getID() {
 		return ID;
 	}
@@ -14,19 +28,6 @@ public class Reservations {
 	public void setID(long iD) {
 		ID = iD;
 	}
-	private Apartment reservedAppatment;
-	private Date startDate;
-	private Integer nightNumber = 1;
-	private Double price;
-	private String message;
-	private Guest guest;
-	private Status status;
-	
-	public Reservations() {
-		
-	}
-	
-	
 
 	public Apartment getReservedAppatment() {
 		return reservedAppatment;

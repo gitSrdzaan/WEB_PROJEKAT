@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -30,6 +29,8 @@ public class LoginService {
 	@Context
 	HttpServletRequest request;
 	
+	public User loggedUser;
+	
 	public LoginService() {
 		
 	}
@@ -41,6 +42,8 @@ public class LoginService {
 			ctx.setAttribute("userDAO", new UserDAO(ctx.getRealPath("/")));
 			
 		}
+		this.loggedUser = null;
+		
 	}
 	
 	@GET
@@ -48,6 +51,7 @@ public class LoginService {
 	public Response helloWOrld(@Context HttpServletRequest request) {
 		/*UserDAO dao = (UserDAO) this.ctx.getAttribute("userDAO");
 		System.out.println(dao.findAll());*/
+		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity("Hello World").build();
 	}
 	
@@ -57,13 +61,19 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User currentUser(@Context HttpServletRequest request) {
 		
-		this.request.getSession(false);
-		System.out.println("currentUser");
-		System.out.println(this.request.toString());
-		System.out.println(this.request.getSession());
-		System.out.println((User)this.request.getSession().getAttribute("user"));
+
+
 		
-		return (User) this.request.getSession().getAttribute("user");
+		//System.out.println("currentUser");
+		/*System.out.println(this.request.toString());
+		System.out.println(this.request.getSession());
+		System.out.println((User)this.request.getSession().getAttribute("user"));*/
+		
+		//System.out.println(this.loggedUser.getFirstname());
+		
+		//return this.loggedUser;
+		
+		return (User) request.getSession().getAttribute("user");
 	}
 	
 	@POST
@@ -77,14 +87,20 @@ public class LoginService {
 			return Response.status(400).
 					entity("invalid username or password").header("Access-Control-Allow-Origin", "*").build();
 		}
-		this.request.getSession(false);
 		
-		this.request.getSession().setAttribute("user", currUser);
+		
+		request.getSession().setAttribute("user", currUser);
 				
-		System.out.println("login");
-		System.out.println(this.request.toString());
+		//System.out.println("login");
+		/*System.out.println(this.request.toString());
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));
+		*/
+
+		//this.loggedUser = currUser;
+
+		//System.out.println(this.loggedUser.getFirstname());
+		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
 		
 		

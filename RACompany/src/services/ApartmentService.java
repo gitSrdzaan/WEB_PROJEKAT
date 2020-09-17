@@ -225,4 +225,21 @@ public class ApartmentService {
 		
 		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
+	
+	
+	/**
+	 * REST poziv za pronalazenje putanje slika odredjenog apartmana
+	 * */
+	@GET
+	@Path("/images/{id}")
+	public Response getApartmentPictures(@Context HttpServletRequest request, @PathParam("id") Long id) {
+		ApartmentDAO dao = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
+		ArrayList<String> imageSources = dao.uploadApartmentImages(id);
+		
+		if(imageSources == null) {
+			return Response.status(500).entity("Greska pri citanju slika").build();
+		}
+		
+		return Response.status(200).entity(imageSources).build();
+	}
 }
