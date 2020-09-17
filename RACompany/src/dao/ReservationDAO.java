@@ -13,6 +13,8 @@ import java.util.Map;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import beans.Apartment;
+import beans.DateStatus;
 import beans.Reservation;
 
 
@@ -135,5 +137,18 @@ public class ReservationDAO {
 		
 		
 		return retList;
+	}
+	public boolean checkForAvailability(Reservation reservation, Apartment apartment) {
+		// TODO Auto-generated method stub
+		for(DateStatus iter : apartment.getApartmentResevartionDates()) {
+			if(iter.getDate().equals(reservation.getStartDate()) || 
+					iter.getDate().equals((reservation.getStartDate().getTime() + (reservation.getNightNumber() *86400*1000))   )) {
+				return false;
+			}
+		}
+		
+		
+		
+		return true;
 	}
 }
