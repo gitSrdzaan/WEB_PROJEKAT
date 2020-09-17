@@ -16,7 +16,7 @@
 
 
         <b-list-group v-for="temp in filterUsers" :key="temp.username" :id="temp.username">
-            <b-list-group-item button>{{temp.username}}</b-list-group-item>
+            <b-list-group-item li>{{temp.username}}</b-list-group-item>
         </b-list-group>
     </div>
 </template>>

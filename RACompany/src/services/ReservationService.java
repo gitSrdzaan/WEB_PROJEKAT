@@ -25,8 +25,7 @@ import dao.UserDAO;
 @Path("/reservation")
 public class ReservationService {
 
-	@Context
-	public ServletContext ctx;
+	@Context  ServletContext ctx;
 	
 	public ReservationService() {
 		
@@ -81,11 +80,11 @@ public class ReservationService {
 		}
 		
 		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
-		ArrayList<Reservation> allReservations = (ArrayList<Reservation>) dao.findAll();
+		ArrayList<Reservation> allReservations =  (ArrayList<Reservation>) dao.findAll();
 		ArrayList<Reservation> returnList = new ArrayList<Reservation>();
 		
 		for(Reservation iter : allReservations) {
-			if(iter.getReservedAppatment().getApartmentHost().getUsername() == host.getUsername()) {
+			if(iter.getReservedAppatment().getApartmentHost().getUsername().equals(host.getUsername())) {
 				returnList.add(iter);
 			}
 		}
@@ -149,6 +148,18 @@ public class ReservationService {
 	
 	}
 	
+	@GET
+	@Path("/getGuest/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getGuestReservations(@PathParam("username") String username, @Context HttpServletRequest request) {
+		
+		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
+		ArrayList<Reservation> retList = dao.findByUser(username);
+		
+		return Response.status(200).entity(retList).build();
+		
+		
+	}
 	
 	
 	
