@@ -1,36 +1,497 @@
-[
-{
-	"id" : 1,
-	"type" : "FULL",
-	"roomNumber" : 3,
-	"guestNumber" : 4,
-	"apartmentLocation" : {
-		"longitude" : 12.4579,
-		"latitude" : 14.12465,
-		"adress" : {
-			"city" : "Grad",
-			"street" : "Ulica",
-			"number" : 1,
-			"postalCode" : 1100
-		}
-	},
-	"apartmentHost" : {
-		"username" : "narco",
-		"password" : "traficante",
-		"firstname" : "Miguel",
-		"lastname" : "Felix",
-		"sex" : "Male",
-		"userRole" : "HOST"
-	},
-	"apartmentResevartionDates" : [],
-	"comments" : [],
-	"pricePerNight" : 0,
-	"checkInTime" : "2020-05-05T00:00:00.001",
-	"checkOutTime" : "2020-05-05T00:00:00.001",
-	"apartmentStatus" : false,
-	"amenities" : [],
-	"reservations" : [],
-	"imageSource" : []
-	
-	
-}]
+[ {
+  "id" : 1,
+  "type" : "FULL",
+  "roomNumber" : 3,
+  "guestNumber" : 4,
+  "apartmentLocation" : {
+    "longitude" : 12.4579,
+    "latitude" : 14.12465,
+    "adress" : {
+      "street" : "Ulica",
+      "number" : 1,
+      "city" : "Grad",
+      "postalCode" : 1100
+    }
+  },
+  "apartmentHost" : {
+    "username" : "narco",
+    "password" : "traficante",
+    "firstname" : "Miguel",
+    "lastname" : "Felix",
+    "sex" : "Male",
+    "userRole" : "HOST"
+  },
+  "apartmentResevartionDates" : [ ],
+  "comments" : [ ],
+  "pricePerNight" : 0.0,
+  "checkInTime" : 1588636800001,
+  "checkOutTime" : 1588636800001,
+  "apartmentStatus" : false,
+  "amenities" : [ ],
+  "reservations" : [ ],
+  "imageSource" : [ ]
+}, {
+  "id" : 2,
+  "type" : "FULL",
+  "roomNumber" : 12,
+  "guestNumber" : 10,
+  "apartmentLocation" : {
+    "longitude" : 12.45768,
+    "latitude" : 12.789321,
+    "adress" : {
+      "street" : "Lasla Gala",
+      "number" : 12,
+      "city" : "Novi Sad",
+      "postalCode" : 21000
+    }
+  },
+  "apartmentHost" : {
+    "username" : "narco",
+    "password" : "traficante",
+    "firstname" : "Miguel",
+    "lastname" : "Felix",
+    "sex" : "Male",
+    "userRole" : "HOST"
+  },
+  "apartmentResevartionDates" : [ {
+    "date" : 1602972000000,
+    "status" : false
+  }, {
+    "date" : 1603058400000,
+    "status" : false
+  }, {
+    "date" : 1603144800000,
+    "status" : false
+  }, {
+    "date" : 1603231200000,
+    "status" : false
+  }, {
+    "date" : 1603317600000,
+    "status" : false
+  }, {
+    "date" : 1603404000000,
+    "status" : false
+  }, {
+    "date" : 1603490400000,
+    "status" : false
+  }, {
+    "date" : 1605481200000,
+    "status" : false
+  }, {
+    "date" : 1605567600000,
+    "status" : false
+  }, {
+    "date" : 1605654000000,
+    "status" : false
+  }, {
+    "date" : 1605740400000,
+    "status" : false
+  }, {
+    "date" : 1605826800000,
+    "status" : false
+  }, {
+    "date" : 1605913200000,
+    "status" : false
+  }, {
+    "date" : 1605999600000,
+    "status" : false
+  }, {
+    "date" : 1606086000000,
+    "status" : false
+  }, {
+    "date" : 1606172400000,
+    "status" : false
+  }, {
+    "date" : 1606258800000,
+    "status" : false
+  }, {
+    "date" : 1606345200000,
+    "status" : false
+  }, {
+    "date" : 1606431600000,
+    "status" : false
+  }, {
+    "date" : 1606518000000,
+    "status" : false
+  }, {
+    "date" : 1606604400000,
+    "status" : false
+  } ],
+  "comments" : [ ],
+  "pricePerNight" : 700.0,
+  "checkInTime" : 1580562000000,
+  "checkOutTime" : 1580547600000,
+  "apartmentStatus" : false,
+  "amenities" : [ {
+    "id" : 1,
+    "name" : "WiFi"
+  }, {
+    "id" : 2,
+    "name" : "CableTV"
+  }, {
+    "id" : 3,
+    "name" : "Parking"
+  } ],
+  "reservations" : [ ],
+  "imageSource" : [ "deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "emily-wang-Wv65tpVIdDg-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "nathan-van-egmond-9LMRQdVv7hw-unsplash.jpg" ]
+}, {
+  "id" : 3,
+  "type" : "FULL",
+  "roomNumber" : 5,
+  "guestNumber" : 5,
+  "apartmentLocation" : {
+    "longitude" : 56.3327,
+    "latitude" : 43.46,
+    "adress" : {
+      "street" : "Beogradska",
+      "number" : 45,
+      "city" : "Beograd",
+      "postalCode" : 11000
+    }
+  },
+  "apartmentHost" : {
+    "username" : "narco",
+    "password" : "traficante",
+    "firstname" : "Miguel",
+    "lastname" : "Felix",
+    "sex" : "Male",
+    "userRole" : "HOST"
+  },
+  "apartmentResevartionDates" : [ {
+    "date" : 1603490400000,
+    "status" : false
+  }, {
+    "date" : 1603576800000,
+    "status" : false
+  }, {
+    "date" : 1603666800000,
+    "status" : false
+  }, {
+    "date" : 1603753200000,
+    "status" : false
+  }, {
+    "date" : 1603839600000,
+    "status" : false
+  }, {
+    "date" : 1603926000000,
+    "status" : false
+  }, {
+    "date" : 1605481200000,
+    "status" : false
+  }, {
+    "date" : 1605567600000,
+    "status" : false
+  }, {
+    "date" : 1605654000000,
+    "status" : false
+  }, {
+    "date" : 1605740400000,
+    "status" : false
+  }, {
+    "date" : 1605826800000,
+    "status" : false
+  }, {
+    "date" : 1605913200000,
+    "status" : false
+  }, {
+    "date" : 1605999600000,
+    "status" : false
+  }, {
+    "date" : 1606086000000,
+    "status" : false
+  }, {
+    "date" : 1606172400000,
+    "status" : false
+  }, {
+    "date" : 1606258800000,
+    "status" : false
+  }, {
+    "date" : 1606345200000,
+    "status" : false
+  }, {
+    "date" : 1606431600000,
+    "status" : false
+  }, {
+    "date" : 1606518000000,
+    "status" : false
+  }, {
+    "date" : 1606604400000,
+    "status" : false
+  }, {
+    "date" : 1607814000000,
+    "status" : false
+  }, {
+    "date" : 1607900400000,
+    "status" : false
+  }, {
+    "date" : 1607986800000,
+    "status" : false
+  }, {
+    "date" : 1608073200000,
+    "status" : false
+  }, {
+    "date" : 1608159600000,
+    "status" : false
+  }, {
+    "date" : 1608246000000,
+    "status" : false
+  }, {
+    "date" : 1608332400000,
+    "status" : false
+  }, {
+    "date" : 1608418800000,
+    "status" : false
+  }, {
+    "date" : 1608505200000,
+    "status" : false
+  }, {
+    "date" : 1608591600000,
+    "status" : false
+  }, {
+    "date" : 1608678000000,
+    "status" : false
+  }, {
+    "date" : 1608764400000,
+    "status" : false
+  }, {
+    "date" : 1608850800000,
+    "status" : false
+  }, {
+    "date" : 1608937200000,
+    "status" : false
+  } ],
+  "comments" : [ ],
+  "pricePerNight" : 300.0,
+  "checkInTime" : 1580562000000,
+  "checkOutTime" : 1580547600000,
+  "apartmentStatus" : false,
+  "amenities" : [ {
+    "id" : 1,
+    "name" : "WiFi"
+  }, {
+    "id" : 2,
+    "name" : "CableTV"
+  } ],
+  "reservations" : [ ],
+  "imageSource" : [ "deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "emily-wang-Wv65tpVIdDg-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "nathan-van-egmond-9LMRQdVv7hw-unsplash.jpg" ]
+}, {
+  "id" : 4,
+  "type" : "ROOM",
+  "roomNumber" : 5,
+  "guestNumber" : 6,
+  "apartmentLocation" : {
+    "longitude" : 41.1479,
+    "latitude" : 13.1654,
+    "adress" : {
+      "street" : "Temerinska",
+      "number" : 4,
+      "city" : "Temerin",
+      "postalCode" : 40000
+    }
+  },
+  "apartmentHost" : {
+    "username" : "narco",
+    "password" : "traficante",
+    "firstname" : "Miguel",
+    "lastname" : "Felix",
+    "sex" : "Male",
+    "userRole" : "HOST"
+  },
+  "apartmentResevartionDates" : [ ],
+  "comments" : [ ],
+  "pricePerNight" : 5100.0,
+  "checkInTime" : 1580562000000,
+  "checkOutTime" : 1580547600000,
+  "apartmentStatus" : false,
+  "amenities" : [ {
+    "id" : 3,
+    "name" : "Parking"
+  } ],
+  "reservations" : [ ],
+  "imageSource" : [ "jarek-ceborski-jn7uVeCdf6U-unsplash.jpg", "naomi-hebert-MP0bgaS_d1c-unsplash.jpg", "ralph-ravi-kayden-FqqiAvJejto-unsplash.jpg" ]
+}, {
+  "id" : 5,
+  "type" : "ROOM",
+  "roomNumber" : 10,
+  "guestNumber" : 12,
+  "apartmentLocation" : {
+    "longitude" : 56.3262,
+    "latitude" : 56.3334,
+    "adress" : {
+      "street" : "Ulica",
+      "number" : 1,
+      "city" : "Grad",
+      "postalCode" : 11000
+    }
+  },
+  "apartmentHost" : {
+    "username" : "narco",
+    "password" : "traficante",
+    "firstname" : "Miguel",
+    "lastname" : "Felix",
+    "sex" : "Male",
+    "userRole" : "HOST"
+  },
+  "apartmentResevartionDates" : [ {
+    "date" : 1603404000000,
+    "status" : false
+  }, {
+    "date" : 1603490400000,
+    "status" : false
+  }, {
+    "date" : 1603576800000,
+    "status" : false
+  }, {
+    "date" : 1603666800000,
+    "status" : false
+  }, {
+    "date" : 1603753200000,
+    "status" : false
+  }, {
+    "date" : 1603839600000,
+    "status" : false
+  }, {
+    "date" : 1603926000000,
+    "status" : false
+  }, {
+    "date" : 1604962800000,
+    "status" : false
+  }, {
+    "date" : 1605049200000,
+    "status" : false
+  }, {
+    "date" : 1605135600000,
+    "status" : false
+  }, {
+    "date" : 1605222000000,
+    "status" : false
+  }, {
+    "date" : 1605308400000,
+    "status" : false
+  }, {
+    "date" : 1605394800000,
+    "status" : false
+  }, {
+    "date" : 1605481200000,
+    "status" : false
+  }, {
+    "date" : 1605567600000,
+    "status" : false
+  }, {
+    "date" : 1605654000000,
+    "status" : false
+  }, {
+    "date" : 1605740400000,
+    "status" : false
+  }, {
+    "date" : 1605826800000,
+    "status" : false
+  }, {
+    "date" : 1605913200000,
+    "status" : false
+  }, {
+    "date" : 1605999600000,
+    "status" : false
+  }, {
+    "date" : 1606086000000,
+    "status" : false
+  }, {
+    "date" : 1606172400000,
+    "status" : false
+  }, {
+    "date" : 1606258800000,
+    "status" : false
+  }, {
+    "date" : 1606345200000,
+    "status" : false
+  }, {
+    "date" : 1606431600000,
+    "status" : false
+  }, {
+    "date" : 1606518000000,
+    "status" : false
+  }, {
+    "date" : 1606604400000,
+    "status" : false
+  }, {
+    "date" : 1606690800000,
+    "status" : false
+  }, {
+    "date" : 1607295600000,
+    "status" : false
+  }, {
+    "date" : 1607382000000,
+    "status" : false
+  }, {
+    "date" : 1607468400000,
+    "status" : false
+  }, {
+    "date" : 1607554800000,
+    "status" : false
+  }, {
+    "date" : 1607641200000,
+    "status" : false
+  }, {
+    "date" : 1607727600000,
+    "status" : false
+  }, {
+    "date" : 1607814000000,
+    "status" : false
+  }, {
+    "date" : 1607900400000,
+    "status" : false
+  }, {
+    "date" : 1607986800000,
+    "status" : false
+  }, {
+    "date" : 1608073200000,
+    "status" : false
+  }, {
+    "date" : 1608159600000,
+    "status" : false
+  }, {
+    "date" : 1608246000000,
+    "status" : false
+  }, {
+    "date" : 1608332400000,
+    "status" : false
+  }, {
+    "date" : 1608418800000,
+    "status" : false
+  }, {
+    "date" : 1608505200000,
+    "status" : false
+  }, {
+    "date" : 1608591600000,
+    "status" : false
+  }, {
+    "date" : 1608678000000,
+    "status" : false
+  }, {
+    "date" : 1608764400000,
+    "status" : false
+  }, {
+    "date" : 1608850800000,
+    "status" : false
+  }, {
+    "date" : 1608937200000,
+    "status" : false
+  }, {
+    "date" : 1609023600000,
+    "status" : false
+  } ],
+  "comments" : [ ],
+  "pricePerNight" : 10.0,
+  "checkInTime" : 1580551200000,
+  "checkOutTime" : 1580547600000,
+  "apartmentStatus" : false,
+  "amenities" : [ {
+    "id" : 2,
+    "name" : "CableTV"
+  }, {
+    "id" : 1,
+    "name" : "WiFi"
+  } ],
+  "reservations" : [ ],
+  "imageSource" : [ "naomi-hebert-MP0bgaS_d1c-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "patrick-perkins-3wylDrjxH-E-unsplash.jpg", "ralph-ravi-kayden-FqqiAvJejto-unsplash.jpg" ]
+} ]

@@ -54,6 +54,8 @@ export default {
       .then(response => (this.apartments = response.data))
       .catch(error =>(console.log("greska pri dobavljanju apartmana"+error.response)));
 
+      this.$forceUpdate();
+
 
     },
     getCurrUser(){
