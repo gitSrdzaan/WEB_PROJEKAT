@@ -85,6 +85,10 @@ export default {
       .then(response => (this.amenities = response.data))
     },
     getAllReservations : function(){
+      axios
+      .get('http://localhost:8080/RACompany/rest/reservation/getAll')
+      .then(response => (this.reservations = response.data))
+      .catch(error => console.log(error));
       
     }
   },
