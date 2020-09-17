@@ -23,6 +23,29 @@
                 <b-form-select id="input-reservation-status" v-model="reservation.status" :disabled="role === 'ADMIN'" :options="filterStatues"/>
             </b-form-group>
 
+            <div>
+                <b-form-textarea
+                    id="textarea"
+                    v-model="comment"
+                    placeholder="Enter your comment."
+                    rows="3"
+                    max-rows="6"
+                ></b-form-textarea>
+
+                <b-form-group id="input-group-3" label="Grade:" label-for="input-3">
+                    <b-form-select
+                        id="input-3"
+                        v-model="grade"
+                        :options="grades"
+                       
+                    ></b-form-select>
+                </b-form-group>
+
+                <b-button @click="Submit()">
+                    Save Comment
+                </b-button>
+            </div>
+
             <b-button @click="onSubmit" :hidden="role === 'ADMIN'">Submit</b-button>
             
         </b-form>
@@ -52,7 +75,15 @@ export default {
                 "ACCEPTED",
                 "FINISHED"
                 
-            ]
+            ],
+            comment: '',
+            grades: [
+                'BAD',
+                'GOOD',
+                'EXCELLENT'
+            ],
+            grade: '',
+            user: {}
         }
     },
     methods :{
@@ -62,7 +93,22 @@ export default {
             .then(response => (console.log(response)))
             .catch(error => (console.log(error)));
 
-        }
+        },
+        Submit(){
+            let comment = {
+                
+                guest : {},
+                text: this.comment,
+                grade: this.grade
+            }
+
+            Axios.put('http://localhost:8080/RACompany/rest/apartment/addComment/'+ this.user.username + '/' + this.reservation.reservedAppatment.id, comment)
+        },
+    },
+    created(){
+            Axios.get('http://localhost:8080/RACompany/rest/currentUser')
+            .then(res => (this.user = res.data))
+            .catch(console.log("currentUser"))
     },
     computed :{
         filterStatues(){

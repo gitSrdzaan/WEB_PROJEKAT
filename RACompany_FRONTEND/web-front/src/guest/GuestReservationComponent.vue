@@ -5,12 +5,15 @@
                 <ReservationComponent v-bind:reservation="reservation" v-if="selectedReservation.id === reservation.id"
                v-bind:role="role"/>
             </b-list-group-item>
+            
         </b-list-group>
     </div>
 </template>
 
 <script>
 import ReservationComponent from "../components/ReservationComponent"
+import Axios from 'axios'
+
 export default {
     name : "GuestReservationComponent",
     components :{
@@ -38,6 +41,11 @@ export default {
     methods :{
         selectReservation(reservation){
             this.selectedReservation = reservation;
+        },
+        
+        getUser(){
+            Axios.get('http://localhost:8080/RACompany/rest/currentUser')
+			.then(res => (this.user = res.data))
         }
     }
     

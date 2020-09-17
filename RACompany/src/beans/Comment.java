@@ -3,7 +3,7 @@ package beans;
 public class Comment {
 
 	private Guest guest;
-	private Apartment aparment;
+	//private Apartment aparment;
 	private String text;
 	private ApartmentGrade grade;
 	
@@ -18,13 +18,14 @@ public class Comment {
 	public void setGuest(Guest guest) {
 		this.guest = guest;
 	}
-	
+	/*
 	public Apartment getApparment() {
 		return aparment;
 	}
 	public void setAparment(Apartment aparment) {
 		this.aparment = aparment;
 	}
+	*/
 	public String getText() {
 		return text;
 	}

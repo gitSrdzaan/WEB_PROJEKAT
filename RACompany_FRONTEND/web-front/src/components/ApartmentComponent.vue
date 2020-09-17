@@ -60,6 +60,14 @@
                 <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
             </b-form-group>
+            
+            <div v-for="comment in apartment.comment" :key="comment">
+                <div class="mt-2">Comment: {{ comment.text }}</div>
+                <div class="mt-2">Grade: {{ comment.grade }}</div>
+                <b-button @click="SaveComment()">
+                    Allow
+                </b-button>
+            </div>
 
             <b-form-group id="submitBtn">
                 <b-button type="submit"> Submit</b-button>
@@ -166,6 +174,10 @@ export default {
             .then(response =>(console.log(response)));
 
              this.$emit('remove');
+        },
+
+        SaveComment(){
+            Axios.put("http://localhost:8080/RACompany/rest/apartment/commentVisibility/"+ this.apartment.id, this.apartment.comment)
         },
         
         checkBoxClicked(value,event){

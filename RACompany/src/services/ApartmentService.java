@@ -177,12 +177,15 @@ public class ApartmentService {
 		
 		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		Apartment apartment = apDAO.find(id);
+		System.out.println(apartment.getId());
 		
 		comment.setGuest(guest);
-		comment.setAparment(apartment);
+		//comment.setAparment(apartment);
 		apartment.getComments().add(comment);
 		
-		apDAO.putApartment(apartment);
+		apDAO.modifyApartment(apartment, apartment.getId());
+		
+		//apDAO.putApartment(apartment);
 		
 		try {
 			apDAO.saveApartments();
@@ -225,6 +228,7 @@ public class ApartmentService {
 		
 		return Response.ok().header("Access-Control-Allow-Origin", "*").build();
 	}
+	
 	
 	
 	/**
