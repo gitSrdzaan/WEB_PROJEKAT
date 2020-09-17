@@ -30,7 +30,10 @@
             </b-form-group>
 
             <b-form-group id="input-group-4"  label="Your lastname:" label-for="input-4" >
-                <b-form-input  id="input-4"   v-model="this.user.lastname" required  placeholder="Enter lastname" >
+                <b-form-input  id="input-4"  
+                 v-model="this.user.lastname" 
+                required 
+                 placeholder="Enter lastname" >
                </b-form-input>
             </b-form-group>
 
@@ -71,6 +74,10 @@ export default {
                 lastname : '',
                 sex : ''
             },
+            password : '',
+            firstname : '',
+            lastname : '',
+            sex : '',
             sexes: [
             'Male',
             'Female'
@@ -79,14 +86,19 @@ export default {
     },
     methods :{
         submintModifiedUser() {
-            this.newUser = this.user;
+            this.newUser.password = document.getElementById("input-1").value;
+            this.newUser.firstname = document.getElementById("input-3").value;
+            this.newUser.lastname = document.getElementById("input-4").value;
+            this.newUser.sex = document.getElementById("input-5").value;
+
+
+            this.newUser.username = this.user.username;
+            this.newUser.userRole = this.user.userRole;
             console.log(this.newUser);
 
             let path = 'http://localhost:8080/RACompany/rest/users/modify';
-            let putPath = path.concat(this.newUser.username);
-            console.log(putPath);
-            console.log(this.user);
-            console.log(this.newUser)
+            
+            
 
             
 
@@ -94,10 +106,13 @@ export default {
             .put(path,this.newUser)
             .then(response => (response))
             .catch(console.log("modifikacija nije prosla"))
+
+            
         }
     },
-    mounted (){
-        console.log(this.user.username)
+    created (){
+        
+        
     }
 }
 </script>

@@ -7,7 +7,7 @@
             <UserInfoComponent v-bind:user="user"/>
           </b-tab>
           <b-tab title="Apartments" @click="getAllApartments">
-            <HostApartmentComponents  v-bind:apartments = "apartments"/>
+            <HostApartmentComponents  v-bind:apartments = "apartments" v-bind:host="user" v-on:update="getAllApartments"/>
           </b-tab>
           <b-tab title="Reservations">
             <HostReservationsComponent/>
@@ -33,49 +33,37 @@ export default {
     HostApartmentComponents,
     HostReservationsComponent
   },
+  props : {
+    user :{
+      type : Object
+    }
+  },
   data(){
     return{
-      user : {},
-      apartments : [
-                {
-                  id : 1,
-                  type : 'FULL',
-                  roomNumber : '',
-                  guestNumber : '',
-                  apartmentLocation : {
-                    longitude : 25.478,
-                    latitude : 24.486,
-                    adress : {
-                      city : "Novi Sad",
-                      street : "Lasla Gala",
-                      postalCode : "21000",
-                      number : 3
-                    }
-                  },
-                  apartmentResevartionDates : [],
-                  comments : [],
-                  pricePerNight : 0.0,
-                  checkInTime : '',
-                  checkOutTime : '',
-                  apartmentStatus : false,
-                  amenities : [],
-                  reservations : [],
-                  imageSource : []
-            }
-      ]
+      
+      apartments : []
     }
   },
   methods : {
     getAllApartments : function(){
-      let path = 'http://localhost:8080/rest/apartment/hostAll/'
-      let getPath = path.concat(this.user.username)
+      let path = 'http://localhost:8080/RACompany/rest/apartment/hostAll/'+this.user.username;
+      
       Axios
-      .get(getPath)
+      .get(path)
       .then(response => (this.apartments = response.data))
-      .catch(console.log("greska pri dobavljanju apartmana"))
+      .catch(error =>(console.log("greska pri dobavljanju apartmana"+error.response)));
 
 
+    },
+    getCurrUser(){
+         Axios
+      .get('http://localhost:8080/RACompany/rest/currentUser')
+      .then(response => (this.user = response.data))
+      .catch(console.log("nema ulogovanog"));
     }
+  },
+  created(){
+    this.getCurrUser();
   }
   
 }

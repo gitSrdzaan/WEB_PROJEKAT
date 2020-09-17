@@ -1,0 +1,11 @@
+[
+	{
+		"username" : "narco",
+		"password" : "traficante",
+		"firstname" : "Miguel",
+		"lastname" : "Felix",
+		"sex" : "Male",
+		"userRole" : "HOST"
+		
+	}
+]

@@ -49,9 +49,9 @@ public class AmenitiesService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllAmenities( @Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
-		if(admin.getUserRole() != UserRole.ADMIN) {
+		/*if(admin.getUserRole() != UserRole.ADMIN) {
 			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
-		}
+		}*/
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").entity(dao.findAll()).build();
@@ -84,9 +84,9 @@ public class AmenitiesService {
 	}
 	
 	@PUT
-	@Path("/modify")
+	@Path("/modify/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response modifyAmenity(Amenities amenities, @Context HttpServletRequest request) {
+	public Response modifyAmenity(Amenities amenities, @PathParam("id") Long id,@Context HttpServletRequest request) {
 		User admin = (User) request.getSession().getAttribute("user");
 		if(admin.getUserRole() != UserRole.ADMIN) {
 			return Response.status(403).header("Access-Control-Allow-Origin", "*").entity("Nije dozvoljeno za druge osim za admine").build();
@@ -94,7 +94,7 @@ public class AmenitiesService {
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		
-		dao.modifyAmenity(amenities);
+		dao.modifyAmenity(amenities,id);
 		
 		
 		try {
@@ -107,6 +107,14 @@ public class AmenitiesService {
 		
 		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
 		apDAO.modifyApartmentsWithAmenity(amenities);
+		
+		try {
+			apDAO.saveApartments();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog apartmana sa novim sadrzajem").build();
+		}
 		
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
@@ -124,6 +132,10 @@ public class AmenitiesService {
 		
 		AmenitiesDAO dao = (AmenitiesDAO) this.ctx.getAttribute("amenitiesDAO");
 		
+		
+		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
+		apDAO.deleteAmenityFromApartment(dao.findById(id));
+		
 		dao.deleteAmenity(id);
 		
 		try {
@@ -131,11 +143,18 @@ public class AmenitiesService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izmjenjenog sadrzaja apartmana").build();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izbrisanog sadrzaja apartmana").build();
 		}
 		
-		ApartmentDAO apDAO = (ApartmentDAO) this.ctx.getAttribute("apartmentDAO");
-		apDAO.deleteAmenityFromApartment(dao.findById(id));
+		try {
+			apDAO.saveApartments();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(500).header("Access-Control-Allow-Origin", "*").entity("Greska u cuvanju izbirsanog sadrzaja apartmana iz apartmana").build();
+		}
+		
+		
 		
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();

@@ -22,6 +22,8 @@ public class Apartment {
 	private Date checkInTime;
 	private Date checkOutTime;
 	
+	
+	
 	private boolean apartmentStatus;
 	
 	private List<Amenities> amenities;

@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -65,7 +64,7 @@ public class LoginService {
 
 
 		
-		System.out.println("currentUser");
+		//System.out.println("currentUser");
 		/*System.out.println(this.request.toString());
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));*/
@@ -74,7 +73,7 @@ public class LoginService {
 		
 		//return this.loggedUser;
 		
-		return (User) this.request.getSession().getAttribute("user");
+		return (User) request.getSession().getAttribute("user");
 	}
 	
 	@POST
@@ -90,14 +89,16 @@ public class LoginService {
 		}
 		
 		
-		this.request.getSession().setAttribute("user", currUser);
+		request.getSession().setAttribute("user", currUser);
 				
-		System.out.println("login");
+		//System.out.println("login");
 		/*System.out.println(this.request.toString());
 		System.out.println(this.request.getSession());
 		System.out.println((User)this.request.getSession().getAttribute("user"));
 		*/
-		this.loggedUser = currUser;
+
+		//this.loggedUser = currUser;
+
 		//System.out.println(this.loggedUser.getFirstname());
 		
 		return Response.status(200).header("Access-Control-Allow-Origin", "*").build();
