@@ -19,34 +19,23 @@
               type="number"></b-form-input>
             </b-form-group>
           </b-col>
-          <b-col>
-            <b-form-group label-cols="4" label-cols-lg="4" label="Starting date" label-for="datepicker">
-              <b-form-datepicker id="datepicker" 
-              class="mb-2" 
-              v-model="starting_date"></b-form-datepicker>
-            </b-form-group>
-          </b-col>
         </b-row>
 
         <b-row>
           <b-col>
-            <b-form-group label-cols="4" label-cols-lg="4" label="Ending date" label-for="end-datepicker">
-              <b-form-datepicker id="end-datepicker" 
-              class="mb-2"></b-form-datepicker>
-            </b-form-group>
-          </b-col>
-          <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Min cost" label-for="min-cost">
               <b-form-input id="min-cost" 
-              placeholder="NE RADI"
-              type="number"></b-form-input>
+              placeholder="input min cost peer night"
+              type="number"
+              v-model="min_cost"></b-form-input>
             </b-form-group>
           </b-col>
           <b-col>
             <b-form-group label-cols="4" label-cols-lg="6" label="Max cost" label-for="max-cost">
               <b-form-input id="max-cost" 
-              placeholder="NE RADI"
-              type="number"></b-form-input>
+              placeholder="input max cost peer night"
+              type="number"
+              v-model="max_cost"></b-form-input>
             </b-form-group>
           </b-col>
         </b-row>
@@ -170,7 +159,8 @@ export default {
         'false',
         ''
       ],
-      starting_date: '',
+      min_cost: '',
+      max_cost: ''
     }
   },
   created: function(){
@@ -195,6 +185,7 @@ export default {
   },
   computed: {
     filteredApartment() {
+
       let data = this.info
       if(this.guestNumber != ''){
         data = data.filter(item =>
@@ -208,15 +199,22 @@ export default {
         data = data.filter(item =>
         parseInt(item.roomNumber) <= parseInt(this.maxRoomNumber))
       }
+      if(this.min_cost != ''){
+        data = data.filter(item =>{
+          return item.pricePerNight >= this.min_cost
+        })
+      }
+      if(this.max_cost != ''){
+        data = data.filter(item => {
+          return item.pricePerNight <= this.max_cost
+        })
+      }
       if(this.location != ''){
         data = data.filter(item => {
           if(item.apartmentLocation.adress){
         return item.apartmentLocation.adress.city.toLowerCase().includes(this.location.toLowerCase())
           }
         })
-      }
-      if(this.starting_date != ''){
-        console.log(this.starting_date);
       }
       // for Guest nije ya wifi napravljeno
       if(this.type != ''){
