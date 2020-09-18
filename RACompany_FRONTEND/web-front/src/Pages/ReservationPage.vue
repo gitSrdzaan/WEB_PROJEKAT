@@ -45,6 +45,21 @@
           <b-col> Total price: {{totalPrice}} </b-col>
         </b-row>
         <b-row>
+
+        </b-row>
+        <b-col>Comment: </b-col>
+          <b-col v-for="comment in apartments.comments" :key="comment.guest.username + comment.text" :hidden="!comment.visible">
+            <b-row>
+              <b-col>
+             <b-textarea :value="comment.text" disabled></b-textarea>
+               </b-col>
+              <b-col>
+             <b-textarea :value="comment.grade" disabled></b-textarea>
+          </b-col>
+            </b-row>
+            
+          </b-col>
+        <b-row>
           <b-col></b-col>
           <b-col>
             <b-form-textarea
