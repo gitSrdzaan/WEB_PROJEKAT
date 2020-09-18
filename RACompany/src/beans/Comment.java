@@ -50,13 +50,14 @@ public class Comment {
 	 * @param beans.Comment comment*/
 	public boolean isEqual(Comment comment) {
 		// TODO Auto-generated method stub
-		if(this.getGuest() != comment.getGuest()) {
+		if(this.getGuest().getUsername().compareTo(comment.getGuest().getUsername()) != 0) {
+			
 			return false;
 		}
 		if(this.getGrade() != comment.getGrade()) {
 			return false;
 		}
-		if(this.getText() != comment.getText()) {
+		if(!this.getText().equals(comment.getText())) {
 			return false;
 		}
 		

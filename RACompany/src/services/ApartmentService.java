@@ -200,6 +200,7 @@ public class ApartmentService {
 	
 	@PUT
 	@Path("/commentVisibility/{apartmentId}")
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response modifyApartmentComment(@PathParam("apartmentId") Long apartmentId,
 			@Context HttpServletRequest request, Comment comment) {
 		User user = (User) request.getSession().getAttribute("user");
@@ -213,7 +214,8 @@ public class ApartmentService {
 		
 		for(Comment iter : apartment.getComments()) {
 			if(iter.isEqual(comment)) {
-				iter.setVisible(!iter.isVisible());//postavljanje vidljivosti na suprotnu od prethodne
+				boolean temp = iter.isVisible();
+				iter.setVisible(!temp);//postavljanje vidljivosti na suprotnu od prethodne
 			}
 		}
 		

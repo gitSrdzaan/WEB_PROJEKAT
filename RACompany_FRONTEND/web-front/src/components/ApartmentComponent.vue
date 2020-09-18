@@ -24,7 +24,7 @@
 
             <b-form-group id="input-group-7" label="Price per night" label-for="input-7">
                 <b-form-input id="input-7" v-model="apartment.pricePerNight" type="number" 
-                step="0.0001" placeholder="Entert price per night"/>s
+                step="0.0001" placeholder="Entert price per night"/>
             </b-form-group>
 
             <b-form-group id="input-group-8" label="Check in time" label-for="input-8">
@@ -35,7 +35,6 @@
             </b-form-group>
 
             <b-form-group id="input-group-10" label="Apartment amenities" label-for="input-10">
-                <b-button type="primary">Choose amenities</b-button>
                 <div>
                     <b-list-group v-for="amenity in this.amenities" :key="amenity.id">
                         <input type="checkbox" :id="amenity.id + '-' + amenity.name" name="CheckBoxInputName"
@@ -53,18 +52,19 @@
             </b-form-group>
 
             <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
-                <div v-for="source in apartment.imageSource" :key="source">
+                <span v-for="source in apartment.imageSource" :key="source">
                     <img  
                         :src="getImage(source)"  fluid :alt="source"  style="width : 100px;height : 100px"/>
-                </div>
+                </span>
                 <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
             </b-form-group>
             
-            <div v-for="comment in apartment.comment" :key="comment">
+            <div v-for="comment in apartment.comments" :key="comment">
                 <div class="mt-2">Comment: {{ comment.text }}</div>
                 <div class="mt-2">Grade: {{ comment.grade }}</div>
-                <b-button @click="SaveComment()">
+                <div class="mt-2">Visibility: {{comment.visible}}</div>
+                <b-button @click="SaveComment(comment)">
                     Allow
                 </b-button>
             </div>
@@ -137,7 +137,8 @@ export default {
             },
             checkInTime : '14:00:00',
             checkOutTime : '10:00:00',
-            imageSources : []
+            imageSources : [],
+            
         }
         
     },
@@ -154,14 +155,14 @@ export default {
             if(this.apartment.id != ""){
                 Axios
                 .put('http://localhost:8080/RACompany/rest/apartment/modify/'+this.apartment.id, this.apartment)
-                .then(response => (console.log(response)));
+                .then(response => (alert("Successfull change of apartment " + response.statusText)));
 
             }
             else{
                 
                 Axios
                 .post('http://localhost:8080/RACompany/rest/apartment/new', this.apartment)
-                .then(response => (console.log(response)));
+                .then(response => (alert("Successfull creation of apartment " + response.statusText)));
             }
 
             this.$emit('input');
@@ -171,13 +172,18 @@ export default {
 
             Axios
             .delete("http://localhost:8080/RACompany/rest/apartment/delete/"+this.apartment.id)
-            .then(response =>(console.log(response)));
+            .then(response =>(alert("Successfull delete of apartment " + response.statusText)));
 
              this.$emit('remove');
         },
 
-        SaveComment(){
-            Axios.put("http://localhost:8080/RACompany/rest/apartment/commentVisibility/"+ this.apartment.id, this.apartment.comment)
+        SaveComment(comment){
+            let temp = comment.visible;
+            comment.visible = !temp;
+            
+            Axios.put("http://localhost:8080/RACompany/rest/apartment/commentVisibility/"+ this.apartment.id, comment)
+            .then(response => (alert("Successfull change of comment visibility " + response.statusText)
+            ));
         },
         
         checkBoxClicked(value,event){
@@ -323,7 +329,7 @@ export default {
             }
         },
         getImage(source){
-            console.log(source);
+           
              return require("../data/images/"+source);
         }
 
