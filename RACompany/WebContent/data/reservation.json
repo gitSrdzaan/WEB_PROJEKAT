@@ -202,4 +202,175 @@
   },
   "status" : "FINISHED",
   "id" : 4
+}, {
+  "reservedAppatment" : {
+    "id" : 2,
+    "type" : "FULL",
+    "roomNumber" : 12,
+    "guestNumber" : 10,
+    "apartmentLocation" : {
+      "longitude" : 12.45768,
+      "latitude" : 12.789321,
+      "adress" : {
+        "street" : "Lasla Gala",
+        "number" : 12,
+        "city" : "Novi Sad",
+        "postalCode" : 21000
+      }
+    },
+    "apartmentHost" : {
+      "username" : "narco",
+      "password" : "traficante",
+      "firstname" : "Miguel",
+      "lastname" : "Felix",
+      "sex" : "Male",
+      "userRole" : "HOST"
+    },
+    "apartmentResevartionDates" : [ {
+      "date" : 1602972000000,
+      "status" : false
+    }, {
+      "date" : 1603058400000,
+      "status" : false
+    }, {
+      "date" : 1603144800000,
+      "status" : false
+    }, {
+      "date" : 1603231200000,
+      "status" : false
+    }, {
+      "date" : 1603317600000,
+      "status" : false
+    }, {
+      "date" : 1603404000000,
+      "status" : false
+    }, {
+      "date" : 1603490400000,
+      "status" : false
+    }, {
+      "date" : 1605481200000,
+      "status" : false
+    }, {
+      "date" : 1605567600000,
+      "status" : false
+    }, {
+      "date" : 1605654000000,
+      "status" : false
+    }, {
+      "date" : 1605740400000,
+      "status" : false
+    }, {
+      "date" : 1605826800000,
+      "status" : false
+    }, {
+      "date" : 1605913200000,
+      "status" : false
+    }, {
+      "date" : 1605999600000,
+      "status" : false
+    }, {
+      "date" : 1606086000000,
+      "status" : false
+    }, {
+      "date" : 1606172400000,
+      "status" : false
+    }, {
+      "date" : 1606258800000,
+      "status" : false
+    }, {
+      "date" : 1606345200000,
+      "status" : false
+    }, {
+      "date" : 1606431600000,
+      "status" : false
+    }, {
+      "date" : 1606518000000,
+      "status" : false
+    }, {
+      "date" : 1606604400000,
+      "status" : false
+    } ],
+    "comments" : [ ],
+    "pricePerNight" : 700.0,
+    "checkInTime" : 1580562000000,
+    "checkOutTime" : 1580547600000,
+    "apartmentStatus" : false,
+    "amenities" : [ {
+      "id" : 1,
+      "name" : "WiFi"
+    }, {
+      "id" : 2,
+      "name" : "CableTV"
+    }, {
+      "id" : 3,
+      "name" : "Parking"
+    } ],
+    "reservations" : [ ],
+    "imageSource" : [ "deborah-cortelazzi-gREquCUXQLI-unsplash.jpg", "emily-wang-Wv65tpVIdDg-unsplash.jpg", "nathan-fertig-FBXuXp57eM0-unsplash.jpg", "nathan-van-egmond-9LMRQdVv7hw-unsplash.jpg" ]
+  },
+  "startDate" : 1602972000000,
+  "nightNumber" : 7,
+  "price" : 4900.0,
+  "message" : "qeqweqw",
+  "guest" : {
+    "username" : "dea",
+    "password" : "police",
+    "firstname" : "Chichi",
+    "lastname" : "Camarena",
+    "sex" : "Male",
+    "userRole" : "GUEST"
+  },
+  "status" : "CREATED",
+  "id" : 5
+}, {
+  "reservedAppatment" : {
+    "id" : 4,
+    "type" : "ROOM",
+    "roomNumber" : 5,
+    "guestNumber" : 6,
+    "apartmentLocation" : {
+      "longitude" : 41.1479,
+      "latitude" : 13.1654,
+      "adress" : {
+        "street" : "Temerinska",
+        "number" : 4,
+        "city" : "Temerin",
+        "postalCode" : 40000
+      }
+    },
+    "apartmentHost" : {
+      "username" : "narco",
+      "password" : "traficante",
+      "firstname" : "Miguel",
+      "lastname" : "Felix",
+      "sex" : "Male",
+      "userRole" : "HOST"
+    },
+    "apartmentResevartionDates" : [ ],
+    "comments" : [ ],
+    "pricePerNight" : 5100.0,
+    "checkInTime" : 1580562000000,
+    "checkOutTime" : 1580547600000,
+    "apartmentStatus" : true,
+    "amenities" : [ {
+      "id" : 3,
+      "name" : "Parking"
+    } ],
+    "reservations" : [ ],
+    "imageSource" : [ "jarek-ceborski-jn7uVeCdf6U-unsplash.jpg", "naomi-hebert-MP0bgaS_d1c-unsplash.jpg", "ralph-ravi-kayden-FqqiAvJejto-unsplash.jpg" ]
+  },
+  "startDate" : 1602972000000,
+  "nightNumber" : 7,
+  "price" : 35700.0,
+  "message" : "",
+  "guest" : {
+    "username" : "dea",
+    "password" : "police",
+    "firstname" : "Chichi",
+    "lastname" : "Camarena",
+    "sex" : "Male",
+    "userRole" : "GUEST"
+  },
+  "status" : "CREATED",
+  "id" : 6
 } ]
