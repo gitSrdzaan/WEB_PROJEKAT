@@ -4,7 +4,10 @@
       <b-container>
         <b-row>
           <b-col>
-          <img src="../assets/logo.png" alt="apartments picture" />
+            <span v-for="source in apartments.imageSource" :key="source">
+              <img :src="getImage(source)" :alt="source" style="width : 200px;height : 200px"/>
+            </span>
+          
           </b-col>
           <b-col>
           <b-row>
@@ -61,7 +64,7 @@
             <b-button @click="Submit()">Submit</b-button>
           </b-col>
           <b-col>
-            <b-button @click="goBack()">Cancle</b-button>
+            <b-button @click="goBack()">Cancel</b-button>
           </b-col>
         </b-row>
       </b-container>
@@ -76,6 +79,11 @@ export default {
   name: 'ReservationPage',
   components: {
     FunctionalCalendar
+  },
+  props : {
+    apartment : {
+      type : Object
+    }
   },
   data() {
     return {
@@ -99,14 +107,21 @@ export default {
 			endDate : null,
       user: {},
       message: "",
-      status: "CREATED"
+      status: "CREATED",
+      imageSource : []
     }
   },
   created(){
     this.apartments = this.$route.params.data,
+    
     axios.get('http://localhost:8080/RACompany/rest/currentUser')
 			.then(res => (this.user = res.data))
-			.catch(console.log("currentUser"))
+      .catch(console.log("currentUser"));
+    axios
+    .get('http://localhost:8080/RACompany/rest/apartment/images/'+this.apartments.id)
+    .then(respone => (this.imageSource = respone.data));
+
+    console.log(this.apartments.imageSource);
   },
   
   computed: {
@@ -154,8 +169,12 @@ export default {
 		daysCount(value){
 			console.log("number of days "+value);
 			this.daysNumber = value;
-		}
-  },
+    },
+    getImage(source){
+      return require("../data/images/"+source);
+    }
+  }
+  
   
   
 }

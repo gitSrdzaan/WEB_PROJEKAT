@@ -52,10 +52,10 @@
             </b-form-group>
 
             <b-form-group id="input-group-12" lable="Apartment pictures" label-for="input-12">
-                <div v-for="source in apartment.imageSource" :key="source">
+                <span v-for="source in apartment.imageSource" :key="source">
                     <img  
                         :src="getImage(source)"  fluid :alt="source"  style="width : 100px;height : 100px"/>
-                </div>
+                </span>
                 <input id="input-group-12" type="file" @change="chooseImages" multiple 
                 accept="image/*"/>
             </b-form-group>
@@ -329,7 +329,7 @@ export default {
             }
         },
         getImage(source){
-            console.log(source);
+           
              return require("../data/images/"+source);
         }
 

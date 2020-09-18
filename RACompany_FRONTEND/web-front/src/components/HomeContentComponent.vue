@@ -87,7 +87,7 @@
     <div class="content">
       <ul class="ul-content" >
         <li v-for="apartment in filteredApartment"
-          :key="apartment.id">
+          :key="apartment.id" >
           <div>
             <b-card
               img-src="https://picsum.photos/600/300/?image=25"
