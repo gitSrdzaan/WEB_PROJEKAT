@@ -23,7 +23,7 @@
                 <b-form-select id="input-reservation-status" v-model="reservation.status" :disabled="role === 'ADMIN'" :options="filterStatues"/>
             </b-form-group>
 
-            <div>
+            <div :hidden="reservation.status === 'CREATED' || reservation.status === 'ACCEPTED' ">
                 <b-form-textarea
                     id="textarea"
                     v-model="comment"
@@ -41,7 +41,7 @@
                     ></b-form-select>
                 </b-form-group>
 
-                <b-button @click="Submit()">
+                <b-button @click="Submit()" >
                     Save Comment
                 </b-button>
             </div>
@@ -134,6 +134,9 @@ export default {
             }
             if(this.reservation.status === "CANCELED"){
                 data = ["CANCELED"]
+            }
+             if(this.reservation.status === "DENIED"){
+                data = ["DENIED"]
             }
 
             if(this.reservation.status === "CANCELED" && this.role === "HOST"){
