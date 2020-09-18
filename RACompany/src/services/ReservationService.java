@@ -172,6 +172,18 @@ public class ReservationService {
 		
 	}
 	
+	@GET
+	@Path("/getGuests/{hostUsername}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getGuestsFromReservations(@PathParam("hostUsername") String username, @Context HttpServletRequest request) {
+		UserDAO userDAO = (UserDAO) this.ctx.getAttribute("userDAO");
+		ReservationDAO dao = (ReservationDAO) this.ctx.getAttribute("reservationDAO");
+		
+		User host = userDAO.findByUsername(username);
+		
+		return Response.status(200).entity(dao.getHostsGuests(host)).build();
+	}
+	
 	
 	
 }

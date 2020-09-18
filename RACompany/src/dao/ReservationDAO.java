@@ -7,15 +7,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import beans.Apartment;
 import beans.DateStatus;
+import beans.Guest;
 import beans.Reservation;
+import beans.User;
 
 
 
@@ -150,5 +154,19 @@ public class ReservationDAO {
 		
 		
 		return true;
+	}
+	/**
+	 * Metoda koja vraca sva korisnika imena korisnika koju imaju rezervaciju kod domacina*/
+	public HashSet<String> getHostsGuests(User host) {
+		HashSet<String> set = new HashSet<String>();
+		for(Reservation iter : this.reservations.values()) {
+			if(iter.getReservedAppatment().getApartmentHost().getUsername().equals(host.getUsername())) {
+				set.add(iter.getGuest().getUsername());
+			}
+		}
+		
+		
+		
+		return set;
 	}
 }
