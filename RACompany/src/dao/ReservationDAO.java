@@ -156,7 +156,8 @@ public class ReservationDAO {
 		return true;
 	}
 	/**
-	 * Metoda koja vraca sva korisnika imena korisnika koju imaju rezervaciju kod domacina*/
+	 * Metoda koja vraca sva korisnika imena korisnika koju imaju rezervaciju kod domacina
+	 * */
 	public HashSet<String> getHostsGuests(User host) {
 		HashSet<String> set = new HashSet<String>();
 		for(Reservation iter : this.reservations.values()) {
